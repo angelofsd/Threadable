@@ -74,6 +74,25 @@ export default {
 </script>
 
 <style scoped>
+#register {
+  text-align: center;
+  background-color: #d9e1e7;
+  margin: 250px 250px;
+  border-radius: 20px;
+  padding: 2px;
+
+}
+
+input {
+        padding-right: 250px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        font-size: 12px;
+        border: solid 2px #889DAE;
+        border-radius: 8px;
+        margin: 10px;
+    }
 .form-input-group {
   margin-bottom: 1rem;
 }
