@@ -76,7 +76,7 @@ input {
         padding-top: 10px;
         padding-bottom: 10px;
         padding-left: 10px;
-        font-size: 14px;
+        font-size: 12px;
         border: solid 2px #889DAE;
         border-radius: 8px;
         margin: 10px;
