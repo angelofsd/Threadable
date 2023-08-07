@@ -1,4 +1,4 @@
-#!/bin/bash
+ccccccvvlgjhnrubfnjhelktjdevtb#!/bin/bash
 export PGPASSWORD='postgres1'
 BASEDIR=$(dirname $0)
 DATABASE=final_capstone
