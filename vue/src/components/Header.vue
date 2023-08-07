@@ -2,7 +2,7 @@
   <div>
       <h1>Reddit (Lite)</h1>
       <form id="search">
-          <input id="searchbox" type="text" placeholder="Search..."/>
+          <input type="text" placeholder="Search..."/>
       </form>
   </div>
 </template>
@@ -17,11 +17,11 @@ export default {
     #search {
         text-align: center;
     }
-    #searchbox {
+    input {
         padding-right: 250px;
         padding-top: 10px;
         padding-bottom: 10px;
-        padding-left: 5px;
+        padding-left: 10px;
         font-size: 24px;
         border: solid 2px #889DAE;
         border-radius: 8px;
