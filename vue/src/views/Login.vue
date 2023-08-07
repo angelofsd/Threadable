@@ -1,7 +1,7 @@
 <template>
   <div id="login">
     <form @submit.prevent="login">
-      <h1 >Please Sign In</h1>
+      <h1 >Sign In</h1>
       <div role="alert" v-if="invalidCredentials">
         Invalid username and password!
       </div>
@@ -64,10 +64,11 @@ export default {
 <style scoped>
 #login {
   text-align: center;
-  background-color: #A8B7C3;
+  background-color: #d9e1e7;
   margin: 250px 250px;
   border-radius: 20px;
-  
+  padding: 2px;
+
 }
 .form-input-group {
   margin-bottom: 1rem;
