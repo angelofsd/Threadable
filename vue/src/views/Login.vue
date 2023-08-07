@@ -62,6 +62,13 @@ export default {
 </script>
 
 <style scoped>
+#login {
+  text-align: center;
+  background-color: #A8B7C3;
+  margin: 250px 250px;
+  border-radius: 20px;
+  
+}
 .form-input-group {
   margin-bottom: 1rem;
 }
