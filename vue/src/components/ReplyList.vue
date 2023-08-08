@@ -67,4 +67,8 @@ export default {
   margin: 10px 0;
   background-color: rgb(166, 199, 238);
 }
+
+.reply:hover {
+  background-color: rgb(50, 138, 245);
+}
 </style>
