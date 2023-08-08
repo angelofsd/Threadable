@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.techelevator.exception.DaoException;
 import com.techelevator.model.Forum;
 import com.techelevator.model.Post;
 import com.techelevator.model.Reply;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -15,8 +18,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.techelevator.model.User;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 @Component
+@CrossOrigin
 public class JdbcUserDao implements UserDao {
 
     private final JdbcTemplate jdbcTemplate;
@@ -87,29 +92,47 @@ public class JdbcUserDao implements UserDao {
 
     @Override
     public boolean update(User user) {
-        return false;
+        String sql = "UPDATE users SET =?;";
+        boolean updated = false;
+        try {
+            int rowCount = jdbcTemplate.update(sql, user.getProfilePic());
+            if (rowCount == 0) {
+                throw new DaoException("Expected to find User, but found none");
+            } else {
+                updated = true;
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to the server");
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data Integrity Violation", e);
+        }
+        return updated;
     }
 
     @Override
     public boolean changePermissions(int userId, String role) {
         String sql = "UPDATE users SET role=?;";
+        boolean updated = false;
         try {
             String ssRole = role.toUpperCase().startsWith("ROLE_") ? role.toUpperCase() : "ROLE_" + role.toUpperCase();
             int rowCount = jdbcTemplate.update(sql, ssRole);
             if (rowCount == 0) {
-                throw new
+                throw new DaoException("Expected to find User, but found none");
+            } else {
+                updated = true;
             }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to the server");
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data Integrity Violation", e);
         }
-
-    }
-
-    @Override
-    public List<Forum> findFavoriteForumsByUserId(int userId) {
-        return null;
+        return updated;
     }
 
     @Override
     public boolean setFavoriteOnForum(int userId, int forumId) {
+        String sql = "INSERT INTO favorite_forums (user_id, forum_id) VALUES (?, ?);";
+
         return false;
     }
 
