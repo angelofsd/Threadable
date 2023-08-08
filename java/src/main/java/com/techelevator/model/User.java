@@ -14,6 +14,8 @@ public class User {
    private int id;
    private String username;
    String profilePic = "";
+
+   String bio = "";
    @JsonIgnore
    private String password;
    @JsonIgnore
@@ -30,15 +32,18 @@ public class User {
       this.password = password;
       if(authorities != null) this.setAuthorities(authorities);
       this.activated = true;
+      this.dateCreated = LocalDate.now();
    }
 
    //For Updating
-   public User (int id, String username, String password, String authorities, String profilePic) {
+   public User (int id, String username, String password, String authorities, String profilePic, String bio) {
       this.id = id;
       this.username = username;
       this.password = password;
       if(authorities != null) this.setAuthorities(authorities);
       this.profilePic = profilePic;
+      this.bio = bio;
+      this.dateCreated = LocalDate.now();
    }
 
    public int getId() {
@@ -103,6 +108,14 @@ public class User {
 
    public void setDateCreated(Date date) {
       this.dateCreated = date.toLocalDate();
+   }
+
+   public String getBio() {
+      return bio;
+   }
+
+   public void setBio(String bio) {
+      this.bio = bio;
    }
 
    @Override

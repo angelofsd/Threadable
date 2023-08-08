@@ -92,10 +92,10 @@ public class JdbcUserDao implements UserDao {
 
     @Override
     public boolean update(User user) {
-        String sql = "UPDATE users SET =?;";
+        String sql = "UPDATE users SET profile_pic_url=?, bio=? WHERE user_id=?;";
         boolean updated = false;
         try {
-            int rowCount = jdbcTemplate.update(sql, user.getProfilePic());
+            int rowCount = jdbcTemplate.update(sql, user.getProfilePic(), user.getBio(), user.getId());
             if (rowCount == 0) {
                 throw new DaoException("Expected to find User, but found none");
             } else {
@@ -135,6 +135,9 @@ public class JdbcUserDao implements UserDao {
         user.setUsername(rs.getString("username"));
         user.setPassword(rs.getString("password_hash"));
         user.setAuthorities(Objects.requireNonNull(rs.getString("role")));
+        user.setProfilePic(rs.getString("profile_pic_url"));
+        user.setBio(rs.getString("bio"));
+        user.setDateCreated(Objects.requireNonNull(rs.getDate("date_created")));
         user.setActivated(true);
         return user;
     }

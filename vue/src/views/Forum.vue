@@ -15,12 +15,7 @@ export default {
   },
   data() {
     return {
-      forum: {
-        forumName: "",
-        forumDescription: "",
-        forumDateCreated: "",
-        createdBy: 0,
-      },
+      forum: {},
       invalidCredentials: false
     };
   },

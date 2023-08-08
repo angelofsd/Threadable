@@ -6,6 +6,7 @@ import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
 import store from '../store/index'
 import Forum from '../views/Forum.vue'
+import Profile from '../views/Profile.vue'
 
 Vue.use(Router)
 
@@ -55,9 +56,17 @@ const router = new Router({
       }
     },
     {
-      path: '/forums',
-      name: 'forums',
+      path: '/forum/:id',
+      name: 'forum',
       component: Forum,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: '/user/:id',
+      name: 'user',
+      component: Profile,
       meta: {
         requiresAuth: false
       }
