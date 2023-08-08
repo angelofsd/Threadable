@@ -1,19 +1,18 @@
 <template>
   <div id="app">
     <Header></Header>
-    
+    <reply-list :post-id="1"/>
     <router-view />
-    <new-post-form/>
   </div>
 </template>
 
 <script>
 import Header from '../src/components/Header.vue'
-import NewPostForm from '../src/components/NewPostForm.vue'
+import ReplyList from './components/ReplyList.vue'
 
 export default {
   components: {
-    Header, NewPostForm
+    Header, ReplyList
   }
 }
 </script>
