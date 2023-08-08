@@ -1,7 +1,7 @@
 <template>
   <form class="new-post-form" v-on:submit.prevent="savePost">
     <input class="title-input" type="text" placeholder="Title" v-model="post.title" />
-    <input class="body-input" type="text" placeholder="Body" v-model="post.body" />
+    <input class="body-input" type="textarea" placeholder="Body" v-model="post.body" />
     <input class="image-input" type="text" placeholder="Image" v-model="post.image" />
     <button>Save</button>
   </form>
@@ -15,19 +15,19 @@ export default {
             post: {
                 title: '',
                 body: '',
+                image: '',
                 liked: null,
-                image: ''
             }
         }
     },
     methods: {
         savePost() {
-            this.$store.commit('SAVE_POST', this.post);
+            this.$store.commit('ADD_NEW_POST', this.post);
             this.post = {
                 title: '',
                 body: '',
+                image: '',
                 liked: null,
-                image: ''
             };
             this.$router.push({name: 'home'});
         }
