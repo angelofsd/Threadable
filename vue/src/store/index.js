@@ -39,6 +39,9 @@ export default new Vuex.Store({
       axios.defaults.headers.common = {};
     },
     SET_ACTIVE_POST() {
+
+    },
+    SET_TOPICS() {
       
     }
   }
