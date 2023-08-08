@@ -1,7 +1,10 @@
 package com.techelevator.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.time.LocalDate;
+import java.sql.Date;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -10,11 +13,14 @@ public class User {
 
    private int id;
    private String username;
+   String profilePic = "";
    @JsonIgnore
    private String password;
    @JsonIgnore
    private boolean activated;
    private Set<Authority> authorities = new HashSet<>();
+   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+   LocalDate dateCreated;
 
    public User() { }
 
@@ -24,6 +30,15 @@ public class User {
       this.password = password;
       if(authorities != null) this.setAuthorities(authorities);
       this.activated = true;
+   }
+
+   //For Updating
+   public User (int id, String username, String password, String authorities, String profilePic) {
+      this.id = id;
+      this.username = username;
+      this.password = password;
+      if(authorities != null) this.setAuthorities(authorities);
+      this.profilePic = profilePic;
    }
 
    public int getId() {
@@ -72,6 +87,22 @@ public class User {
          String authority = role.contains("ROLE_") ? role : "ROLE_" + role;
          this.authorities.add(new Authority(authority));
       }
+   }
+
+   public String getProfilePic() {
+      return profilePic;
+   }
+
+   public void setProfilePic(String profilePic) {
+      this.profilePic = profilePic;
+   }
+
+   public LocalDate getDateCreated() {
+      return dateCreated;
+   }
+
+   public void setDateCreated(Date date) {
+      this.dateCreated = date.toLocalDate();
    }
 
    @Override
