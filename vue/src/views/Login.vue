@@ -68,7 +68,6 @@ export default {
   margin: 250px 250px;
   border-radius: 20px;
   padding: 2px;
-
 }
 
 input {
