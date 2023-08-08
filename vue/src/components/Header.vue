@@ -4,6 +4,8 @@
     <div id="nav">
         <router-link v-bind:to="{ name: 'home' }">Home</router-link>
         <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">&nbsp;|&nbsp;Logout</router-link>
+        <router-link v-bind:to="{ name: 'login' }" v-if="$store.state.token == ''">&nbsp;|&nbsp;Login</router-link>
+        <p>You are logged in as {{$store.state.user.username}}</p>
     </div>
       <form id="search">
           <input type="text" placeholder="Search..."/>
