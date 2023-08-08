@@ -38,11 +38,18 @@ export default new Vuex.Store({
       state.user = {};
       axios.defaults.headers.common = {};
     },
+    SAVE_POST() {
+
+    },
     SET_ACTIVE_POST() {
 
     },
-    SET_TOPICS() {
+    SET_POSTS() {
       
+    },
+    SET_LIKE_STATUS() {
+
+
     }
   }
 })
