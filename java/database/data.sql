@@ -2,6 +2,7 @@ BEGIN TRANSACTION;
 
 INSERT INTO users (username,password_hash,role) VALUES ('user','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER');
 INSERT INTO users (username,password_hash,role) VALUES ('admin','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_ADMIN');
+INSERT INTO users (username, password_hash, role) VALUES ('stephen', '$2a$10$cwllnn.q5mt5e4P6CZqfyOOr/tEm8SEKJFdTBtZM.VmPoFTtELrvC', 'ROLE_USER');
 INSERT INTO users (username, password_hash, role)
 VALUES ('bozo', 'hashed_password1', 'moderator'), ('user1', 'hashed_password2', 'user'), ('mod2', 'hashed_password3', 'moderator');
 INSERT INTO forums (name, description, created_by)
