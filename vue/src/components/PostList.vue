@@ -50,16 +50,16 @@ export default {
 </script>
 
 <style>
-.topic-list {
+.post-list {
   margin: 0 auto;
   max-width: 800px;
 }
-.topic {
+.post {
   font-size: 24px;
   border-bottom: 1px solid #f2f2f2;
   padding: 10px 20px;
 }
-.topic:last-child {
+.post:last-child {
   border: 0px;
 }
 table {
@@ -74,12 +74,12 @@ tbody tr:nth-child(even) {
   background-color: #f2f2f2;
 }
 
-.topic-list a:link,
-.topic-list a:visited {
+.post-list a:link,
+.post-list a:visited {
   color: blue;
   text-decoration: none;
 }
-.topic-list a:hover {
+.post-list a:hover {
   text-decoration: underline;
 }
 </style>
