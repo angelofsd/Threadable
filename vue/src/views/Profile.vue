@@ -1,17 +1,17 @@
 <template>
   <div class="forum">
-    <h1>Forum Title</h1>
-    <p>This is the forum description</p>
+    <h1>UserProfile</h1>
+    <p>This is the bio?</p>
   </div>
 </template>
 
 <script>
 export default {
-  name: "forum",
+  name: "profile",
   components: {},
   data() {
     return {
-      forum: {},
+      user: {},
       invalidCredentials: false
     };
   },

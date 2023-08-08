@@ -7,7 +7,9 @@ CREATE TABLE users (
 	username varchar(50) NOT NULL UNIQUE,
 	password_hash varchar(200) NOT NULL,
 	role varchar(50) NOT NULL,
-	profile_pic_url VARCHAR(255),
+	profile_pic_url VARCHAR(255) DEFAULT 'https://www.nicepng.com/png/full/1011-10113425_profile-clipart-generic-user-circle.png',
+	bio varchar(500),
+	date_created TIMESTAMP DEFAULT NOW(),
 	CONSTRAINT PK_user PRIMARY KEY (user_id)
 );
 
