@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.techelevator.model.Forum;
+import com.techelevator.model.Post;
+import com.techelevator.model.Reply;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -80,6 +83,64 @@ public class JdbcUserDao implements UserDao {
         String ssRole = role.toUpperCase().startsWith("ROLE_") ? role.toUpperCase() : "ROLE_" + role.toUpperCase();
 
         return jdbcTemplate.update(insertUserSql, username, password_hash, ssRole) == 1;
+    }
+
+    @Override
+    public boolean update(User user) {
+        return false;
+    }
+
+    @Override
+    public boolean changePermissions(int userId, String role) {
+        String sql = "UPDATE users SET role=?;";
+        try {
+            String ssRole = role.toUpperCase().startsWith("ROLE_") ? role.toUpperCase() : "ROLE_" + role.toUpperCase();
+            int rowCount = jdbcTemplate.update(sql, ssRole);
+            if (rowCount == 0) {
+                throw new
+            }
+        }
+
+    }
+
+    @Override
+    public List<Forum> findFavoriteForumsByUserId(int userId) {
+        return null;
+    }
+
+    @Override
+    public boolean setFavoriteOnForum(int userId, int forumId) {
+        return false;
+    }
+
+    @Override
+    public List<Post> findLikedPostsByUserId(int userId) {
+        return null;
+    }
+
+    @Override
+    public boolean setLikePost(int userId, int postId) {
+        return false;
+    }
+
+    @Override
+    public boolean removeLikeOnPost(int userId, int postId) {
+        return false;
+    }
+
+    @Override
+    public List<Reply> findLikedRepliesByUserId(int userId) {
+        return null;
+    }
+
+    @Override
+    public boolean setLikeReply(int userId, int replyId) {
+        return false;
+    }
+
+    @Override
+    public boolean removeLikeOnReply(int userId, int replyId) {
+        return false;
     }
 
     private User mapRowToUser(SqlRowSet rs) {
