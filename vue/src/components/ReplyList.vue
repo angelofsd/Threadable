@@ -57,10 +57,7 @@ export default {
 </script>
 
 <style scoped>
-h3 {
-  
 
-}
 
 .reply {
   font-weight: 600;
@@ -69,5 +66,9 @@ h3 {
   padding: 10px;
   margin: 10px 0;
   background-color: rgb(166, 199, 238);
+}
+
+.reply:hover {
+  background-color: rgb(50, 138, 245);
 }
 </style>
