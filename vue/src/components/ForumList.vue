@@ -32,6 +32,16 @@ export default {
                     this.forums=response.data;
                 }
             })
+            .catch( (error) => {
+                if (error.response) {
+                alert("Something went wrong: " + error.response.statusText);
+                } else if(error.request){
+                            //We could not reach the server
+                            alert("We could not reach the server");
+                } else {
+                            alert("Something went horribly wrong");
+                        }
+            })
             }
         },
     created() {

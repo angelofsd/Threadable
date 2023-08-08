@@ -55,8 +55,8 @@ const router = new Router({
       }
     },
     {
-      path: '/forum',
-      name: 'forum',
+      path: '/forums',
+      name: 'forums',
       component: Forum,
       meta: {
         requiresAuth: false
