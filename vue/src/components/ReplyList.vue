@@ -6,7 +6,7 @@
       <small>Posted by user {{ reply.userId }} on {{ formatDate(reply.dateCreated) }}</small>
       <!-- TODO Optionally, add buttons/links to edit or delete replies -->
     </div>
-    <!-- TODO Optionally, add a form to create a new reply -->
+    <!-- TODO Optionally(ask team), add a form to create a new reply -->
   </div>
 </template>
 
@@ -57,10 +57,17 @@ export default {
 </script>
 
 <style scoped>
+h3 {
+  
+
+}
 
 .reply {
-  border: 1px solid #ccc;
+  font-weight: 600;
+  border: 3px solid #2BA8FA;
+  border-radius: 4px;
   padding: 10px;
   margin: 10px 0;
+  background-color: rgb(166, 199, 238);
 }
 </style>
