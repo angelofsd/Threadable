@@ -23,19 +23,19 @@ public interface UserDao {
 
     boolean changePermissions(int userId, String role);
 
-    List<Forum> findFavoriteForumsByUserId(int userId);
-
-    boolean setFavoriteOnForum(int userId, int forumId);
-
-    List<Post> findLikedPostsByUserId(int userId);
-
-    boolean setLikePost(int userId, int postId);
-
-    boolean removeLikeOnPost(int userId, int postId);
-
-    List<Reply> findLikedRepliesByUserId(int userId);
-
-    boolean setLikeReply(int userId, int replyId);
-
-    boolean removeLikeOnReply(int userId, int replyId);
+//    List<Forum> findFavoriteForumsByUserId(int userId);
+//
+//    boolean setFavoriteOnForum(int userId, int forumId);
+//
+//    List<Post> findLikedPostsByUserId(int userId);
+//
+//    boolean setLikePost(int userId, int postId);
+//
+//    boolean removeLikeOnPost(int userId, int postId);
+//
+//    List<Reply> findLikedRepliesByUserId(int userId);
+//
+//    boolean setLikeReply(int userId, int replyId);
+//
+//    boolean removeLikeOnReply(int userId, int replyId);
 }
