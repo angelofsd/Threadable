@@ -39,18 +39,19 @@ export default {
         padding-bottom: 25px;
     }
 
-    #banner {
-        display: flex;
-    }
-
     #logo {
         background-color: cadetblue;
     }
 
+    #banner {
+        display:inline;
+    }
+    
     #nav {
         text-align: right;
         background-color: blue;
         /* Why doesn't this WORK */
+        display: flex;
         justify-content: flex-end;
     }
 

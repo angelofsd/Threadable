@@ -1,7 +1,7 @@
 <template>
   <div class="forum">
     <h1>UserProfile</h1>
-    <p>This is the bio?</p>
+    <p>This is the bio</p>
   </div>
 </template>
 

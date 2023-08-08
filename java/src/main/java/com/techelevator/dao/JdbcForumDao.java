@@ -6,10 +6,12 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class JdbcForumDao implements ForumDao{
 
     private final JdbcTemplate jdbcTemplate;
@@ -17,6 +19,17 @@ public class JdbcForumDao implements ForumDao{
     public JdbcForumDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
+
+    public List<Forum> getForumsByLatestCreated() {
+        List<Forum> newForums = new ArrayList<>();
+        String sql = "SELECT * FROM forums ORDER BY date_created";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+        while (results.next()) {
+            newForums.add(mapRowToForum(results));
+        }
+        return newForums;
+    }
+
 
     @Override
     public List<Forum> findFavoriteForumsByUserId(int userId) {
@@ -42,7 +55,33 @@ public class JdbcForumDao implements ForumDao{
         return favorites;
     }
 
-    private Forum mapRowToForum(SqlRowSet results) {
+    @Override
+    public Forum createForum(Forum forum) {
+        String sql = "INSERT INTO forums (name, description, created_by, date_created) VALUES (?, ?, ?, ?) RETURNING id";
+        int newId = jdbcTemplate.queryForObject(sql, Integer.class,forum.getName(), forum.getDescription(), forum.getCreatedBy(), forum.getDateCreated());
+        forum.setId(newId);
+        return forum;
+    }
+
+    @Override
+    public Forum getForumById(int forumId) {
+        String sql = "SELECT * FROM forums WHERE id = ?";
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, forumId);
+        if (result.next()) {
+            return mapRowToForum(result);
+        }
         return null;
+    }
+
+    private Forum mapRowToForum(SqlRowSet results) {
+        Forum forum = new Forum();
+
+        forum.setId(results.getInt("id"));
+        forum.setName(results.getString("name"));
+        forum.setCreatedBy(results.getInt("created_by"));
+        forum.setDateCreated(results.getTimestamp("date_created"));
+        forum.setDescription(results.getString("description"));
+
+        return forum;
     }
 }
