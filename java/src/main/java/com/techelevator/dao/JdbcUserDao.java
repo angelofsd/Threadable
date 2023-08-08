@@ -129,43 +129,6 @@ public class JdbcUserDao implements UserDao {
         return updated;
     }
 
-    @Override
-    public boolean setFavoriteOnForum(int userId, int forumId) {
-        String sql = "INSERT INTO favorite_forums (user_id, forum_id) VALUES (?, ?);";
-
-        return false;
-    }
-
-    @Override
-    public List<Post> findLikedPostsByUserId(int userId) {
-        return null;
-    }
-
-    @Override
-    public boolean setLikePost(int userId, int postId) {
-        return false;
-    }
-
-    @Override
-    public boolean removeLikeOnPost(int userId, int postId) {
-        return false;
-    }
-
-    @Override
-    public List<Reply> findLikedRepliesByUserId(int userId) {
-        return null;
-    }
-
-    @Override
-    public boolean setLikeReply(int userId, int replyId) {
-        return false;
-    }
-
-    @Override
-    public boolean removeLikeOnReply(int userId, int replyId) {
-        return false;
-    }
-
     private User mapRowToUser(SqlRowSet rs) {
         User user = new User();
         user.setId(rs.getInt("user_id"));
