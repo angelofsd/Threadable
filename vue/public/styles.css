@@ -1,3 +1,11 @@
+/* 
+
+ATTENTION: Does not work past the homepage/login... 
+global styling should be added to App.vue instead 
+
+*/
+
+
 body {
     font-family: 'Montserrat', sans-serif;
     margin: 50px 80px;
