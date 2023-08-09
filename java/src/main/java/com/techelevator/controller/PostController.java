@@ -2,6 +2,7 @@ package com.techelevator.controller;
 
 import com.techelevator.dao.PostDao;
 import com.techelevator.model.Post;
+import com.techelevator.model.Reply;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,6 +25,11 @@ public class PostController {
     @GetMapping("/{id}")
     public Post getPostById(@PathVariable int postId) {
         return postDao.getPostbyId(postId);
+    }
+
+    @GetMapping("/{forumId}")
+    public List<Post> getReplyByForumId(@PathVariable int forumId) {
+        return postDao.getReplyByForumId(forumId);
     }
 
     @PostMapping
