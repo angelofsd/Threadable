@@ -1,28 +1,109 @@
 <template>
   <div id="header">
     <div id="banner">
-        <router-link id="logo" v-bind:to="{ name: 'home' }"><h1>Reddit (Lite)</h1></router-link>
+        <div>
+            <router-link id="logo" v-bind:to="{ name: 'home' }"><span>Reddit (Lite)</span></router-link>
+        </div>
         <div id="nav">
-            <div id="login-text">
+            <div id="login-text"> 
+                <img id="profile-pic" v-show="$store.state.token != ''" v-bind:src="$store.state.user.profilePic" />
+                <p v-show="$store.state.token != ''">You are logged in as <b>{{$store.state.user.username}}</b></p>
                 <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</router-link>
-            <router-link v-bind:to="{ name: 'login' }" v-if="$store.state.token == ''">Login</router-link>
-            <p v-show="$store.state.token != ''">You are logged in as {{$store.state.user.username}}</p>
+                <router-link v-bind:to="{ name: 'login' }" v-if="$store.state.token == ''">Login</router-link>
             </div>
         </div>
     </div>
       <form id="search">
           <input type="text" placeholder="Search..."/>
       </form>
+      <div id="main-tabs">
+          <div name="hot">
+              <p>Hot</p>
+          </div>
+          <div name="trending">
+              <p>Trending</p>
+          </div>
+          <div name="favorited" v-show="$store.state.token != ''">
+              <p>Favorited</p>
+          </div>
+      </div>
     </div>
 </template>
 
 <script>
 export default {
-
+    
 }
 </script>
 
 <style scoped>
+   
+   /* General Header Stuff */
+
+    #header {
+        border-bottom: solid 1px #889DAE;
+    }
+
+    #banner {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    /* Profile Picture */
+
+    #profile-pic {
+        width: 35px;
+        padding: 5px;
+        border: solid 1px #555597;
+        border-radius: 50%;
+    }
+
+    #profile-pic:hover {
+        transition-duration: 250ms;
+        cursor: pointer;
+        box-shadow: 2px 3px #555597;
+    }
+
+    /* Login, Logout, and Profile Nav */
+    
+    #nav {
+        text-align: right;
+    }
+
+    /* Logo */
+
+    #header span {
+        font-family: 'Unica One', 'Montserrat', sans-serif;
+        font-size: 28px;
+        cursor: pointer;
+        border-radius: 5px;
+        border-bottom: none;
+        margin-bottom: 15px;
+    }
+
+    #header span:hover {
+        color:rgb(85, 85, 151);
+        transition-duration: 250ms;
+        box-shadow: 2px 2px 1px 1px #555597;
+        transform: scale(.2);
+    }
+
+    #header span:not( :hover ) {
+        transition-duration: 250ms;
+    }
+
+    #logo {
+        text-decoration: none;
+        color: inherit;
+        border-bottom: none;
+    }
+
+    /* Search Bar */
+
+    #search {
+        text-align: center;
+    }
+
     input {
         padding-right: 300px;
         padding-top: 10px;
@@ -34,48 +115,35 @@ export default {
         margin: 10px;
     }
 
-    #header {
-        border-bottom: solid 1px #889DAE;
-        padding-bottom: 25px;
-    }
+    /* Hot, Trending, and Favorited Tabs */
 
-    #logo {
-        background-color: cadetblue;
-    }
-
-    #banner {
-        display:inline;
-    }
-    
-    #nav {
-        text-align: right;
-        background-color: blue;
-        /* Why doesn't this WORK */
+    #main-tabs {
+        margin-left: 40px;
         display: flex;
-        justify-content: flex-end;
+        gap: 50px;
     }
 
-    #header h1 {
-        font-family: 'Unica One', 'Montserrat', sans-serif;
-        cursor: pointer;
-    }
+    #main-tabs p {
+    padding: 1px;
+    border-bottom: solid 1px transparent;
+    cursor: pointer;
+  }
 
-    #header h1:hover {
-        color:rgb(85, 85, 151);
+
+  #main-tabs p:hover {
+        color:#555597;
+        border-bottom: solid 1px #555597;
         transition-duration: 250ms;
     }
 
-    #header h1:not( :hover ) {
+    #main-tabs p:not( :hover ) {
         transition-duration: 250ms;
     }
-
-    a {
-        text-decoration: none;
-        color: inherit;
-    }
-
-    #search {
-        text-align: center;
+    /* Default will be 'HOT', but onClick change the class to this */
+    .clicked {
+        color:#555597;
+        border-bottom: solid 1px #555597;
+        transition-duration: 250ms;
     }
     
 </style>
