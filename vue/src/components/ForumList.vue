@@ -71,6 +71,7 @@ export default {
     display: inline-block;
     width:50%;
     text-align:right;
+    font-weight: normal;
 }
 
 </style>
