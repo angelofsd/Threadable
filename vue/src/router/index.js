@@ -57,8 +57,16 @@ const router = new Router({
       }
     },
     {
-      path: '/forum/:id',
-      name: 'forum',
+      path: '/forums/',
+      name: 'forums',
+      component: Forum,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: '/forums/:id',
+      name: 'forumsId',
       component: Forum,
       meta: {
         requiresAuth: false

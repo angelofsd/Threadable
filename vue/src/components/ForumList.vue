@@ -1,7 +1,9 @@
 <template>
-  <div class="forum-list">
+  <div class="forumList">
       <div class="testDiv" v-for="forum in forums" v-bind:key="forum.id">
-        <h2>  {{forum.name}} </h2>
+        <h2 class="forum-name">  {{forum.name}} </h2>
+        <h5 class="forum-description"> {{forum.description}}</h5>
+        <h5 class="created-by">Created By: {{forum.createdBy}}</h5>
       </div>
 
   </div>
@@ -50,6 +52,25 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.testDiv {
+    border: solid 2px #889DAE;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom:10px;
+    border-radius: 8px;
+    
+}
+.forum-description {
+    display: inline-block;
+    width:50%;
+    flex-direction: row-reverse;
+}
+
+.created-by {
+    display: inline-block;
+    width:50%;
+    text-align:right;
+}
 
 </style>
