@@ -22,7 +22,7 @@ public class JdbcForumDao implements ForumDao{
 
     public List<Forum> getForumsByLatestCreated() {
         List<Forum> newForums = new ArrayList<>();
-        String sql = "SELECT * FROM forums ORDER BY date_created";
+        String sql = "SELECT * FROM forums ORDER BY date_created LIMIT 5";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
         while (results.next()) {
             newForums.add(mapRowToForum(results));
