@@ -3,7 +3,7 @@
     <h3>Replies:</h3>
     <div v-for="reply in replies" :key="reply.id" class="reply">
       <p>{{ reply.text }}</p>
-      <small>Posted by user {{ reply.userId }} on {{ formatDate(reply.dateCreated) }}</small>
+      <small>Posted by user {{ reply.username }} on {{ formatDate(reply.dateCreated) }}</small>
       <!-- TODO Optionally, add buttons/links to edit or delete replies -->
     </div>
     <!-- TODO Optionally(ask team), add a form to create a new reply -->
@@ -12,6 +12,7 @@
 
 <script>
 import ReplyService from '../services/ReplyService';
+import UserService from '../services/UserService';
 
 export default {
   props: {
@@ -35,11 +36,15 @@ export default {
       return date.toLocaleDateString('en-US', options);
     },
      getReplies() {
-       ReplyService.listByPostId(this.postId).then( (response) => {
-         if (response.status === 200) {
-           this.replies = response.data;
-         }
-       })
+      ReplyService.listByPostId(this.postId)
+        .then((response) => {
+          if (response.status === 200) {
+            this.replies = response.data;
+            this.replies.forEach((reply) => {
+              this.getUsername(reply); // Fetch username for each reply
+            });
+          }
+        })
        .catch( (error) => {
          if (error.response) {
            alert("Something went wrong: " + error.response.statusText);
@@ -51,6 +56,16 @@ export default {
                 }
        })
     },
+     getUsername(reply) {
+      UserService.getUserById(reply.userId)
+        .then((response) => {
+          reply.username = response.data.username; // Set username to reply object
+          this.$forceUpdate(); // Force re-render
+        })
+        .catch((error) => {
+          console.error('An error occurred:', error);
+        });
+    }
     
   },
 };
@@ -60,15 +75,27 @@ export default {
 
 
 .reply {
+  width: 90%;
   font-weight: 600;
   border: 3px solid #2BA8FA;
-  border-radius: 4px;
+  border-radius: 5px;
   padding: 10px;
   margin: 10px 0;
   background-color: rgb(166, 199, 238);
 }
 
 .reply:hover {
-  background-color: rgb(50, 138, 245);
+  background-color: rgb(134, 174, 224);
+}
+
+small {
+  font-weight: 700;
+  color: #FFFFFF;
+
+
+}
+
+small:hover {
+  background-color: rgb(134, 174, 224);
 }
 </style>

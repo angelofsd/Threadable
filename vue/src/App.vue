@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <Header></Header>
-    <!-- <ForumList></ForumList> -->
+    <!-- <reply-list v-bind:post-id="1"/> -->
+    
     <router-view />
     <post-list />
     
@@ -12,11 +13,13 @@
 import Header from '../src/components/Header.vue'
 //import CreatePost from '../src/components/CreatePost.vue'
 import PostList from '../src/components/PostList.vue'
-// import ForumList from '../src/components/ForumList.vue'
+// import ReplyList from './components/ReplyList.vue'
+
 
 export default {
   components: {
-    Header, PostList//, ForumList
+    Header, PostList,
+   // ReplyList
   }
 }
 </script>
