@@ -5,11 +5,15 @@
       <input type="text" name="postTitle" v-model="post.title" />
     </div>
     <div class="field">
-      <label for="postText">Text</label>
-      <input type="textarea" name="postText" v-model="post.body" />
+      <label for="postText">Body</label>
+      <input type="textarea" name="postBody" v-model="post.body" />
+    </div>
+    <div>
+      <label for="image">Image</label>
+      <input class="image-input" type="text" placeholder="Image" v-model="post.image" />
     </div>
     <div class="actions">
-      <button type="submit" v-on:click="savePost()">Save Post</button>
+      <button type="submit" v-on:click="savePost">Save Post</button>
     </div>
   </form>
 </template>
@@ -23,10 +27,14 @@ export default {
   data() {
     return {
       post: {
-        id: 0,
-        
+        postId: this.postId,
         title: "",
-        body: ""
+        body: "",
+        imageURL: null,
+        dateCreated: "",
+        forumId: 4,
+        userId: 2,
+        liked: null
       }
     };
   },
@@ -34,19 +42,22 @@ export default {
     savePost() {
       PostService.createPost(this.post)
             .then((response) => {
+                if (response.status === 201) {
+              console.log("Succesfully posted!")
+              //maybe reset the reply body here or navigate somewhere else?
+            }
                 
-                
-                const id = response.data.postId;
-                const route = {
-                    name: "Posts",
-                    params: {
-                        id: id,
+                // const id = response.data.postId;
+                // const route = {
+                //     name: "Posts",
+                //     params: {
+                //         id: id,
                         
-                    }
+                //     }
               
-                };
+                // };
 
-                this.$router.push(route);
+                // this.$router.push(route);
 
             })
             .catch((error) => {

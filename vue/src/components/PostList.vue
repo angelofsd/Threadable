@@ -4,23 +4,25 @@
       <thead>
         <tr>
           <th>Post</th>
-          <th>Edit</th>
-          <th>Delete</th>
+          <th></th>
+          <!-- <th>Edit</th>
+          <th>Delete</th> -->
         </tr>
       </thead>
       <tbody>
-        <tr v-for="post in this.$store.state.posts" v-bind:key="post.id">
+        <tr v-for="post in posts" v-bind:key="post.id">
           <td width="60%">
             <router-link
               v-bind:to="{ name: 'Posts', params: { id: post.id } }"
             >{{ post.title }}</router-link>
           </td>
-          <td>
+          <td>{{post.body}}</td>
+          <!-- <td>
             <router-link :to="{ name: 'EditPost', params: {id: post.id} }">Edit</router-link>
           </td>
           <td>
             <a href="#" v-on:click="deletePost(post.id)">Delete</a>
-          </td>
+          </td> -->
         </tr>
       </tbody>
     </table>
@@ -32,33 +34,40 @@ import PostService from "../services/PostService.js";
 
 export default {
   name: "post-list",
-  methods: {
-    getPosts() {
-      PostService.list().then(response => {
-        this.$store.commit("SET_POSTS", response.data);
-      });
-    },
-    deletePost(id) {
-      PostService.deletePost(id);
-      location.reload();
-    }
+  data() {
+    return {
+      posts: [],
+    };
   },
   created() {
     this.getPosts();
+  },
+  methods: {
+    getPosts() {
+      PostService.getAllPosts()
+      .then( (response) => {
+         if (response.status === 200) {
+           this.posts = response.data;
+         }
+       })
+       .catch( (error) => {
+         if (error.response) {
+           alert("Something went wrong: " + error.response.statusText);
+         } else if(error.request){
+                    //We could not reach the server
+                    alert("We could not reach the server");
+         } else {
+                    alert("Something went horribly wrong");
+                }
+       })
+    }
+    
   }
 };
 </script>
 
 <style>
-.post-list {
-  margin: 0 auto;
-  max-width: 800px;
-}
-.post {
-  font-size: 24px;
-  border-bottom: 1px solid #f2f2f2;
-  padding: 10px 20px;
-}
+
 .post:last-child {
   border: 0px;
 }

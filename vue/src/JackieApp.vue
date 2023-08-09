@@ -3,18 +3,20 @@
     <Header></Header>
     <!-- <ForumList></ForumList> -->
     <router-view />
+    <post-list />
     
   </div>
 </template>
 
 <script>
 import Header from '../src/components/Header.vue'
-
+//import CreatePost from '../src/components/CreatePost.vue'
+import PostList from '../src/components/PostList.vue'
 // import ForumList from '../src/components/ForumList.vue'
 
 export default {
   components: {
-    Header//, ForumList
+    Header, PostList//, ForumList
   }
 }
 </script>

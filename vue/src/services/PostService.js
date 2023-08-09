@@ -3,24 +3,24 @@ import axios from 'axios';
 
 export default {
 
-  get(id) {
-    return axios.get(`/posts/${id}`);
+  getAllPosts() {
+    return axios.get(`/posts`);
   },
 
   createPost(post) {
 
-      const url = "posts";
+      const url = "/posts";
       return axios.post(url, post);
 
   },
   
   updatePost(post){
-      const url = "posts/" + post.id;
+      const url = "/posts/" + post.id;
       return axios.put(url, post);
   },
 
   deletePost(id){
-      const url = "posts/"+id;
+      const url = "/posts/"+id;
       return axios.delete(url)
   }
 
