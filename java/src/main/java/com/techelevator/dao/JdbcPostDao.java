@@ -2,8 +2,6 @@ package com.techelevator.dao;
 
 import com.techelevator.exception.DaoException;
 import com.techelevator.model.Post;
-import com.techelevator.model.Reply;
-import com.techelevator.model.User;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -11,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+
 @Component
 public class JdbcPostDao implements PostDao{
     private final JdbcTemplate jdbcTemplate;
@@ -49,6 +47,25 @@ public class JdbcPostDao implements PostDao{
     }
 
     @Override
+    public List<Post> getReplyByForumId(int forumId) {
+        List<Post> posts = new ArrayList<>();
+        String sql = "SELECT * FROM posts WHERE forum_id = ?;";
+        try {
+            SqlRowSet result = jdbcTemplate.queryForRowSet(sql, forumId);
+            if (result.next()) {
+                posts.add(mapRowToPost(result));
+            }
+        } catch (CannotGetJdbcConnectionException ex) {
+            throw new DaoException("Unable to connect to server or database", ex);
+        }
+        catch (Exception ex) {
+            throw new DaoException("Something went wrong!", ex);
+        }
+
+        return posts;
+    }
+
+    @Override
     public Post createPost(Post post) {
         String sql = "INSERT INTO posts (title, body, image_url, date_created, forum_id, user_id) VALUES (?, ?, ?, ?, ?, ?) RETURNING id";
         int newPostId = jdbcTemplate.queryForObject(sql,
@@ -62,6 +79,8 @@ public class JdbcPostDao implements PostDao{
         post.setPostId(newPostId);
         return post;
     }
+
+
 
     private Post mapRowToPost(SqlRowSet rs) {
         Post post = new Post();
