@@ -8,6 +8,7 @@ import store from '../store/index'
 import Forum from '../views/Forum.vue'
 import Profile from '../views/Profile.vue'
 import NewPost from '../views/NewPost.vue'
+import ActiveForums from '../views/ActiveForums.vue'
 
 Vue.use(Router)
 
@@ -59,7 +60,7 @@ const router = new Router({
     {
       path: '/forums/',
       name: 'forums',
-      component: Forum,
+      component: ActiveForums,
       meta: {
         requiresAuth: false
       }

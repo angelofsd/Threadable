@@ -1,9 +1,9 @@
 <template>
   <div class="forumList">
       <div class="testDiv" v-for="forum in forums" v-bind:key="forum.id">
-        <h2 class="forum-name">  {{forum.name}} </h2>
-        <h5 class="forum-description"> {{forum.description}}</h5>
-        <h5 class="created-by">Created By: {{forum.createdBy}}</h5>
+        <h3 class="forum-name">  {{forum.name}} </h3>
+        <h4 class="forum-description"> {{forum.description}}</h4>
+        <h4 class="created-by">Created By: {{forum.username}}</h4>
       </div>
 
   </div>
@@ -11,6 +11,7 @@
 
 <script>
 import ForumService from '../services/ForumService.js';
+import UserService from '../services/UserService.js';
 
 export default {
     name:'forum-list',
@@ -20,11 +21,13 @@ export default {
             createdBy: "",
             description: "",
             dateCreated: "",
+            username: ""
         }
     },
     data() {
         return {
             forums: [],
+            username: "",
         }
     },
     methods: {
@@ -32,6 +35,10 @@ export default {
             ForumService.list().then((response) => {
                 if (response.status === 200) {
                     this.forums=response.data;
+                    this.forums.forEach((forum) => {
+                        this.getUsername(forum);
+                        
+                    })
                 }
             })
             .catch( (error) => {
@@ -44,8 +51,19 @@ export default {
                             alert("Something went horribly wrong");
                         }
             })
-            }
         },
+        getUsername(forum) {
+            UserService.getUserById(forum.createdBy).then((response) => {
+                if(response.status===200) {
+                    forum.username = response.data.username
+                    this.$forceUpdate();
+                    console.log("It works");
+                }
+            }).catch((error) => {
+                console.error("An error occurred", error)
+            })
+        }
+    },
     created() {
         this.getForums();
     }
