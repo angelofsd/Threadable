@@ -5,8 +5,8 @@
             <router-link id="logo" v-bind:to="{ name: 'home' }"><span>Reddit (Lite)</span></router-link>
         </div>
         <div id="nav">
-            <div id="login-text"> 
-                <img id="profile-pic" v-show="$store.state.token != ''" v-bind:src="$store.state.user.profilePic" />
+            <div id="login-text">
+                <router-link v-bind:to="{ name: 'user', params: {id: $store.state.user.id}}"><img id="profile-pic" v-show="$store.state.token != ''" v-bind:src="$store.state.user.profilePic" /></router-link>
                 <p v-show="$store.state.token != ''">You are logged in as <b>{{$store.state.user.username}}</b></p>
                 <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</router-link>
                 <router-link v-bind:to="{ name: 'login' }" v-if="$store.state.token == ''">Login</router-link>
