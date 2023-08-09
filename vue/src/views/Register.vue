@@ -73,27 +73,31 @@ export default {
 <style scoped>
 #register {
   text-align: center;
+  min-width: 20%;
   background-color: #d9e1e7;
-  margin: 250px 250px;
+  margin: 10%;
   border-radius: 20px;
   padding: 2px;
+  box-shadow: 2px 2px 3px #555597;
 
 }
 
-button {
-  
+
+h1{
+  font-size: 24px;
 }
 
 input {
-        padding-right: 250px;
-        padding-top: 10px;
-        padding-bottom: 10px;
-        padding-left: 10px;
-        font-size: 12px;
-        border: solid 2px #889DAE;
-        border-radius: 8px;
-        margin: 10px;
-    }
+  padding-right: 25%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  font-size: 12px;
+  border: solid 2px #889DAE;
+  border-radius: 8px;
+  margin: 10px;
+}
+
 .form-input-group {
   margin-bottom: 1rem;
 }

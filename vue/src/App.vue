@@ -28,7 +28,7 @@ export default {
   }
 
   input {
-      padding-right: 300px;
+      padding-right: 20%;
       padding-top: 10px;
       padding-bottom: 10px;
       padding-left: 10px;
