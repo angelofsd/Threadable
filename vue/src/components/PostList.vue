@@ -14,6 +14,8 @@
 
 <script>
 import PostService from "../services/PostService.js";
+import UserService from '../services/UserService.js';
+
 
 export default {
   name: "post-list",
@@ -34,6 +36,25 @@ export default {
          }
        })
        .catch( (error) => {
+         if (error.response) {
+           alert("Something went wrong: " + error.response.statusText);
+         } else if(error.request){
+                    //We could not reach the server
+                    alert("We could not reach the server");
+         } else {
+                    alert("Something went horribly wrong");
+                }
+       })
+    },
+    getUsername(post) {
+      UserService.getUserById(post.userId)
+      .then((response) => {
+        if (response.status === 200) {
+          post.username = response.data.username;
+          this.$forceUpdate();
+        }
+      })
+      .catch( (error) => {
          if (error.response) {
            alert("Something went wrong: " + error.response.statusText);
          } else if(error.request){
