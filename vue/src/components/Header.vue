@@ -5,8 +5,12 @@
             <router-link id="logo" v-bind:to="{ name: 'home' }"><span>Reddit (Lite)</span></router-link>
         </div>
         <div id="nav">
+            <router-link id="profile-pic-link" v-bind:to="{ name: 'user', params: {id: $store.state.user.id}}">
+                <div id="circle-pic">
+                    <img id="profile-pic" v-show="$store.state.token != ''" v-bind:src="$store.state.user.profilePic" />
+                </div>
+            </router-link>
             <div id="login-text">
-                <router-link v-bind:to="{ name: 'user', params: {id: $store.state.user.id}}"><img id="profile-pic" v-show="$store.state.token != ''" v-bind:src="$store.state.user.profilePic" /></router-link>
                 <p v-show="$store.state.token != ''">You are logged in as <b>{{$store.state.user.username}}</b></p>
                 <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</router-link>
                 <router-link v-bind:to="{ name: 'login' }" v-if="$store.state.token == ''">Login</router-link>
@@ -51,6 +55,7 @@ export default {
 
     /* Profile Picture */
 
+
     #profile-pic {
         width: 35px;
         padding: 5px;
@@ -62,6 +67,10 @@ export default {
         transition-duration: 250ms;
         cursor: pointer;
         box-shadow: 2px 3px #555597;
+    }
+
+    #profile-pic-link:hover {
+        border-bottom:none; /* Overwrites a:hover in App.vue */
     }
 
     /* Login, Logout, and Profile Nav */
@@ -85,7 +94,6 @@ export default {
         color:rgb(85, 85, 151);
         transition-duration: 250ms;
         box-shadow: 2px 2px 1px 1px #555597;
-        transform: scale(.2);
     }
 
     #header span:not( :hover ) {
@@ -102,17 +110,6 @@ export default {
 
     #search {
         text-align: center;
-    }
-
-    input {
-        padding-right: 300px;
-        padding-top: 10px;
-        padding-bottom: 10px;
-        padding-left: 10px;
-        font-size: 18px;
-        border: solid 2px #889DAE;
-        border-radius: 8px;
-        margin: 10px;
     }
 
     /* Hot, Trending, and Favorited Tabs */
