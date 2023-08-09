@@ -24,6 +24,8 @@
 <script>
 import PostService from "../services/PostService.js";
 import ReplyService from "../services/ReplyService.js";
+import UserService from '../services/UserService.js';
+
 
 export default {
   name: "post-details",
@@ -31,9 +33,8 @@ export default {
     postId: Number
   },
   methods: {
-    deleteMessage(id) {
-      ReplyService.deleteReply(id);
-      this.$store.commit("DELETE_REPLY", id);
+    getUsername() {
+      
     }
   },
   created() {

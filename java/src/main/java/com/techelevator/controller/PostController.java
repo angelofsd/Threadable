@@ -27,9 +27,10 @@ public class PostController {
         return postDao.getPostbyId(postId);
     }
 
-    @GetMapping("/{forumId}")
-    public List<Post> getReplyByForumId(@PathVariable int forumId) {
-        return postDao.getReplyByForumId(forumId);
+
+    @GetMapping("/{userId}")
+    public List<Post> getPostsByUserId(@PathVariable int userId) {
+        return postDao.getPostsByForumId(userId);
     }
 
     @PostMapping
