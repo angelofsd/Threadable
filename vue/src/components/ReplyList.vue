@@ -118,7 +118,10 @@ small:hover {
       line-height: 14px;
       padding: 1px 3px;
       border-radius: 6px;
-      background-image: linear-gradient(to right, rgb(28, 110, 164) 0%, rgb(35, 136, 203) 50%, rgb(134, 174, 224)100%); box-shadow: rgb(10, 86, 109) 2px 3px 3px 3px; border: 2px solid rgb(28, 110, 164); display: inline-block;
+      background-image: linear-gradient(to right, rgb(28, 110, 164) 0%, rgb(35, 136, 203) 50%, rgb(134, 174, 224)); 
+      box-shadow: rgb(10, 86, 109) 2px 3px 3px 3px;
+      border: 2px solid rgb(28, 110, 164);
+      
       }
 .delete-button:hover {
 background: #1C6EA4; 

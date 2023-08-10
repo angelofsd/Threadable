@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Header></Header>
-    <!-- <ForumList></ForumList> -->
+       
     <router-view />
     <post-list />
     
@@ -10,13 +10,16 @@
 
 <script>
 import Header from '../src/components/Header.vue'
-//import CreatePost from '../src/components/CreatePost.vue'
+
 import PostList from '../src/components/PostList.vue'
-// import ForumList from '../src/components/ForumList.vue'
+
+
+
+
 
 export default {
   components: {
-    Header, PostList//, ForumList
+    Header, PostList
   }
 }
 </script>
@@ -28,7 +31,7 @@ export default {
   }
 
   input {
-      padding-right: 300px;
+      padding-right: 20%;
       padding-top: 10px;
       padding-bottom: 10px;
       padding-left: 10px;
@@ -73,4 +76,6 @@ export default {
         text-decoration: none;
         color: inherit;
     }
+
+   
 </style>
