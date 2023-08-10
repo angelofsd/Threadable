@@ -52,7 +52,7 @@ public class JdbcPostDao implements PostDao{
         String sql = "SELECT * FROM posts WHERE forum_id = ?;";
         try {
             SqlRowSet result = jdbcTemplate.queryForRowSet(sql, forumId);
-            if (result.next()) {
+            while (result.next()) {
                 posts.add(mapRowToPost(result));
             }
         } catch (CannotGetJdbcConnectionException ex) {

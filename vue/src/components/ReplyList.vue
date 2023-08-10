@@ -4,7 +4,7 @@
     <div v-for="reply in replies" :key="reply.id" class="reply">
       <p>{{ reply.text }}</p>
       <small>Posted by user {{ reply.username }} on {{ formatDate(reply.dateCreated) }}</small>
-      <!-- TODO Optionally, add buttons/links to edit or delete replies -->
+      <button v-on:click="deleteReply(reply.id)" class = "delete-button">Delete Reply</button>
     </div>
     <!-- TODO Optionally(ask team), add a form to create a new reply -->
   </div>
@@ -35,6 +35,17 @@ export default {
       const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
       return date.toLocaleDateString('en-US', options);
     },
+      deleteReply(replyId) {
+    // I use postId since I have it as a prop
+    ReplyService.deleteReply(this.postId, replyId)
+      .then(() => {
+        // Remove the reply from the replies array
+        this.replies = this.replies.filter(reply => reply.id !== replyId);
+      })
+      .catch((error) => {
+        alert('Failed to delete reply: ' + error);
+      });
+  },
      getReplies() {
       ReplyService.listByPostId(this.postId)
         .then((response) => {
@@ -78,6 +89,7 @@ export default {
   width: 90%;
   font-weight: 600;
   border: 3px solid #2BA8FA;
+  box-shadow: 1px 2px;
   border-radius: 5px;
   padding: 10px;
   margin: 10px 0;
@@ -98,4 +110,17 @@ small {
 small:hover {
   background-color: rgb(134, 174, 224);
 }
+
+ .delete-button {
+      float: right;
+      color: rgb(255, 255, 255);
+      font-size: 14px;
+      line-height: 14px;
+      padding: 1px 3px;
+      border-radius: 6px;
+      background-image: linear-gradient(to right, rgb(28, 110, 164) 0%, rgb(35, 136, 203) 50%, rgb(134, 174, 224)100%); box-shadow: rgb(10, 86, 109) 2px 3px 3px 3px; border: 2px solid rgb(28, 110, 164); display: inline-block;
+      }
+.delete-button:hover {
+background: #1C6EA4; 
+    }
 </style>
