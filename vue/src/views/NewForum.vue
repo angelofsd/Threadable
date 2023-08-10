@@ -1,11 +1,17 @@
 <template>
-  <div>
-  </div>
+
+    <create-forum></create-forum>
+
 </template>
 
 <script>
-export default {
+import CreateForum from '../components/CreateForum.vue'
 
+
+export default {
+  components: { 
+    CreateForum 
+  }
 }
 </script>
 
