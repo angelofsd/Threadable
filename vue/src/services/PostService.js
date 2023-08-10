@@ -6,6 +6,10 @@ export default {
   getAllPosts() {
     return axios.get(`/posts`);
   },
+  getPostsByForumId(forumId) {
+    return axios.get(`/posts?forumId=${forumId}`);
+  },
+
 
   createPost(post) {
 
