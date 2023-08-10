@@ -1,6 +1,9 @@
 <template>
   <div class="post-details">
-    <h1>{{ this.$store.state.activePost.title }}</h1>
+    <div class="post" v-for="post in posts" v-bind:key="post.id">
+        <div>>{{ post.title }}</div>
+        <p>{{post.body}}</p>
+      </div>
     <router-link
       :to="{ name: 'AddReply', params: {postId: $store.state.activePost.id} }"
       class="addReply"
