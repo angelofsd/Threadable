@@ -3,6 +3,10 @@ import axios from 'axios';
 
 export default {
 
+  get(id){
+    return axios.get(`/posts/details/${id}`)
+  },
+
   getAllPosts() {
     return axios.get(`/posts`);
   },

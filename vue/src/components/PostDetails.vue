@@ -1,43 +1,35 @@
 <template>
   <div class="post-details">
-    <div class="post" v-for="post in posts" v-bind:key="post.id">
-        <div>>{{ post.title }}</div>
+    <div class="post" >
+        <h1>{{ post.title }}</h1>
         <p>{{post.body}}</p>
-      </div>
-    <router-link
-      :to="{ name: 'AddReply', params: {postId: $store.state.activePost.id} }"
-      class="addReply"
-    >Add New Reply</router-link>
-    <div
-      v-for="reply in this.$store.state.activePost.replies"
-      v-bind:key="reply.id"
-      class="post-reply bubble"
-    >
-      
-      <p class="reply-text">{{ reply.replytext }}</p>
-      <router-link
-        :to="{name: 'EditReply', params: {replyId: $store.state.activePost.id, replyId: reply.id} }"
-        class="btnEditReply"
-      >Edit</router-link>
-      <div class="button-container" >
-        <button class="mark-liked" v-on:click.prevent="setLike(true)" v-if="!post.liked">Mark Like</button>
-        <button class="mark-unliked" v-on:click.prevent="setLike(false)" v-if="post.liked">Mark Unlike</button>
     </div>
-      <button class="btnDeleteReply" v-on:click="deleteReply(message.id)">Delete</button>
-    </div>
+    <div><reply-list v-bind:postId="postId" /></div>
+    <div><create-reply/></div>
   </div>
 </template>
 
 <script>
 import PostService from "../services/PostService.js";
-// import ReplyService from "../services/ReplyService.js";
+import CreateReply from "../components/CreateReply.vue"
+import ReplyList from "../components/ReplyList.vue"
+//import ReplyService from "../services/ReplyService.js";
+
 // import UserService from '../services/UserService.js';
 
 
 export default {
   name: "post-details",
-  props: {
-    postId: Number
+  props: [
+    "postId" 
+  ],
+  data() {
+    return{
+      post: {}
+    }
+  },
+  components: {
+    CreateReply, ReplyList
   },
   methods: {
     getUsername() {
@@ -49,6 +41,7 @@ export default {
       .get(this.postId)
       .then(response => {
         this.$store.commit("SET_ACTIVE_POST", response.data);
+        this.post = response.data;
       })
       .catch(error => {
         if (error.response.status == 404) {
