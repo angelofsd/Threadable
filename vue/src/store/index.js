@@ -20,7 +20,8 @@ export default new Vuex.Store({
   state: {
     token: currentToken || '',
     user: currentUser || {},
-    posts: []
+    posts: [],
+    forums: []
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -54,6 +55,9 @@ export default new Vuex.Store({
     SET_LIKE_STATUS() {
 
 
-    }
+    },
+    ADD_NEW_FORUM(state, payload) {
+      state.forums.unshift(payload);
+    },
   }
 })
