@@ -14,6 +14,10 @@ export default {
         create(topic) {
             const url = 'forums/';
             return axios.post(url, topic);
+        },
+        getFavorited(userId) {
+            const url = `forums/${userId}/favorited`
+            return axios.get(url);
         }
 
 }
