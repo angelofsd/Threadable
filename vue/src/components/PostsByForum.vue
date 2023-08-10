@@ -19,6 +19,10 @@ export default {
       type: Number,
       required: true,
     },
+     forumName: { 
+    type: String,
+    required: true, 
+  },
   },
   data() {
     return {
