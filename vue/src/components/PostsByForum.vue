@@ -1,74 +1,44 @@
 <template>
   <div>
-     <h3>Posts in Forum: r/{{this.forumName}}</h3>
+    <h3>Posts in Forum: {{this.forumId}}</h3>
     <div v-for="post in posts" :key="post.id" class="post">
-  <h4 @click="toggleReplies(post.id)">{{ post.title }}</h4>
-  <p>{{ post.body }}</p>
-  
-  <ReplyList v-if="currentPostId === post.id" :post-id="post.postId" />
-      <button @click="replyToPost()">Reply</button>
-      <button @click="deletePost(post.id)">Delete</button>
-     
+      <h4>{{ post.title }}</h4>
+      <p>{{ post.body }}</p>
+      <button @click="replyToPost(post.id)">Reply</button>
+      <button @click="deletePost(post.id)">Delete Post</button>
     </div>
   </div>
 </template>
 
 <script>
-
-import ReplyList from './ReplyList.vue';
-import PostService from '../services/PostService';
+import axios from 'axios';
 
 export default {
-  components: {
-    ReplyList, 
-  },
   props: {
     forumId: {
       type: Number,
       required: true,
     },
-     forumName: { 
-    type: String,
-    required: true, 
-  },
   },
   data() {
     return {
-      
       posts: [],
-      currentPostId: null,
-      showReplies: false,
-      
     };
   },
   created() {
     this.getPostsByForum();
-    console.log(this.posts);
   },
   methods: {
-      toggleReplies(postId) {
-    if (this.currentPostId === postId) {
-      this.currentPostId = null; // Hide if already showing
-    } else {
-      this.currentPostId = postId; // Show replies for clicked post
-    }
-  },
     getPostsByForum() {
-      PostService.getPostsByForumId(this.forumId)
-    .then((response) => {
-      if (response.status === 200) {
-        this.posts = response.data;
-      }
-    })
-    .catch((error) => {
-      console.error('An error occurred:', error);
-    });
-    },
-    replyToPost() {
-      
-    },
-    deletePost(postId) {
-        postId; //placeholder
+      axios.get(`/forums/${this.forumId}/posts`)
+        .then((response) => {
+          if (response.status === 200) {
+            this.posts = response.data;
+          }
+        })
+        .catch((error) => {
+          console.error('An error occurred:', error);
+        });
     },
   },
 };
