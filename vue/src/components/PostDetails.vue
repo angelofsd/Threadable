@@ -19,6 +19,10 @@
         :to="{name: 'EditReply', params: {replyId: $store.state.activePost.id, replyId: reply.id} }"
         class="btnEditReply"
       >Edit</router-link>
+      <div class="button-container" >
+        <button class="mark-liked" v-on:click.prevent="setLike(true)" v-if="!post.liked">Mark Like</button>
+        <button class="mark-unliked" v-on:click.prevent="setLike(false)" v-if="post.liked">Mark Unlike</button>
+    </div>
       <button class="btnDeleteReply" v-on:click="deleteReply(message.id)">Delete</button>
     </div>
   </div>
@@ -51,7 +55,10 @@ export default {
           this.$router.push({name: 'NotFound'});
         }
       });
-  }
+  },
+  setLike(value) {
+            this.$store.commit('SET_LIKE_STATUS', {post: this.post, value: value});
+        }
 };
 </script>
 
