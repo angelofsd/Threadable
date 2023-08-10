@@ -1,10 +1,11 @@
 <template>
   <div>
-    <h3>Posts in Forum:</h3>
+    <h3>Posts in Forum: {{this.forumId}}</h3>
     <div v-for="post in posts" :key="post.id" class="post">
       <h4>{{ post.title }}</h4>
       <p>{{ post.body }}</p>
-      <!-- You can add more details as needed -->
+      <button @click="replyToPost(post.id)">Reply</button>
+      <button @click="deletePost(post.id)">Delete Post</button>
     </div>
   </div>
 </template>
@@ -44,5 +45,16 @@ export default {
 </script>
 
 <style scoped>
- 
+  button {
+      
+      color: rgb(255, 255, 255);
+      font-size: 12px;
+      line-height: 12px;
+      padding: 1px 3px;
+      margin-right: 15px;
+      border-radius: 6px;
+      background-image: linear-gradient(to right, rgb(28, 110, 164) 0%, rgb(35, 136, 203) 50%, rgb(134, 174, 224)100%); 
+     box-shadow: rgb(10, 86, 109) 2px 3px 3px 3px; border: 2px solid rgb(28, 110, 164);
+      display: inline-block;
+      }
 </style>
