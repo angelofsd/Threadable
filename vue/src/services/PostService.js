@@ -28,9 +28,7 @@ export default {
       return axios.delete(url)
   },
 
-  getPostsByForumId(forumId) {
-    return axios.get(`/posts?forumId=${forumId}`);
-  }
+ 
 }
 
 
