@@ -6,9 +6,12 @@ import java.util.List;
 
 public interface ForumDao {
 
-    List<Forum> findFavoriteForumsByUserId(int userId);
     List<Forum> getForumsByLatestCreated();
     Forum createForum(Forum forum);
+    Forum updateForum(Forum forum);
     Forum getForumById(int forumId);
+    List<Forum> findFavoriteForumsByUserId(int userId);
+    boolean setFavoriteOnForum(int userId, int forumId);
+    boolean removeFavoriteOnForum(int userId, int forumId);
 
 }
