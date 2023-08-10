@@ -1,12 +1,20 @@
 <template>
-  <div class="forumList">
-      <div class="testDiv" v-for="forum in forums" v-bind:key="forum.id">
-        <h3 class="forum-name">  {{forum.name}} </h3>
-        <h4 class="forum-description"> {{forum.description}}</h4>
-        <h4 class="created-by">Created By: {{forum.username}}</h4>
-      </div>
 
-  </div>
+        <div class="forumList">
+            <div class="testDiv" v-for="forum in forums" v-bind:key="forum.id">
+                <h3 class="forum-name">  
+                    <router-link :to="{name: 'forumsId', params: {id: forum.id}}">
+                    {{forum.name}}
+                    </router-link>
+                </h3>
+                    <h4 class="forum-description"> {{forum.description}}</h4>
+                    <h4 class="created-by">Created By:
+                        <router-link :to="{name:'user', params:{id : forum.createdBy}}">{{forum.username}}
+                        </router-link>
+                    </h4>
+            </div>
+        </div>
+
 </template>
 
 <script>
@@ -20,8 +28,7 @@ export default {
             name: "",
             createdBy: "",
             description: "",
-            dateCreated: "",
-            username: ""
+            dateCreated: ""
         }
     },
     data() {
