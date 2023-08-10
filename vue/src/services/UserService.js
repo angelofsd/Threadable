@@ -13,7 +13,7 @@ export default {
   },
 
   updateUser(user) {
-    return axios.put(API_URL, user);
+    return axios.put(`${API_URL}/${user.id}`, user);
   },
 
 }

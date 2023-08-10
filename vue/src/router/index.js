@@ -9,6 +9,7 @@ import Forum from '../views/Forum.vue'
 import Profile from '../views/Profile.vue'
 import NewPost from '../views/NewPost.vue'
 import ActiveForums from '../views/ActiveForums.vue'
+import Favorite from '../views/Favorite.vue'
 
 Vue.use(Router)
 
@@ -85,6 +86,14 @@ const router = new Router({
       path: '/posts',
       name: 'posts',
       component: NewPost,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: '/favorites',
+      name: 'favorites',
+      component: Favorite,
       meta: {
         requiresAuth: false
       }
