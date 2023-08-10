@@ -17,8 +17,8 @@ import UserService from '../services/UserService';
 export default {
   props: {
     postId: {
-      type: Number,
-      required: true,
+      
+      required: false,
     },
   },
   data() {

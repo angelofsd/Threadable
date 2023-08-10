@@ -22,9 +22,9 @@ public class PostController {
         return postDao.getAllPosts();
     }
 
-    @GetMapping("/{id}")
-    public Post getPostById(@PathVariable int postId) {
-        return postDao.getPostbyId(postId);
+    @GetMapping("/details/{id}")
+    public Post getPostById(@PathVariable int id) {
+        return postDao.getPostbyId(id);
     }
 
 
