@@ -1,26 +1,32 @@
 <template>
-  <div id="profile">
-    <div id="profile-image-section">
-      <div id="profile-image">
-        <img v-bind:src="user.profilePic" />
+  <div>
+    <div id="profile">
+      <div id="profile-image-section">
+        <div id="profile-image">
+          <img v-bind:src="user.profilePic" />
+        </div>
+        <button v-show="isCurrentUserProfile">Edit</button>
+        <h1>{{user.username}}</h1>
       </div>
-      <button>Edit</button>
-      <h1>{{user.username}}</h1>
+      <div id="bio-section">
+        <p>{{user.bio}}</p>
+        <button v-show="isCurrentUserProfile">Edit</button>
+      </div>
     </div>
-    <div id="bio-section">
-      <p>{{user.bio}}</p>
-      <button>Edit</button>
-    </div>
+  <Activity></Activity>
   </div>
 </template>
 
 <script>
 import userService from '../services/UserService'
+import Activity from './Activity.vue'
 export default {
+  components: { Activity },
   name: 'user-details',
   userId: 0,
   data() {
     return {
+      isCurrentUserProfile: true,
       user:{
         id: 0,
         username: "",
@@ -42,6 +48,8 @@ export default {
       }
       this.user.authorities = response.data.autorities;
     })
+
+    this.isCurrentUserProfile = (parseInt(this.$route.params.id) === this.$store.state.user.id)
   }
 }
 </script>

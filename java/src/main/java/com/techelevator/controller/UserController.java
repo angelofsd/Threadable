@@ -1,6 +1,8 @@
 package com.techelevator.controller;
 
+import com.techelevator.dao.ForumDao;
 import com.techelevator.dao.UserDao;
+import com.techelevator.model.Forum;
 import com.techelevator.model.User;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,9 +14,11 @@ import java.util.List;
 public class UserController {
 
     private final UserDao userDao;
+    private final ForumDao forumDao;
 
-    public UserController(UserDao userDao) {
+    public UserController(UserDao userDao, ForumDao forumDao) {
         this.userDao = userDao;
+        this.forumDao = forumDao;
     }
     @RequestMapping("")
     public List<User> getUsers() {
@@ -29,5 +33,10 @@ public class UserController {
     @PutMapping("/{id}")
     public boolean updateUser(@PathVariable int id, @RequestBody User user) {
         return userDao.update(user);
+    }
+
+    @GetMapping("/{id}/favorite")
+    public List<Forum> findFavoriteForumsByUserId(@PathVariable int id) {
+        return forumDao.findFavoriteForumsByUserId(id);
     }
 }

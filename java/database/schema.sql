@@ -19,6 +19,7 @@ CREATE TABLE forums (
     description TEXT,
     date_created TIMESTAMP DEFAULT NOW(),
     created_by INT,
+    active BOOLEAN DEFAULT true,
     CONSTRAINT fk_created_by FOREIGN KEY (created_by) REFERENCES users(user_id)
 );
 CREATE TABLE posts (

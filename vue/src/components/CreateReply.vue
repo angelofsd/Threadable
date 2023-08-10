@@ -1,7 +1,7 @@
 <template>
   <div>
     <h3>Create a Reply:</h3>
-    <textarea v-model="replyBody" placeholder="Enter your reply here..." rows="4" cols="50"></textarea>
+    <textarea v-model="replyBody" placeholder="Enter your reply here..." rows="4" cols="50" class="text-box"></textarea>
     <button v-on:click="createReply">Submit Reply</button>
   </div>
 </template>
@@ -58,5 +58,5 @@ export default {
 </script>
 
 <style scoped>
-/* Add any required styling here */
+
 </style>
