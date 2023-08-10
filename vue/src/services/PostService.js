@@ -10,6 +10,10 @@ export default {
     return axios.get(`/posts?forumId=${forumId}`);
   },
 
+  getPostsByUserId(userId) {
+    return axios.get(`/posts/user/${userId}`)
+  },
+
 
   createPost(post) {
 
