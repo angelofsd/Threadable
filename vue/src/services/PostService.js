@@ -26,6 +26,11 @@ export default {
   deletePost(id){
       const url = "/posts/"+id;
       return axios.delete(url)
-  }
+  },
 
+  getPostsByForumId(forumId) {
+    return axios.get(`/posts?forumId=${forumId}`);
+  }
 }
+
+
