@@ -1,8 +1,7 @@
 <template>
   <div id="app">
     <Header></Header>
-    <!-- <reply-list v-bind:post-id="1"/> -->
-    
+       
     <router-view />
     <post-list />
     
@@ -11,15 +10,16 @@
 
 <script>
 import Header from '../src/components/Header.vue'
-//import CreatePost from '../src/components/CreatePost.vue'
+
 import PostList from '../src/components/PostList.vue'
-// import ReplyList from './components/ReplyList.vue'
+
+
+
 
 
 export default {
   components: {
-    Header, PostList,
-   // ReplyList
+    Header, PostList
   }
 }
 </script>
@@ -76,4 +76,6 @@ export default {
         text-decoration: none;
         color: inherit;
     }
+
+   
 </style>
