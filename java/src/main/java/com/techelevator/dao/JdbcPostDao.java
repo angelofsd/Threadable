@@ -2,6 +2,7 @@ package com.techelevator.dao;
 
 import com.techelevator.exception.DaoException;
 import com.techelevator.model.Post;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -97,6 +98,72 @@ public class JdbcPostDao implements PostDao{
                 post.getUserId());
         post.setPostId(newPostId);
         return post;
+    }
+
+    @Override
+    public List<Post> findLikedPostsByUserId(int userId) {
+        List<Post> likedPosts = new ArrayList<>();
+        String sql = "SELECT p.id, p.title, p.body, p.image_url, p.date_created, p.forum_id, p.user_id FROM posts p\n" +
+                "LEFT JOIN liked_posts lp\n" +
+                "\tON p.id = lp.post_id\n" +
+                "WHERE lp.user_id = ?;";
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
+            while (results.next()) {
+                likedPosts.add(mapRowToPost(results));
+            }
+        } catch (CannotGetJdbcConnectionException ex) {
+            throw new DaoException("Unable to connect to server or database", ex);
+        }
+        catch (Exception ex) {
+            throw new DaoException("Something went wrong!", ex);
+        }
+
+        return likedPosts;
+    }
+
+    @Override
+    public boolean setLikePost(int userId, int postId, boolean isLiked) {
+        String updateSql = "UPDATE liked_posts SET liked = ? WHERE user_id = ? AND post_id = ?;";
+        String createSql = "INSERT INTO liked_posts(user_id, post_id, liked) VALUES (?,?,?) RETURNING post_id;";
+        boolean success = false;
+        try {
+            int rows = jdbcTemplate.update(updateSql, isLiked, userId, postId);
+            if (rows == 0) {
+                int post = jdbcTemplate.queryForObject(createSql, int.class, userId, postId, isLiked);
+                if (post > 0) {
+                    success = true;
+                } else {
+                    throw new DaoException("Could not generate like on post");
+                }
+            } else {
+                success = true;
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to the server");
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data Integrity Violation", e);
+        }
+
+        return success;
+    }
+
+    @Override
+    public boolean removeLikePost(int userId, int postId) {
+        String sql = "DELETE FROM liked_posts WHERE user_id = ? AND post_id = ?;";
+        boolean success = false;
+        try {
+            int rows = jdbcTemplate.update(sql, userId, postId);
+            if (rows >= 1) {
+                success = true;
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to the server");
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data Integrity Violation", e);
+        }
+
+        return success;
     }
 
 
