@@ -1,7 +1,7 @@
 <template>
   <div>
     <h3>Create a Reply:</h3>
-    <textarea v-model="replyBody" placeholder="Enter your reply here..." rows="4" cols="50" class="text-box"></textarea>
+    <textarea v-model="replyBody" placeholder="Enter your reply here..." rows="6" cols="65" class="text-box"></textarea>
     <button v-on:click="createReply">Submit Reply</button>
   </div>
 </template>
