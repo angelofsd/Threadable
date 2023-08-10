@@ -27,6 +27,7 @@ export default {
     };
   },
   created() {
+    
     this.getReplies();
   },
   methods: {

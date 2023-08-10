@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <Header></Header>
-    <posts-by-forum :forum-id="4" />
-    <reply-list v-bind:post-id="1"/>
+    <posts-by-forum :forum-id="1" forum-name="Technology" />
+    <!-- <reply-list v-bind:post-id="1"/> -->
     <create-reply :post-id="1" />
     
     <router-view />
@@ -17,14 +17,14 @@ import Header from '../src/components/Header.vue'
 import PostList from '../src/components/PostList.vue'
 import CreateReply from './components/CreateReply.vue'
 import PostsByForum from './components/PostsByForum.vue'
-import ReplyList from './components/ReplyList.vue'
+// import ReplyList from './components/ReplyList.vue'
 
 
 
 
 export default {
   components: {
-    Header, PostList, ReplyList, CreateReply, PostsByForum
+    Header, PostList, CreateReply, PostsByForum
   }
 }
 </script>
