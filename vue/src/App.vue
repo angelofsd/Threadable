@@ -2,8 +2,9 @@
   <div id="app">
     <Header></Header>
        
-    <router-view />
-    <post-list />
+    <!--<router-view /> -->
+   
+    
     
   </div>
 </template>
@@ -11,7 +12,8 @@
 <script>
 import Header from '../src/components/Header.vue'
 
-import PostList from '../src/components/PostList.vue'
+
+
 
 
 
@@ -19,7 +21,8 @@ import PostList from '../src/components/PostList.vue'
 
 export default {
   components: {
-    Header, PostList
+    Header
+    
   }
 }
 </script>
