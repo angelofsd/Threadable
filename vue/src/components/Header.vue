@@ -57,8 +57,7 @@ export default {
 
 
     #profile-pic {
-        width: 35px;
-        padding: 5px;
+        width: 50px;
         border: solid 1px #555597;
         border-radius: 50%;
     }
