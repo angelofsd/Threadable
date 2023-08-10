@@ -2,10 +2,13 @@ package com.techelevator.controller;
 
 import com.techelevator.dao.ForumDao;
 import com.techelevator.dao.PostDao;
+import com.techelevator.exception.DaoException;
 import com.techelevator.model.Forum;
 import com.techelevator.model.Post;
+import com.techelevator.model.Reply;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -50,6 +53,24 @@ public class ForumController {
         return forumDao.createForum(forum);
     }
 
+    @PutMapping("/{forumId}")
+    public Forum updateForum(@PathVariable int forumId, @RequestBody Forum forum) {
+        try {
+            forum.setId(forumId);
+            return forumDao.updateForum(forum);
+        } catch (DaoException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Forum not found");
+        }
+    }
 
+    @PostMapping("/favorite/{forumId}/{userId}")
+    public boolean setFavoriteOnForum(@PathVariable int forumId, @PathVariable int userId) {
+        return forumDao.setFavoriteOnForum(userId, forumId);
+    }
+
+    @DeleteMapping("/favorite/{forumId}/{userId}")
+    public boolean removeFavoriteOnForum(@PathVariable int forumId, @PathVariable int userId) {
+        return forumDao.removeFavoriteOnForum(userId, forumId);
+    }
 
 }

@@ -39,7 +39,7 @@ public class JdbcForumDao implements ForumDao{
                 "\tON f.id = ff.forum_id\n" +
                 "LEFT JOIN users u\n" +
                 "\tON ff.user_id = u.user_id\n" +
-                "WHERE u.user_id = ?;";
+                "WHERE u.user_id = ? AND f.active = true;";
         try{
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
             while (results.next()) {
@@ -56,11 +56,68 @@ public class JdbcForumDao implements ForumDao{
     }
 
     @Override
+    public boolean setFavoriteOnForum(int userId, int forumId) {
+        String sql = "INSERT INTO favorite_forums (user_id, forum_id) VALUES (?, ?) RETURNING forum_id;";
+        boolean success = false;
+        try {
+            int returnedId = jdbcTemplate.queryForObject(sql, int.class, userId, forumId);
+            if (returnedId == forumId) {
+                success = true;
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to the server");
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data Integrity Violation", e);
+        }
+
+
+        return success;
+    }
+
+    @Override
+    public boolean removeFavoriteOnForum(int userId, int forumId) {
+        String sql = "DELETE FROM favorite_forums WHERE user_id = ? AND forum_id = ?;";
+        boolean success = false;
+        try {
+            int rows = jdbcTemplate.update(sql, userId, forumId);
+            if (rows >= 1) {
+                success = true;
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to the server");
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data Integrity Violation", e);
+        }
+
+        return success;
+    }
+
+    @Override
     public Forum createForum(Forum forum) {
         String sql = "INSERT INTO forums (name, description, created_by, date_created) VALUES (?, ?, ?, ?) RETURNING id";
         int newId = jdbcTemplate.queryForObject(sql, Integer.class,forum.getName(), forum.getDescription(), forum.getCreatedBy(), forum.getDateCreated());
         forum.setId(newId);
         return forum;
+    }
+
+    @Override
+    public Forum updateForum(Forum forum) {
+        String sql = "UPDATE forums SET name = ?, description = ? WHERE id = ?;";
+        Forum updatedForum = null;
+        try {
+            int rows = jdbcTemplate.update(sql, forum.getName(), forum.getDescription(), forum.getId());
+            if (rows == 0) {
+                throw new DaoException("Expected 1 updated forum, found 0");
+            } else {
+                updatedForum = getForumById(forum.getId());
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to the server");
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data Integrity Violation", e);
+        }
+
+        return updatedForum;
     }
 
     @Override
