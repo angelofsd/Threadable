@@ -26,7 +26,7 @@ public class ForumController {
     }
 
 
-    @GetMapping("/{userId}/forums")
+    @GetMapping("/{userId}/favorited")
     public List<Forum> findFavoriteForumsByUserId(@PathVariable int userId) {
         return forumDao.findFavoriteForumsByUserId(userId);
     }
