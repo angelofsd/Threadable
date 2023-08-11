@@ -14,5 +14,7 @@ public interface PostDao {
     List<Post> findLikedPostsByUserId(int userId);
     boolean setLikePost(int userId, int postId, boolean isLiked);
     boolean removeLikePost(int userId, int postId);
+    boolean removePost(int postId);
+    int getVotes(int postId);
 
 }

@@ -44,6 +44,11 @@ public class PostController {
         return postDao.createPost(post);
     }
 
+    @RequestMapping(path="/details/{id}", method=RequestMethod.DELETE)
+    public void deletePost(@PathVariable int id){
+        postDao.removePost(id);
+    }
+
 
 
 
