@@ -6,7 +6,8 @@ import java.util.List;
 
 public interface ForumDao {
 
-    List<Forum> getForumsByLatestCreated();
+    List<Forum> getTrendingForums();
+    List<Forum> getAllForums();
     Forum createForum(Forum forum);
     Forum updateForum(Forum forum);
     Forum getForumById(int forumId);

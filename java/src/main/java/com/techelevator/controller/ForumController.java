@@ -5,7 +5,6 @@ import com.techelevator.dao.PostDao;
 import com.techelevator.exception.DaoException;
 import com.techelevator.model.Forum;
 import com.techelevator.model.Post;
-import com.techelevator.model.Reply;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -32,9 +31,14 @@ public class ForumController {
     }
 
 
-    @GetMapping("/")
-    public List<Forum> getForumsByLatestCreated() {
-        return forumDao.getForumsByLatestCreated();
+    @GetMapping("/trending")
+    public List<Forum> getTrendingForums() {
+        return forumDao.getTrendingForums();
+    }
+
+    @GetMapping
+    public List<Forum> getAllForums() {
+        return forumDao.getAllForums();
     }
 
     @GetMapping("/{forumId}")
