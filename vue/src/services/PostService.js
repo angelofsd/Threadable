@@ -36,7 +36,7 @@ export default {
   },
 
   deletePost(id){
-      const url = "/posts/"+id;
+      const url = "/posts/details/"+id;
       return axios.delete(url)
   },
 

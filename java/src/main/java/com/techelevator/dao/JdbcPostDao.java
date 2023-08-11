@@ -187,6 +187,46 @@ public class JdbcPostDao implements PostDao{
         return success;
     }
 
+    @Override
+    public boolean removePost(int postId) {
+        String sql = "DELETE from replies where post_id = ?;\n" +
+                "DELETE FROM liked_posts WHERE post_id = ?;\n" +
+                "DELETE from posts where id= ?;";
+        boolean success = false;
+        try {
+            int rows = jdbcTemplate.update(sql, postId, postId, postId);
+            if (rows >= 1) {
+                success = true;
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to the server");
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data Integrity Violation", e);
+        }
+
+        return success;
+    }
+
+    @Override
+    public int getVotes(int postId) {
+        int votes = 0;
+        String sql = "SELECT COUNT(*) as count FROM liked_posts WHERE post_id = ?;";
+        try {
+            SqlRowSet result = jdbcTemplate.queryForRowSet(sql, postId);
+            if (result.next()) {
+                votes = result.getInt("count");
+            }
+        } catch (CannotGetJdbcConnectionException ex) {
+            throw new DaoException("Unable to connect to server or database", ex);
+        }
+        catch (Exception ex) {
+            throw new DaoException("Something went wrong!", ex);
+        }
+
+        return votes;
+
+    }
+
 
 
     private Post mapRowToPost(SqlRowSet rs) {

@@ -28,6 +28,7 @@ export default new Vuex.Store({
     token: currentToken || '',
     user: currentUser || {},
     posts: [],
+    post: "",
     forums: []
   },
   mutations: {
@@ -60,8 +61,8 @@ export default new Vuex.Store({
     SET_POSTS() {
       
     },
-    SET_LIKE_STATUS() {
-
+    SET_LIKE_STATUS(state) {
+      state.post.liked = true;
 
     },
     ADD_NEW_FORUM(state, payload) {
@@ -70,5 +71,11 @@ export default new Vuex.Store({
     SAVE_FORUM() {
 
     },
+    DELETE_POST(state, postId) {
+      state.posts.splice(
+        state.posts.findIndex(post => post.id === postId),
+        1
+      )
+    }
   }
 })

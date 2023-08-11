@@ -13,6 +13,8 @@ public class Post {
     private int userId;
     private boolean liked;
 
+    private int votes;
+
     public Post() { };
 
     public int getPostId() {
@@ -76,5 +78,13 @@ public class Post {
 
     public void setLiked(boolean liked) {
         this.liked = liked;
+    }
+
+    public int getVotes() {
+        return votes;
+    }
+
+    public void setVotes(int votes) {
+        this.votes = votes;
     }
 }
