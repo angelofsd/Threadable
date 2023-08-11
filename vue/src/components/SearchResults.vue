@@ -1,45 +1,48 @@
 <template>
-  <div id="favorited-list">
-      <h3>Favorited</h3>
-      <div class="forum" v-for="forum in forums" v-bind:key="forum.id">
+  <div id="post-list">
+      <h3>Search Results for: {{this.$route.params.input}}</h3>
+      <div class="post" v-for="post in posts" v-bind:key="post.id">
         <div>
           <router-link
-            v-bind:to="{ name: 'Forum', params: { id: forum.id } }"
-          >{{ forum.name }}</router-link>
+            v-bind:to="{ name: 'post', params: { id: post.id } }"
+          >{{ post.title }}</router-link>
         </div>
-        <p>{{forum.description}}</p>
+        <p>{{post.body}}</p>
       </div>
   </div>
 </template>
 
 <script>
-import ForumService from '../services/ForumService.js';
+import PostService from "../services/PostService.js";
 import UserService from '../services/UserService.js';
 
 
 export default {
-  name: "favorited",
+  name: "post-list",
   data() {
     return {
-      forums: [],
+      posts: [],
     };
   },
   created() {
-    ForumService.getFavorited(this.$store.state.user.id).then((response) => {
-        if (response.status === 200) {
-           this.forums = response.data;
-         }
-    })
-       .catch( (error) => {
-         if (error.response) {
-           alert("Something went wrong: " + error.response.statusText);
-         } else if(error.request){
-                    //We could not reach the server
-                    alert("We could not reach the server");
-         } else {
-                    alert("Something went horribly wrong");
-                }
-       })
+    this.search();
+  },
+  methods: {
+    search() {
+            PostService.searchForPosts(this.$route.params.input).then((response) => {
+                this.posts = response.data
+            })
+            .catch( (error) => {
+                if (error.response) {
+                alert("Something went wrong: " + error.response.statusText);
+                } else if(error.request){
+                            //We could not reach the server
+                            alert("We could not reach the server");
+                } else {
+                            alert("Something went horribly wrong");
+                        }
+            })
+        }
     },
     getUsername(post) {
       UserService.getUserById(post.userId)
@@ -60,17 +63,16 @@ export default {
                 }
        })
     }
-    
-}
+};
 </script>
 
 <style>
 
-#favorited-list {
+#post-list {
   margin: 20px;
 }
 
-.forum {
+.post {
   border: solid 1px #555597;
   box-shadow: 1px 2px #555597;
   border-radius: 10px;
@@ -79,20 +81,20 @@ export default {
 
 }
 
-.forum:hover {
+.post:hover {
   border: solid 1px #978555;
   box-shadow: 1px 2px #978555;
 }
 
-.forum p {
+.post p {
   font-size: 14px;
 }
 
-.forum a {
+.post a {
   border-bottom: solid 1px #555597;
 }
 
-.forum a:hover {
+.post a:hover {
   border-bottom: solid 1px #978555;
 }
 
