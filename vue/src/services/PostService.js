@@ -18,6 +18,10 @@ export default {
     return axios.get(`/posts/user/${userId}`)
   },
 
+  searchForPosts(search) {
+    return axios.get(`/posts?search=${search}`);
+  },
+
 
   createPost(post) {
 
