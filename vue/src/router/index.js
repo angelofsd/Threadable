@@ -8,8 +8,9 @@ import store from '../store/index'
 import Forum from '../views/Forum.vue'
 import Profile from '../views/Profile.vue'
 import Post from '../views/Post.vue'
-import ActiveForums from '../views/ActiveForums.vue'
+import TrendingForums from '../views/TrendingForums.vue'
 import Favorite from '../views/Favorite.vue'
+import AllForums from '../views/AllForums.vue'
 
 
 Vue.use(Router)
@@ -60,9 +61,17 @@ const router = new Router({
       }
     },
     {
-      path: '/forums/',
-      name: 'forums',
-      component: ActiveForums,
+      path: '/forums/trending',
+      name: 'trendingForums',
+      component: TrendingForums,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: '/forums',
+      name: 'allForums',
+      component: AllForums,
       meta: {
         requiresAuth: false
       }
@@ -75,6 +84,7 @@ const router = new Router({
         requiresAuth: false
       }
     },
+
     {
       path: '/user/:id',
       name: 'user',

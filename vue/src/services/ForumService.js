@@ -18,6 +18,10 @@ export default {
         getFavorited(userId) {
             const url = `forums/${userId}/favorited`
             return axios.get(url);
+        },
+        getTrendingForums() {
+            const url = 'forums/trending';
+            return axios.get(url);
         }
 
 }
