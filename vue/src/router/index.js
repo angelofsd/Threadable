@@ -80,7 +80,7 @@ const router = new Router({
     },
     {
       path: '/forums/:id',
-      name: 'forumsId',
+      name: 'forumPage',
       component: Forum,
       meta: {
         requiresAuth: false

@@ -3,7 +3,7 @@
         <div class="trendingForums">
             <div class="testDiv" v-for="forum in forums" v-bind:key="forum.id">
                 <h3 class="forum-name">  
-                    <router-link :to="{name: 'forumsId', params: {id: forum.id}}">
+                    <router-link :to="{name: 'forumPage', params: {id: forum.id}}">
                     {{forum.name}}
                     </router-link>
                 </h3>
