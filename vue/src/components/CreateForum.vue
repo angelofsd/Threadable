@@ -1,5 +1,5 @@
 <template>
-  <form>
+  <form v-on:submit.prevent>
       <div>
         <label for="forumName">Name of Forum: </label>
         <input type="text" name="postTitle" v-model="forum.name"/>
@@ -9,7 +9,7 @@
         <input type="text" name="forumDescription" v-model="forum.description"/>
       </div>
       <div class="saveForum">
-          <button type="submit" :click="saveForum">Save Forum</button>
+          <button type="submit" v-on:click="saveForum()">Save Forum</button>
       </div>
   </form>
 </template>
@@ -19,22 +19,33 @@ import ForumService from '../services/ForumService.js'
 
 export default {
     name: "create-forum",
+    props:["forumId"],
     data() {
         return {
             forum: {
-                
-                name: "",
-                description: "",
-                dateCreated: "",
-                createdBy: ""
+                id: this.forumId,
+                name: '',
+                description: '',
+                createdBy: this.$store.state.user.id,
+                dateCreated: ''
             }
-        }
+        };
     },
+    computed: {
+      userId() {
+          return this.$store.state.user.id;
+      }
+  },
     methods: {
         saveForum() {
             ForumService.create(this.forum).then((response) => {
-                if (response.status === 200) {
-                    alert("Successfully created a forum!")
+                this.id = response.data.id;
+                this.name = response.data.name;
+                this.description = response.data.name;
+                this.createdBy = response.data.createdBy;
+                this.dateCreated = response.data.dateCreated;
+                if (response.status === 200 || response.status === 201) {
+                    console.log("Successfully created a forum!");
                 }
             })
             .catch((error) => {
@@ -53,6 +64,6 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 
 </style>

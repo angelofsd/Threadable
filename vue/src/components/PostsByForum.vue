@@ -16,11 +16,11 @@ import axios from 'axios';
 export default {
   props: {
     forumId: {
-      type: Number,
+
       required: true,
     },
      forumName: { 
-    type: String,
+
     required: true, 
   },
   },

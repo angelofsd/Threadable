@@ -67,5 +67,8 @@ export default new Vuex.Store({
     ADD_NEW_FORUM(state, payload) {
       state.forums.unshift(payload);
     },
+    SAVE_FORUM() {
+
+    },
   }
 })
