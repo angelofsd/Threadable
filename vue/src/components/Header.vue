@@ -25,7 +25,7 @@
               <router-link v-bind:to="{name: 'hot'}"><p>Hot</p></router-link>
           </div>
           <div name="trending">
-              <router-link v-bind:to="{name: 'trending'}"><p>Trending</p></router-link>
+              <router-link v-bind:to="{name: 'trendingForums'}"><p>Trending</p></router-link>
           </div>
           <div name="favorited" v-show="$store.state.token != ''">
               <router-link v-bind:to="{name: 'favorites'}"><p>Favorited</p></router-link>
