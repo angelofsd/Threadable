@@ -12,7 +12,7 @@ import TrendingForums from '../views/TrendingForums.vue'
 import Favorite from '../views/Favorite.vue'
 import HotPosts from '../views/HotPosts.vue'
 import SearchPage from '../views/SearchPage.vue'
-import AllForums from '../views/allForums.vue'
+import AllForums from '../views/AllForums.vue'
 
 
 Vue.use(Router)

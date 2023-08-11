@@ -50,7 +50,7 @@ export default {
                 params: {input: this.searchInput}
             }
 
-            this.router.push(route)
+            this.$router.push(route)
         }
     }
     
