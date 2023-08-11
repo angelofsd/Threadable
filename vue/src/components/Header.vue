@@ -17,25 +17,42 @@
             </div>
         </div>
     </div>
-      <form id="search">
-          <input type="text" placeholder="Search..."/>
+      <form id="searchEl">
+          <input v-model="searchInput" v-on:keyup.enter="searchPage()" type="text" placeholder="Search..."/>
       </form>
       <div id="main-tabs">
           <div name="hot">
-              <p>Hot</p>
+              <router-link v-bind:to="{name: 'hot'}"><p>Hot</p></router-link>
           </div>
           <div name="trending">
-              <p>Trending</p>
+              <router-link v-bind:to="{name: 'trending'}"><p>Trending</p></router-link>
           </div>
           <div name="favorited" v-show="$store.state.token != ''">
-              <p>Favorited</p>
+              <router-link v-bind:to="{name: 'favorites'}"><p>Favorited</p></router-link>
           </div>
       </div>
     </div>
 </template>
 
 <script>
+
 export default {
+    data() {
+        return{
+            searchInput: "",
+        }
+    },
+    methods: {
+        //Probably works, just need to figure out how to print list
+        searchPage() {
+            const route = {
+                name: 'search',
+                params: {input: this.searchInput}
+            }
+
+            this.router.push(route)
+        }
+    }
     
 }
 </script>
@@ -107,7 +124,7 @@ export default {
 
     /* Search Bar */
 
-    #search {
+    #searchEl {
         text-align: center;
     }
 

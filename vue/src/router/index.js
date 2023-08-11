@@ -10,6 +10,8 @@ import Profile from '../views/Profile.vue'
 import Post from '../views/Post.vue'
 import ActiveForums from '../views/ActiveForums.vue'
 import Favorite from '../views/Favorite.vue'
+import HotPosts from '../views/HotPosts.vue'
+import SearchPage from '../views/SearchPage.vue'
 
 
 Vue.use(Router)
@@ -98,7 +100,31 @@ const router = new Router({
       meta: {
         requiresAuth: false
       }
-    }
+    },
+    {
+      path: '/hot',
+      name: 'hot',
+      component: HotPosts,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: '/trending',
+      name: 'trending',
+      component: ActiveForums,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: '/search/:input',
+      name: 'search',
+      component: SearchPage,
+      meta: {
+        requiresAuth: false
+      }
+    },
   ]
 })
 

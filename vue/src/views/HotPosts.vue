@@ -1,16 +1,16 @@
 <template>
   <div>
-    <div class="favorited-forums">
-        <FavoriteForums></FavoriteForums>
+    <div class="hot-posts">
+        <HotPosts></HotPosts>
     </div>
   </div>
 </template>
 
 <script>
-import FavoriteForums from '../components/FavorieForums.vue';
+import HotPosts from '../components/HotPosts.vue';
 export default {
   name: "user-profile",
-  components: {FavoriteForums},
+  components: {HotPosts},
   data() {
     return {
       user: {},

@@ -18,8 +18,13 @@ public class PostController {
         this.postDao = postDao;
     }
     @GetMapping
-    public List<Post> getAllPosts() {
-        return postDao.getAllPosts();
+    public List<Post> getAllPosts(@RequestParam(defaultValue = "") String search) {
+        if (search.equals("")) {
+            return postDao.getAllPosts();
+        } else {
+            return postDao.searchForPosts(search);
+        }
+
     }
 
     @GetMapping("/details/{id}")
