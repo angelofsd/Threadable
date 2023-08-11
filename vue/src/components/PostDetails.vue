@@ -42,9 +42,16 @@ export default {
     setLike(value) {
       this.$store.commit('SET_LIKE_STATUS', {post: this.post, value: value});
     },
-    deletePost(postId) {
-      PostService.deletePost(postId);
-      this.$store.commit("DELETE_POST", postId);
+    deletePost() {
+      PostService.deletePost(this.postId)
+      .then(() => {
+                const route = {
+                    name: "home",
+                };
+
+                this.$router.push(route);
+      })
+      //this.$store.commit("DELETE_POST", postId);
     }
   },
   created() {
