@@ -20,7 +20,8 @@ public class JdbcForumDao implements ForumDao{
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public List<Forum> getForumsByLatestCreated() {
+    @Override
+    public List<Forum> getTrendingForums() {
         List<Forum> newForums = new ArrayList<>();
         String sql = "SELECT * FROM forums ORDER BY date_created LIMIT 5";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
@@ -28,6 +29,17 @@ public class JdbcForumDao implements ForumDao{
             newForums.add(mapRowToForum(results));
         }
         return newForums;
+    }
+
+    @Override
+    public List<Forum> getAllForums() {
+        List<Forum> allForums = new ArrayList<>();
+        String sql = "SELECT * FROM forums";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+        while (results.next()) {
+            allForums.add(mapRowToForum(results));
+        }
+        return allForums;
     }
 
 
