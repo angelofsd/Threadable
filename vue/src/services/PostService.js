@@ -48,6 +48,16 @@ export default {
       return axios.post(url, post);
 
   },
+
+  getNumberOfLikes(postId) {
+    const url = `/posts/details/${postId}/likes`
+    return axios.get(url);
+  },
+
+  getNumberOfDislikes(postId) {
+    const url = `/posts/details/${postId}/dislikes`
+    return axios.get(url);
+  },
   
   updatePost(post){
       const url = "/posts/" + post.id;

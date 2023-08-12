@@ -5,7 +5,9 @@
         <p>{{post.body}}</p>
         
         <button class="mark-liked-button" v-on:click.prevent="setLike()">Mark Like</button> |
+        <p>{{this.numberLikes}}</p>
         <button class="mark-unliked-button" v-on:click.prevent="setDislike()" >Mark Unlike</button> |
+        <p>{{this.numberDislikes}}</p>
         <button class="delete-button" v-on:click="deletePost(post.id)" >Delete</button>
     </div>
     <div><reply-list v-bind:postId="postId" /></div>
@@ -25,11 +27,16 @@ import ReplyList from "../components/ReplyList.vue"
 export default {
   name: "post-details",
   props: [
-    "postId" 
+    "postId"
   ],
   data() {
     return{
-      post: {}
+      post: {},
+      numberLikes: 0,
+      numberDislikes: 0,
+      isLiked: false,
+      isDisliked: false,
+      userLikes: []
     }
   },
   components: {
@@ -41,10 +48,14 @@ export default {
     },
     setLike() {
       PostService.likePost(this.$store.state.user.id, this.postId);
+      this.numberLikes ++
+      // this.numberDislikes --
       this.$store.commit('SET_LIKE_STATUS', {post: this.post, value: true});
     },
     setDislike() {
       PostService.dislikePost(this.$store.state.user.id, this.postId);
+      // this.numberLikes --
+      this.numberDislikes ++
       this.$store.commit('SET_LIKE_STATUS', {post: this.post, value: false});
     },
     deletePost() {
@@ -58,11 +69,36 @@ export default {
       })
       //this.$store.commit("DELETE_POST", postId);
     },
-    getVotes() {
-
+    getNumberOfLikes() {
+      PostService.getNumberOfLikes(this.postId).then((response) => {
+        this.numberLikes = response.data
+      })
+    },
+    getNumberOfDislikes() {
+      PostService.getNumberOfDislikes(this.postId).then((response) => {
+        this.numberDislikes = response.data
+      })
+    },
+    getLikesByUser() {
+      PostService.getLikedPostsByUserId(this.$store.state.user.id).then((response) => {
+        this.userLikes = response.data
+      })
+    },
+    setIsLiked() {
+      this.userLikes.forEach((post) => {
+        if (post.postId === this.postId) {
+          console.log(post.postId)
+          this.isLiked = true;
+        }
+      })
     }
   },
   created() {
+    this.getNumberOfLikes();
+    this.getNumberOfDislikes();
+    this.getLikesByUser();
+    
+
     PostService
       .get(this.postId)
       .then(response => {
@@ -74,6 +110,8 @@ export default {
           this.$router.push({name: 'NotFound'});
         }
       });
+
+      this.setIsLiked();
   },
   };
   
