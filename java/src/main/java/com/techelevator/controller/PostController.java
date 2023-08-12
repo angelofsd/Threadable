@@ -49,6 +49,26 @@ public class PostController {
         postDao.removePost(id);
     }
 
+    @GetMapping("/likes/user/{userId}")
+    public List<Post>getLikedPostsByUserId(@PathVariable int userId) {
+        return postDao.findLikedPostsByUserId(userId);
+    }
+
+    @PostMapping("/{postId}/{userId}/true")
+    public boolean likePost(@PathVariable int postId, @PathVariable int userId) {
+        return postDao.setLikePost(userId, postId, true);
+    }
+
+    @PostMapping("/{postId}/{userId}/false")
+    public boolean dislikePost(@PathVariable int postId, @PathVariable int userId) {
+        return postDao.setLikePost(userId, postId, false);
+    }
+
+    @DeleteMapping("/{postId}/delete_like/{userId}")
+    public boolean deleteLikeOnPost(@PathVariable int postId, @PathVariable int userId) {
+        return postDao.removeLikePost(userId, postId);
+    }
+
 
 
 

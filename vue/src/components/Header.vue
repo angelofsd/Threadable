@@ -17,9 +17,7 @@
             </div>
         </div>
     </div>
-      <form id="searchEl">
           <input v-model="searchInput" v-on:keyup.enter="searchPage()" type="text" placeholder="Search..."/>
-      </form>
       <div id="main-tabs">
           <div name="hot">
               <router-link v-bind:to="{name: 'hot'}"><p>Hot</p></router-link>

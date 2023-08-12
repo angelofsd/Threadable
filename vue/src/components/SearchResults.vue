@@ -1,6 +1,6 @@
 <template>
   <div id="post-list">
-      <h3>Search Results for: {{this.$route.params.input}}</h3>
+      <h3>{{showingResultsFor}}</h3>
       <div class="post" v-for="post in posts" v-bind:key="post.id">
         <div>
           <router-link
@@ -27,10 +27,17 @@ export default {
   created() {
     this.search();
   },
+  computed: {
+    showingResultsFor() {
+      this.search();
+      return "Showing results for: " + this.$route.params.input
+    }
+  },
   methods: {
     search() {
             PostService.searchForPosts(this.$route.params.input).then((response) => {
                 this.posts = response.data
+                this.$forceUpdate();
             })
             .catch( (error) => {
                 if (error.response) {
