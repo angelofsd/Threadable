@@ -9,7 +9,7 @@
         <button class="delete-button" v-on:click="deletePost(post.id)" >Delete</button>
     </div>
     <div><reply-list v-bind:postId="postId" /></div>
-    <div><create-reply/></div>
+    <div><create-reply /></div>
   </div>
 </template>
 
