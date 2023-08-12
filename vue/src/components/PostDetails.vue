@@ -4,8 +4,8 @@
         <h1>{{ post.title }}</h1>
         <p>{{post.body}}</p>
         
-        <button class="mark-liked-button" v-on:click.prevent="setLike(true)">Mark Like</button> |
-        <button class="mark-unliked-button" v-on:click.prevent="setLike(false)" >Mark Unlike</button> |
+        <button class="mark-liked-button" v-on:click.prevent="setLike()">Mark Like</button> |
+        <button class="mark-unliked-button" v-on:click.prevent="setDislike()" >Mark Unlike</button> |
         <button class="delete-button" v-on:click="deletePost(post.id)" >Delete</button>
     </div>
     <div><reply-list v-bind:postId="postId" /></div>
@@ -39,11 +39,14 @@ export default {
     getUsername() {
       
     },
-    setLike(value) {
-      this.post.liked = value;
-      this.$store.commit('SET_LIKE_STATUS', {post: this.post, value: value});
+    setLike() {
+      PostService.likePost(this.$store.state.user.id, this.postId);
+      this.$store.commit('SET_LIKE_STATUS', {post: this.post, value: true});
     },
-    
+    setDislike() {
+      PostService.dislikePost(this.$store.state.user.id, this.postId);
+      this.$store.commit('SET_LIKE_STATUS', {post: this.post, value: false});
+    },
     deletePost() {
       PostService.deletePost(this.postId)
       .then(() => {
