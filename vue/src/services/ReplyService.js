@@ -13,7 +13,7 @@ export default {
   },
 
   createReply(postId, reply) {
-    return axios.post(`${API_URL}/${postId}/replies`, reply);
+    return axios.post(`${API_URL}/details/${postId}/replies`, reply);
   },
 
   updateReply(postId, replyId, reply) {

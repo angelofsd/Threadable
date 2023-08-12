@@ -10,12 +10,7 @@
 import ReplyService from '../services/ReplyService';
 
 export default {
-  props: {
-    postId: {
-      type: Number,
-      required: true,
-    },
-  },
+  props: ["postID"],
   computed: {
       userId() {
           return this.$store.state.user.id;
