@@ -40,8 +40,10 @@ export default {
       
     },
     setLike(value) {
+      this.post.liked = value;
       this.$store.commit('SET_LIKE_STATUS', {post: this.post, value: value});
     },
+    
     deletePost() {
       PostService.deletePost(this.postId)
       .then(() => {
@@ -52,6 +54,9 @@ export default {
                 this.$router.push(route);
       })
       //this.$store.commit("DELETE_POST", postId);
+    },
+    getVotes() {
+
     }
   },
   created() {

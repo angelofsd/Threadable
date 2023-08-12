@@ -28,7 +28,7 @@ export default new Vuex.Store({
     token: currentToken || '',
     user: currentUser || {},
     posts: [],
-    post: "",
+    post: {},
     forums: []
   },
   mutations: {
@@ -61,8 +61,8 @@ export default new Vuex.Store({
     SET_POSTS() {
       
     },
-    SET_LIKE_STATUS(state) {
-      state.post.liked = true;
+    SET_LIKE_STATUS(state, payload) {
+      state.post = payload;
 
     },
     ADD_NEW_FORUM(state, payload) {
