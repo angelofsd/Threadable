@@ -13,6 +13,7 @@ import Favorite from '../views/Favorite.vue'
 import HotPosts from '../views/HotPosts.vue'
 import SearchPage from '../views/SearchPage.vue'
 import AllForums from '../views/AllForums.vue'
+import ForumByNew from '../views/ForumByNew.vue'
 
 
 Vue.use(Router)
@@ -86,7 +87,14 @@ const router = new Router({
         requiresAuth: false
       }
     },
-
+    {
+      path: '/forums/:id/new',
+      name: 'forumPageByNew',
+      component: ForumByNew,
+      meta: {
+        requiresAuth: false
+      }
+    },
     {
       path: '/user/:id',
       name: 'user',
