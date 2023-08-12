@@ -3,7 +3,7 @@
         <div class="forumList">
             <div class="testDiv" v-for="forum in forums" v-bind:key="forum.id">
                 <h3 class="forum-name">  
-                    <router-link :to="{name: 'forumsId', params: {id: forum.id}}">
+                    <router-link :to="{name: 'forumPage', params: {id: forum.id}}">
                     {{forum.name}}
                     </router-link>
                 </h3>
@@ -84,6 +84,7 @@ export default {
     padding-right: 10px;
     margin-bottom:10px;
     border-radius: 8px;
+    width:75%
     
 }
 .forum-description {

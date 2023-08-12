@@ -34,11 +34,11 @@ export default {
     };
   },
   created() {
-    this.getPostsByForum();
+    this.getPostsByForumIdByNew();
   },
   methods: {
-    getPostsByForum() {
-      axios.get(`/forums/${this.forumId}/posts`)
+    getPostsByForumIdByNew() {
+      axios.get(`/forums/${this.forumId}/new`)
         .then((response) => {
           if (response.status === 200) {
             this.posts = response.data;
