@@ -14,6 +14,10 @@ export default {
     return axios.get(`/forums/${forumId}/posts`); 
   },
 
+  getPostsByForumIdByNew(forumId) {
+    return axios.get(`/forums/${forumId}/new`); 
+  },
+
   getPostsByUserId(userId) {
     return axios.get(`/posts/user/${userId}`)
   },

@@ -9,7 +9,7 @@
 
 
 <script>
-// This is for specific forum i.e. forums/{forumId
+// This is for specific forum i.e. forums/forumId
 
 import PostsByForum from '../components/PostsByForum.vue'
 import CreateForum from '../components/CreateForum.vue'
