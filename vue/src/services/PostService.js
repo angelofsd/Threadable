@@ -14,6 +14,10 @@ export default {
     return axios.get(`/forums/${forumId}/posts`); 
   },
 
+  getPostsByForumIdByNew(forumId) {
+    return axios.get(`/forums/${forumId}/new`); 
+  },
+
   getPostsByUserId(userId) {
     return axios.get(`/posts/user/${userId}`)
   },
@@ -22,6 +26,21 @@ export default {
     return axios.get(`/posts?search=${search}`);
   },
 
+  getLikedPostsByUserId(userId) {
+    return axios.get(`/posts/likes/user/${userId}`)
+  },
+
+  likePost(postId, userId) {
+    return axios.post(`posts/${postId}/${userId}/true`)
+  },
+
+  dislikePost(postId, userId) {
+    return axios.post(`posts/${postId}/${userId}/false`)
+  },
+
+  removeLikeOnPost(postId, userId) {
+    return axios.delete(`posts/${postId}/delete_like/${userId}`)
+  },
 
   createPost(post) {
 
@@ -40,7 +59,7 @@ export default {
       return axios.delete(url)
   },
 
- 
+  
 }
 
 

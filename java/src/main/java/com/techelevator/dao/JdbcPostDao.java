@@ -88,6 +88,25 @@ public class JdbcPostDao implements PostDao{
     }
 
     @Override
+    public List<Post> getPostsByForumIdByNew(int forumId){
+        List<Post> posts = new ArrayList<>();
+        String sql = "SELECT * FROM posts WHERE forum_id = ? ORDER BY date_created;";
+        try {
+            SqlRowSet result = jdbcTemplate.queryForRowSet(sql, forumId);
+            while (result.next()) {
+                posts.add(mapRowToPost(result));
+            }
+        } catch (CannotGetJdbcConnectionException ex) {
+            throw new DaoException("Unable to connect to server or database", ex);
+        }
+        catch (Exception ex) {
+            throw new DaoException("Something went wrong!", ex);
+        }
+
+        return posts;
+    }
+
+    @Override
     public List<Post> getPostsByUserId(int userId) {
         List<Post> posts = new ArrayList<>();
         String sql = "SELECT * FROM posts WHERE user_id = ?;";
