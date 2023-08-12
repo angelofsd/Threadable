@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/posts/{postId}/replies")
+@RequestMapping("/posts/details/{postId}/replies")
 public class ReplyController {
 
     private final ReplyDao replyDao;

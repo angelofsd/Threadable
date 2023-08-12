@@ -10,15 +10,16 @@
 import ReplyService from '../services/ReplyService';
 
 export default {
-  props: ["postID"],
+  props: ["postId"],
   computed: {
       userId() {
           return this.$store.state.user.id;
-      }
+      },
+    
   },
   data() {
     return {
-      replyBody: '',
+      reply: {},
     };
   },
   methods: {
@@ -26,13 +27,15 @@ export default {
         
         const reply = {
             text: this.replyBody,
-            postId: this.postId,
+            postId: this.$route.params.id,
             userId: this.userId
         }
-      ReplyService.createReply(this.postId, reply)
+      ReplyService.createReply(this.$route.params.id, reply)
       .then( (response) => {
           if (response.status === 201) {
-              console.log("Succesfully posted!")
+            this.reply = response.data;
+            console.log("Succesfully posted!")
+            location.reload(); 
               //maybe reset the reply body here or navigate somewhere else?
           }
       })
@@ -49,6 +52,7 @@ export default {
             })
     },
   },
+
 };
 </script>
 
