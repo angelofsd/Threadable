@@ -8,7 +8,7 @@
     <div v-for="post in posts" :key="post.id" class="post">
       <div id="post-subheader">
         <h4>{{ post.title }}</h4>
-        <LikeAndDislike v-bind:postId="post.id" />
+        <LikeAndDislike v-bind:postId="post.postId" />
       </div>
       <p>{{ post.body }}</p>
       <button @click="replyToPost(post.id)">Reply</button>
@@ -19,7 +19,6 @@
 
 <script>
 import axios from 'axios';
-import PostService from '../services/PostService';
 import LikeAndDislike from './LikeAndDislike.vue';
 
 export default {
@@ -43,7 +42,7 @@ export default {
   },
   created() {
     this.getPostsByForum();
-    this.getLikesByUser();
+    
   },
   methods: {
     getPostsByForum() {
@@ -56,13 +55,8 @@ export default {
         .catch((error) => {
           console.error('An error occurred:', error);
         });
-    },
-    setLikes() {
-            PostService.getLikedPostsByUserId(this.$store.state.user.id).then((response) => {
-                this.$store.commit("SET_LIKED_POSTS", response.data)
-            })
-        }
-  },
+    }
+  }
 };
 </script>
 

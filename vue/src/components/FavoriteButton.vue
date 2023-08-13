@@ -1,6 +1,5 @@
 <template>
-  <!-- REMOVE FROM PROFILE WHEN DONE -->
-  <div>
+  <div v-show="$store.state.token != ''">
       <StarIcon v-show="!isFavorited" v-on:click="onClick()" id="favorite-button" />
       <SolidStar v-show="isFavorited" v-on:click="onClick()" id="favorited-button" />
   </div>
