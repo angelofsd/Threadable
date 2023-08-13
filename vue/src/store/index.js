@@ -32,6 +32,7 @@ export default new Vuex.Store({
     forums: [],
     favoritedForums: [],
     likedPosts: [],
+    heartedReplies: [],
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {

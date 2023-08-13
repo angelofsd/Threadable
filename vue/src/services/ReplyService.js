@@ -22,6 +22,21 @@ export default {
 
   deleteReply(postId, replyId) {
     return axios.delete(`${API_URL}/${postId}/replies/${replyId}`);
+  },
+
+  getHearted(postId, replyId) {
+    const url = `${API_URL}/${postId}/replies/${replyId}/hearted`
+    return axios.get(url);
+  },
+  
+  setHearted(postId, replyId, userId) {
+    const url = `${API_URL}/${postId}/replies/${replyId}/${userId}/hearted`
+    return axios.post(url)
+  },
+
+  removeHearted(postId, replyId, userId) {
+    const url = `${API_URL}/${postId}/replies/${replyId}/${userId}/hearted`
+    return axios.delete(url)
   }
 }
 

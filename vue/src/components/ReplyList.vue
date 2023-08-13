@@ -5,6 +5,7 @@
       <p>{{ reply.text }}</p>
       <small>Posted by user {{ reply.username }} on {{ formatDate(reply.dateCreated) }}</small>
       <button v-on:click="deleteReply(reply.id)" class = "delete-button">Delete Reply</button>
+      <HeartReply :replyId="reply.id" />
     </div>
     <!-- TODO Optionally(ask team), add a form to create a new reply -->
   </div>
@@ -13,8 +14,13 @@
 <script>
 import ReplyService from '../services/ReplyService';
 import UserService from '../services/UserService';
+import HeartReply from './HeartReply.vue';
+
 
 export default {
+  components: {
+    HeartReply,
+  },
   props: {
     postId: {
       
@@ -37,8 +43,8 @@ export default {
       return date.toLocaleDateString('en-US', options);
     },
       deleteReply(replyId) {
-    // I use postId since I have it as a prop
-    ReplyService.deleteReply(this.postId, replyId)
+      // I use postId since I have it as a prop
+      ReplyService.deleteReply(this.postId, replyId)
       .then(() => {
         // Remove the reply from the replies array
         this.replies = this.replies.filter(reply => reply.id !== replyId);
