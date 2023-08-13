@@ -2,12 +2,14 @@
 
         <div class="trendingForums">
             <div class="testDiv" v-for="forum in forums" v-bind:key="forum.id">
-                
-                <h3 class="forum-name">  
-                    <router-link :to="{name: 'forumPage', params: {id: forum.id}}">
-                    {{forum.name}}
-                    </router-link>
-                </h3>
+                <div id="forum-subheader">
+                    <h3 class="forum-name">  
+                        <router-link :to="{name: 'forumPage', params: {id: forum.id}}">
+                        {{forum.name}}
+                        </router-link>
+                    </h3>
+                    <FavoriteButton :forumId="forum.id"></FavoriteButton>
+                </div>
                     <h4 class="forum-description"> {{forum.description}}</h4>
                     <h4 class="created-by">Created By:
                         <router-link :to="{name:'user', params:{id : forum.createdBy}}">{{forum.username}}
@@ -21,9 +23,11 @@
 <script>
 import ForumService from '../services/ForumService.js';
 import UserService from '../services/UserService.js';
+import FavoriteButton from '../components/FavoriteButton.vue'
 
 export default {
     name:'trending-forums',
+    components: {FavoriteButton},
     props: {
         forumId: {
             name: "",
@@ -98,6 +102,11 @@ export default {
     width:50%;
     text-align:right;
     font-weight: normal;
+}
+
+#forum-subheader {
+  display: flex;
+  justify-content: space-between;
 }
 
 </style>

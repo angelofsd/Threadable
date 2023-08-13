@@ -2,10 +2,11 @@
   <div id="favorited-list">
       <h3>Favorited</h3>
       <div class="forum" v-for="forum in forums" v-bind:key="forum.id">
-        <div>
+        <div id="forum-subheader">
           <router-link
-            v-bind:to="{ name: 'Forum', params: { id: forum.id } }"
+            v-bind:to="{ name: 'forumPage', params: { id: forum.id } }"
           >{{ forum.name }}</router-link>
+          <FavoriteButton :forumId="forum.id"></FavoriteButton>
         </div>
         <p>{{forum.description}}</p>
       </div>
@@ -15,10 +16,12 @@
 <script>
 import ForumService from '../services/ForumService.js';
 import UserService from '../services/UserService.js';
-
+import FavoriteButton from '../components/FavoriteButton.vue'
 
 export default {
   name: "favorited",
+  components: {FavoriteButton},
+  
   data() {
     return {
       forums: [],
@@ -28,6 +31,7 @@ export default {
     ForumService.getFavorited(this.$store.state.user.id).then((response) => {
         if (response.status === 200) {
            this.forums = response.data;
+           this.$store.commit("SET_FAVORITED_FORUMS", response.data)
          }
     })
        .catch( (error) => {
@@ -68,6 +72,11 @@ export default {
 
 #favorited-list {
   margin: 20px;
+}
+
+#forum-subheader {
+  display: flex;
+  justify-content: space-between;
 }
 
 .forum {
