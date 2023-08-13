@@ -14,9 +14,10 @@
 </template>
 
 <script>
-import ForumService from '../services/ForumService.js';
 import UserService from '../services/UserService.js';
 import FavoriteButton from '../components/FavoriteButton.vue'
+import PostService from '../services/PostService.js';
+import ForumService from '../services/ForumService.js';
 
 export default {
   name: "favorited",
@@ -28,23 +29,28 @@ export default {
     };
   },
   created() {
-    ForumService.getFavorited(this.$store.state.user.id).then((response) => {
-        if (response.status === 200) {
-           this.forums = response.data;
-           this.$store.commit("SET_FAVORITED_FORUMS", response.data)
-         }
+    
+    PostService.getLikedPostsByUserId(this.$store.state.user.id).then((response) => {
+      this.$store.commit("SET_LIKED_POSTS", response.data)
     })
-       .catch( (error) => {
-         if (error.response) {
-           alert("Something went wrong: " + error.response.statusText);
-         } else if(error.request){
-                    //We could not reach the server
-                    alert("We could not reach the server");
-         } else {
-                    alert("Something went horribly wrong");
-                }
-       })
-    },
+    //Need to move this somewhere else so it updates more often
+    ForumService.getFavorited(this.$store.state.user.id).then((response) => {
+      if (response.status === 200) {
+        this.forums = response.data;
+        this.$store.commit("SET_FAVORITED_FORUMS", response.data)
+      }
+    })
+    .catch( (error) => {
+      if (error.response) {
+        alert("Something went wrong: " + error.response.statusText);
+      } else if(error.request){
+                //We could not reach the server
+                alert("We could not reach the server");
+      } else {
+                alert("Something went horribly wrong");
+            }
+    })
+},
     getUsername(post) {
       UserService.getUserById(post.userId)
       .then((response) => {

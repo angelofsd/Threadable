@@ -17,7 +17,9 @@
             </div>
         </div>
     </div>
+        <div id="searchEl">
           <input v-model="searchInput" v-on:keyup.enter="searchPage()" type="text" placeholder="Search..."/>
+        </div>
       <div id="main-tabs">
           <div name="hot">
               <router-link v-bind:to="{name: 'hot'}"><p>Hot</p></router-link>
@@ -50,10 +52,10 @@ export default {
                 name: 'search',
                 params: {input: this.searchInput}
             }
-
             this.$router.push(route)
+            this.searchInput = "";
         }
-    }
+    },
     
 }
 </script>

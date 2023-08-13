@@ -30,6 +30,10 @@ export default {
     return axios.get(`/posts/likes/user/${userId}`)
   },
 
+  getDislikedPostsByUserId(userId) {
+    return axios.get(`posts/dislikes/user/${userId}`)
+  },
+
   likePost(postId, userId) {
     return axios.post(`posts/${postId}/${userId}/true`)
   },

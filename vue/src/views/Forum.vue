@@ -13,6 +13,7 @@
 
 import PostsByForum from '../components/PostsByForum.vue'
 import CreateForum from '../components/CreateForum.vue'
+import PostService from '../services/PostService';
 
 export default {
   name: "forum",
@@ -25,6 +26,16 @@ export default {
       forumName:"",
       invalidCredentials: false
     };
+  },
+  created() {
+    if(this.$store.state.user) {
+      PostService.getLikedPostsByUserId(this.$store.state.user.id).then((response) => {
+                  this.$store.commit("SET_LIKED_POSTS", response.data)
+              })
+      PostService.getDislikedPostsByUserId(this.$store.state.user.id).then((response) => {
+        this.$store.commit("SET_DISLIKED_POSTS", response.data)
+      })
+    }
   }
 };
 </script>

@@ -33,7 +33,7 @@ export default {
   data() {
     return{
       post: {},
-      userLikes: []
+      // userLikes: []
     }
   },
   components: {
@@ -69,7 +69,7 @@ export default {
         }
       });
 
-      this.setIsLiked();
+      // this.setIsLiked();
   },
   };
   

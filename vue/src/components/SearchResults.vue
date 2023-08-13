@@ -2,6 +2,7 @@
   <div id="post-list">
       <h3>{{showingResultsFor}}</h3>
       <div class="post" v-for="post in posts" v-bind:key="post.id">
+        {{console.log(post.id)}}
         <div>
           <router-link
             v-bind:to="{ name: 'post', params: { id: post.id } }"

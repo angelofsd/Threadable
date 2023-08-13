@@ -32,6 +32,7 @@ export default new Vuex.Store({
     forums: [],
     favoritedForums: [],
     likedPosts: [],
+    dislikedPosts: [],
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -93,6 +94,9 @@ export default new Vuex.Store({
     },
     SET_LIKED_POSTS(state, data) {
       state.likedPosts = data
+    },
+    SET_DISLIKED_POSTS(state, data) {
+      state.dislikedPosts = data
     }
   }
 })

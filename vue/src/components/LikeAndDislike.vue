@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-show="$store.state.token != ''">
       <div class="likes">
           <p>{{numberOfLikes}}</p>
           <ArrowCircleUpIcon class="like-button" v-show="!isLiked" v-on:click="onClickLike()" />
@@ -34,21 +34,21 @@ export default {
     },
     methods: {
         setLike() {
-            PostService.likePost(3, this.$store.state.user.id);
+            PostService.likePost(this.postId, this.$store.state.user.id);
         },
         setDislike() {
-            PostService.dislikePost(3, this.$store.state.user.id);
+            PostService.dislikePost(this.postId, this.$store.state.user.id);
         },
         removeLike() {
-            PostService.removeLikeOnPost(3, this.$store.state.user.id)
+            PostService.removeLikeOnPost(this.postId, this.$store.state.user.id)
         },
         getNumberOfLikes() {
-            PostService.getNumberOfLikes(3).then((response) => {
+            PostService.getNumberOfLikes(this.postId).then((response) => {
                 this.numberOfLikes = response.data
             })
         },
         getNumberOfDislikes() {
-            PostService.getNumberOfDislikes(3).then((response) => {
+            PostService.getNumberOfDislikes(this.postId).then((response) => {
                 this.numberOfDislikes = response.data
             })
         },
@@ -83,11 +83,28 @@ export default {
                 this.setDislike();
                 this.numberOfDislikes ++;
             }
+        },
+        setLiked() {
+            this.$store.state.likedPosts.forEach((post) => {
+                if (post.postId === this.postId) {
+                    this.isLiked = true;
+                }
+            })
+        },
+        setDisliked() {
+            this.$store.state.dislikedPosts.forEach((post) => {
+                if (post.postId === this.postId) {
+                    this.isDisliked = true;
+                }
+            })
         }
     },
     created() {
         this.getNumberOfLikes();
         this.getNumberOfDislikes();
+        this.setLiked();
+        this.setDisliked();
+
         
     }
 }
