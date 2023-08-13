@@ -28,6 +28,9 @@
           <div name="favorited" v-show="$store.state.token != ''">
               <router-link v-bind:to="{name: 'favorites'}"><p>Favorited</p></router-link>
           </div>
+          <div name="all">
+              <router-link v-bind:to="{name: 'allForums'}"><p>All Forums</p></router-link>
+          </div>
       </div>
     </div>
 </template>

@@ -2,11 +2,13 @@
 
         <div class="forumList">
             <div class="testDiv" v-for="forum in forums" v-bind:key="forum.id">
-                <h3 class="forum-name">  
-                    <router-link :to="{name: 'forumPage', params: {id: forum.id}}">
-                    {{forum.name}}
-                    </router-link>
-                </h3>
+                <div>
+                    <h3 class="forum-name">  
+                        <router-link :to="{name: 'forumPage', params: {id: forum.id}}">
+                        {{forum.name}}
+                        </router-link>
+                    </h3>
+                </div>
                     <h4 class="forum-description"> {{forum.description}}</h4>
                     <h4 class="created-by">Created By:
                         <router-link :to="{name:'user', params:{id : forum.createdBy}}">{{forum.username}}
@@ -23,6 +25,7 @@ import UserService from '../services/UserService.js';
 
 export default {
     name:'forum-list',
+    components: {},
     props: {
         forumId: {
             name: "",

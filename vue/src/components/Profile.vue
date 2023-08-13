@@ -2,7 +2,6 @@
   <div>
     <div id="profile">
       <div id="profile-image-section">
-        <FavoriteButton></FavoriteButton>
         <div v-show="showEditPic">
           <form>
             <textarea v-model="newProfileUrl" placeholder="Edit Pic..."/>
@@ -35,9 +34,8 @@
 <script>
 import userService from '../services/UserService'
 import Activity from './Activity.vue'
-import FavoriteButton from '../components/FavoriteButton.vue'
 export default {
-  components: { Activity, FavoriteButton },
+  components: { Activity },
   name: 'user-details',
   userId: 0,
   data() {

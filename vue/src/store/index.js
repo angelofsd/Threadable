@@ -29,7 +29,9 @@ export default new Vuex.Store({
     user: currentUser || {},
     posts: [],
     post: {},
-    forums: []
+    forums: [],
+    favoritedForums: [],
+    likedPosts: [],
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -76,6 +78,21 @@ export default new Vuex.Store({
         state.posts.findIndex(post => post.id === postId),
         1
       )
+    },
+
+    // FAVORITED STUFF
+
+    SET_FAVORITED_FORUMS(state, data) {
+      state.favoritedForums = data
+    },
+    ADD_FAVORITED_FORUM(state, payload) {
+      state.favoritedForums.unshift(payload);
+    },
+    REMOVE_FAVORITED_FORUM(state, forumId) {
+      state.favoritedForums.splice(forum => forum.id === forumId)
+    },
+    SET_LIKED_POSTS(state, data) {
+      state.likedPosts = data
     }
   }
 })

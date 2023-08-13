@@ -6,7 +6,10 @@
     <h3 class="options"><router-link v-bind:to="{ name: 'forumPageByNew', params: {id: this.forumId}}">New</router-link></h3>
     <h3 class="options"><router-link v-bind:to="{ name: 'forumPage', params: {id: this.forumId}}">Popular</router-link></h3>
     <div v-for="post in posts" :key="post.id" class="post">
-      <h4>{{ post.title }}</h4>
+      <div id="post-subheader">
+        <h4>{{ post.title }}</h4>
+        <LikeAndDislike v-bind:postId="post.id" />
+      </div>
       <p>{{ post.body }}</p>
       <button @click="replyToPost(post.id)">Reply</button>
       <button @click="deletePost(post.id)">Delete Post</button>
@@ -16,6 +19,8 @@
 
 <script>
 import axios from 'axios';
+import PostService from '../services/PostService';
+import LikeAndDislike from './LikeAndDislike.vue';
 
 export default {
   props: {
@@ -28,6 +33,9 @@ export default {
     required: true, 
   },
   },
+  components: {
+    LikeAndDislike
+  },
   data() {
     return {
       posts: [],
@@ -35,6 +43,7 @@ export default {
   },
   created() {
     this.getPostsByForum();
+    this.getLikesByUser();
   },
   methods: {
     getPostsByForum() {
@@ -48,11 +57,20 @@ export default {
           console.error('An error occurred:', error);
         });
     },
+    setLikes() {
+            PostService.getLikedPostsByUserId(this.$store.state.user.id).then((response) => {
+                this.$store.commit("SET_LIKED_POSTS", response.data)
+            })
+        }
   },
 };
 </script>
 
 <style scoped>
+  #post-subheader {
+    display: flex;
+    justify-content: space-between;
+  }
   button {
       
       color: rgb(255, 255, 255);

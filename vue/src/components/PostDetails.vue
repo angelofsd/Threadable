@@ -1,13 +1,12 @@
 <template>
   <div class="post-details">
     <div class="post" >
+      <div id="post-subheader">
         <h1>{{ post.title }}</h1>
+        <LikeAndDislike :postId="post.id" />
+      </div>
         <p>{{post.body}}</p>
         
-        <button class="mark-liked-button" v-on:click.prevent="setLike()">Mark Like</button> |
-        <p>{{this.numberLikes}}</p>
-        <button class="mark-unliked-button" v-on:click.prevent="setDislike()" >Mark Unlike</button> |
-        <p>{{this.numberDislikes}}</p>
         <button class="delete-button" v-on:click="deletePost(post.id)" >Delete</button>
     </div>
     <div><reply-list v-bind:postId="postId" /></div>
@@ -19,6 +18,7 @@
 import PostService from "../services/PostService.js";
 import CreateReply from "../components/CreateReply.vue"
 import ReplyList from "../components/ReplyList.vue"
+import LikeAndDislike from './LikeAndDislike.vue';
 //import ReplyService from "../services/ReplyService.js";
 
 // import UserService from '../services/UserService.js';
@@ -26,37 +26,22 @@ import ReplyList from "../components/ReplyList.vue"
 
 export default {
   name: "post-details",
+  
   props: [
     "postId"
   ],
   data() {
     return{
       post: {},
-      numberLikes: 0,
-      numberDislikes: 0,
-      isLiked: false,
-      isDisliked: false,
       userLikes: []
     }
   },
   components: {
-    CreateReply, ReplyList
+    CreateReply, ReplyList, LikeAndDislike
   },
   methods: {
     getUsername() {
       
-    },
-    setLike() {
-      PostService.likePost(this.$store.state.user.id, this.postId);
-      this.numberLikes ++
-      // this.numberDislikes --
-      this.$store.commit('SET_LIKE_STATUS', {post: this.post, value: true});
-    },
-    setDislike() {
-      PostService.dislikePost(this.$store.state.user.id, this.postId);
-      // this.numberLikes --
-      this.numberDislikes ++
-      this.$store.commit('SET_LIKE_STATUS', {post: this.post, value: false});
     },
     deletePost() {
       PostService.deletePost(this.postId)
@@ -69,36 +54,9 @@ export default {
       })
       //this.$store.commit("DELETE_POST", postId);
     },
-    getNumberOfLikes() {
-      PostService.getNumberOfLikes(this.postId).then((response) => {
-        this.numberLikes = response.data
-      })
-    },
-    getNumberOfDislikes() {
-      PostService.getNumberOfDislikes(this.postId).then((response) => {
-        this.numberDislikes = response.data
-      })
-    },
-    getLikesByUser() {
-      PostService.getLikedPostsByUserId(this.$store.state.user.id).then((response) => {
-        this.userLikes = response.data
-      })
-    },
-    setIsLiked() {
-      this.userLikes.forEach((post) => {
-        if (post.postId === this.postId) {
-          console.log(post.postId)
-          this.isLiked = true;
-        }
-      })
-    }
+    
   },
   created() {
-    this.getNumberOfLikes();
-    this.getNumberOfDislikes();
-    this.getLikesByUser();
-    
-
     PostService
       .get(this.postId)
       .then(response => {
@@ -121,6 +79,10 @@ export default {
 
 <style>
 /** page structure **/
+#post-subheader{
+  display:flex;
+  justify-content: space-between;
+}
 .post-details {
   padding: 20px 20px;
   margin: 0 auto;

@@ -22,6 +22,14 @@ export default {
         getTrendingForums() {
             const url = 'forums/trending';
             return axios.get(url);
+        },
+        setFavoritedForum(forumId, userId) {
+            const url = `forums/favorite/${forumId}/${userId}`
+            return axios.post(url)
+        },
+        removeFavoritedForum(forumId, userId) {
+            const url = `forums/favorite/${forumId}/${userId}`
+            return axios.delete(url)
         }
 
 }
