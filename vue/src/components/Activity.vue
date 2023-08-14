@@ -4,14 +4,12 @@
         <div id="post-list">
             <h4>Created Posts</h4>
             <div class="post" v-for="post in posts" v-bind:key="post.id">
-
-                <h4>{{ post.title }}</h4>
+                <div id="post-subheader">
+                  <h4>{{ post.title }}</h4>
+                  <LikeAndDislike :postId="post.postId" />
+                </div>
                 <img v-show="post.imageURL" v-if="post.postId" v-bind:src="'' + post.postId" />
                 <p>{{ post.body }}</p>
-                <div class="button-container">
-                    <button class="mark-liked" v-on:click.prevent="setLike(true)" v-if="!post.liked">Mark Like</button>
-                    <button class="mark-unliked" v-on:click.prevent="setLike(false)" v-if="post.liked">Mark Unlike</button>
-                </div>
             </div>
         </div>
     </div>
@@ -19,10 +17,11 @@
 
 <script>
 import postService from '../services/PostService';
+import LikeAndDislike from './LikeAndDislike.vue';
 
 export default {
-  components: { },
-    name: 'post-card',
+  components: { LikeAndDislike },
+    name: 'activity',
     props: {
         post: Object,
     },

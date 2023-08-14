@@ -68,9 +68,8 @@ export default {
           this.$router.push({name: 'NotFound'});
         }
       });
-
-      // this.setIsLiked();
-  },
+    }
+    
   };
   
 

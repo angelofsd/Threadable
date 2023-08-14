@@ -1,11 +1,10 @@
 <template>
   <div id="post-list">
       <h3>{{showingResultsFor}}</h3>
-      <div class="post" v-for="post in posts" v-bind:key="post.id">
-        {{console.log(post.id)}}
+      <div class="post" v-for="post in posts" v-bind:key="post.postId">
         <div>
           <router-link
-            v-bind:to="{ name: 'post', params: { id: post.id } }"
+            v-bind:to="{ name: 'post', params: { id: post.postId } }"
           >{{ post.title }}</router-link>
         </div>
         <p>{{post.body}}</p>
@@ -38,7 +37,6 @@ export default {
     search() {
             PostService.searchForPosts(this.$route.params.input).then((response) => {
                 this.posts = response.data
-                this.$forceUpdate();
             })
             .catch( (error) => {
                 if (error.response) {

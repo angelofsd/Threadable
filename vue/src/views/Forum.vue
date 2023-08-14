@@ -36,6 +36,7 @@ export default {
         this.$store.commit("SET_DISLIKED_POSTS", response.data)
       })
     }
+
   }
 };
 </script>

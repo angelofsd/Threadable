@@ -2,12 +2,13 @@
 
         <div class="forumList">
             <div class="testDiv" v-for="forum in forums" v-bind:key="forum.id">
-                <div>
+                <div id="forum-subheader">
                     <h3 class="forum-name">  
                         <router-link :to="{name: 'forumPage', params: {id: forum.id}}">
                         {{forum.name}}
                         </router-link>
                     </h3>
+                        <FavoriteButton :forumId="forum.id"></FavoriteButton>
                 </div>
                     <h4 class="forum-description"> {{forum.description}}</h4>
                     <h4 class="created-by">Created By:
@@ -22,10 +23,11 @@
 <script>
 import ForumService from '../services/ForumService.js';
 import UserService from '../services/UserService.js';
+import FavoriteButton from './FavoriteButton.vue';
 
 export default {
     name:'forum-list',
-    components: {},
+    components: {FavoriteButton},
     props: {
         forumId: {
             name: "",
@@ -76,11 +78,16 @@ export default {
     },
     created() {
         this.getForums();
+
+        
     }
 }
 </script>
 
 <style scoped>
+.forum-subheader {
+    display: flex;
+}
 .testDiv {
     border: solid 2px #889DAE;
     padding-left: 10px;
