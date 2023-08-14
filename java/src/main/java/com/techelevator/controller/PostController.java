@@ -38,6 +38,16 @@ public class PostController {
         return postDao.getPostsByForumId(userId);
     }
 
+    @GetMapping("/forums/{forumId}")
+    public List<Post> getPostsByForumId(@PathVariable int forumId) {
+        return postDao.getPostsByForumId(forumId);
+    }
+
+    @GetMapping("/forums/{forumId}/new")
+    public List<Post> getPostsByForumIdByNew(@PathVariable int forumId) {
+        return postDao.getPostsByForumId(forumId);
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Post createPost(@RequestBody Post post) {
@@ -51,7 +61,12 @@ public class PostController {
 
     @GetMapping("/likes/user/{userId}")
     public List<Post>getLikedPostsByUserId(@PathVariable int userId) {
-        return postDao.findLikedPostsByUserId(userId);
+        return postDao.findLikedPostsByUserId(userId, true);
+    }
+
+    @GetMapping("/dislikes/user/{userId}")
+    public List<Post>getDislikedPostsByUserId(@PathVariable int userId) {
+        return postDao.findLikedPostsByUserId(userId, false);
     }
 
     @PostMapping("/{postId}/{userId}/true")
@@ -69,7 +84,15 @@ public class PostController {
         return postDao.removeLikePost(userId, postId);
     }
 
+    @GetMapping("/details/{postId}/likes")
+    public int numberOfLikes(@PathVariable int postId) {
+        return postDao.getNumberOfLikes(postId, true);
+    }
 
+    @GetMapping("/details/{postId}/dislikes")
+    public int numberOfDislikes(@PathVariable int postId) {
+        return postDao.getNumberOfLikes(postId, false);
+    }
 
 
 }

@@ -44,7 +44,7 @@ export default {
   },
   methods: {
     getPostsByForum() {
-      axios.get(`/forums/${this.forumId}/posts`)
+      axios.get(`/posts/forums/${this.forumId}`)
         .then((response) => {
           if (response.status === 200) {
             this.posts = response.data;
