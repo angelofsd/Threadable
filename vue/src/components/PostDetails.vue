@@ -83,8 +83,16 @@ export default {
           this.$router.push({name: 'NotFound'});
         }
       });
+      if(this.$store.state.user) {
+        PostService.getLikedPostsByUserId(this.$store.state.user.id).then((response) => {
+                    this.$store.commit("SET_LIKED_POSTS", response.data)
+                })
+        PostService.getDislikedPostsByUserId(this.$store.state.user.id).then((response) => {
+          this.$store.commit("SET_DISLIKED_POSTS", response.data)
+        })
+      }
     }
-    
+
   };
   
 
