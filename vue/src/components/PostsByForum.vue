@@ -7,7 +7,7 @@
     <h3 class="options"><router-link v-bind:to="{ name: 'forumPage', params: {id: this.forumId}}">Popular</router-link></h3>
     <div v-for="post in posts" :key="post.id" class="post">
       <div id="post-subheader">
-        <h4><router-link v-bind:to="{ name: 'Post', params:{id: post.postId} }">{{ post.title }}</router-link></h4>
+        <h4><router-link v-bind:to="{ name: 'post', params:{id: post.postId} }">{{ post.title }}</router-link></h4>
         <LikeAndDislike v-bind:postId="post.postId" />
       </div>
       <p>{{ post.body }}</p>
