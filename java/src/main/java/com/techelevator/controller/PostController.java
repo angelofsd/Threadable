@@ -51,7 +51,12 @@ public class PostController {
 
     @GetMapping("/likes/user/{userId}")
     public List<Post>getLikedPostsByUserId(@PathVariable int userId) {
-        return postDao.findLikedPostsByUserId(userId);
+        return postDao.findLikedPostsByUserId(userId, true);
+    }
+
+    @GetMapping("/dislikes/user/{userId}")
+    public List<Post>getDislikedPostsByUserId(@PathVariable int userId) {
+        return postDao.findLikedPostsByUserId(userId, false);
     }
 
     @PostMapping("/{postId}/{userId}/true")
@@ -69,7 +74,15 @@ public class PostController {
         return postDao.removeLikePost(userId, postId);
     }
 
+    @GetMapping("/details/{postId}/likes")
+    public int numberOfLikes(@PathVariable int postId) {
+        return postDao.getNumberOfLikes(postId, true);
+    }
 
+    @GetMapping("/details/{postId}/dislikes")
+    public int numberOfDislikes(@PathVariable int postId) {
+        return postDao.getNumberOfLikes(postId, false);
+    }
 
 
 }
