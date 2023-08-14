@@ -3,10 +3,11 @@
     <div class="post" >
       <div id="post-subheader">
         <h1>{{ post.title }}</h1>
-        <LikeAndDislike v-bind:postId="postId" />
+        <LikeAndDislike :postId="postId" />
+        
       </div>
         <p>{{post.body}}</p>
-        
+        <small>{{post.username}} on {{formatDate(post.dateCreated)}}>>></small>
         <button class="delete-button" v-on:click="deletePost(post.id)" >Delete</button>
     </div>
     <div><reply-list v-bind:postId="postId" /></div>
@@ -20,8 +21,7 @@ import CreateReply from "../components/CreateReply.vue"
 import ReplyList from "../components/ReplyList.vue"
 import LikeAndDislike from './LikeAndDislike.vue';
 //import ReplyService from "../services/ReplyService.js";
-
-// import UserService from '../services/UserService.js';
+import UserService from '../services/UserService.js';
 
 
 export default {
@@ -40,8 +40,15 @@ export default {
     CreateReply, ReplyList, LikeAndDislike
   },
   methods: {
-    getUsername() {
-      
+    getUsername(post) {
+      UserService.getUserById(post.userId)
+        .then((response) => {
+          post.username = response.data.username; // Set username to reply object
+          this.$forceUpdate(); // Force re-render
+        })
+        .catch((error) => {
+          console.error('An error occurred:', error);
+        });
     },
     deletePost() {
       PostService.deletePost(this.postId)
@@ -54,14 +61,22 @@ export default {
       })
       //this.$store.commit("DELETE_POST", postId);
     },
+    formatDate(dateString) {
+      const date = new Date(dateString);
+      const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+      return date.toLocaleDateString('en-US', options);
+    },
     
   },
   created() {
+    
+
     PostService
       .get(this.postId)
       .then(response => {
         this.$store.commit("SET_ACTIVE_POST", response.data);
         this.post = response.data;
+        this.getUsername(this.post);
       })
       .catch(error => {
         if (error.response.status == 404) {
