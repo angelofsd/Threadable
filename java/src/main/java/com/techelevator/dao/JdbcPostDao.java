@@ -18,9 +18,14 @@ public class JdbcPostDao implements PostDao{
         this.jdbcTemplate = jdbcTemplate;
     }
     @Override
-    public List<Post> getAllPosts() {
+    public List<Post> getHotPosts() {
         List<Post> posts = new ArrayList<>();
-        String sql = "SELECT * FROM posts";
+        String sql = "select p.id, p.title, p.body, p.image_url, p.date_created, p.forum_id, p.user_id, COUNT(*) as liked_count\n" +
+                "FROM posts p\n" +
+                "join liked_posts lp on p.id = lp.post_id \n" +
+                "WHERE liked = true\n" +
+                "group by p.id\n" +
+                "order by liked_count";
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql);
         while (result.next()) {
             posts.add(mapRowToPost(result));
@@ -135,7 +140,8 @@ public class JdbcPostDao implements PostDao{
                 post.getImageURL(),
                 post.getDateCreated(),
                 post.getForumId(),
-                post.getUserId());
+                post.getUserId()
+               );
         post.setPostId(newPostId);
         return post;
     }
@@ -257,6 +263,7 @@ public class JdbcPostDao implements PostDao{
         post.setDateCreated(rs.getTimestamp("date_created"));
         post.setForumId(rs.getInt("forum_id"));
         post.setUserId(rs.getInt("user_id"));
+        //post.setVotes(rs.getInt("liked_count"));
 
         return post;
     }

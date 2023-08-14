@@ -17,10 +17,10 @@ public class PostController {
     public PostController(PostDao postDao) {
         this.postDao = postDao;
     }
-    @GetMapping
-    public List<Post> getAllPosts(@RequestParam(defaultValue = "") String search) {
+    @GetMapping("/hot")
+    public List<Post> getHotPosts(@RequestParam(defaultValue = "") String search) {
         if (search.equals("")) {
-            return postDao.getAllPosts();
+            return postDao.getHotPosts();
         } else {
             return postDao.searchForPosts(search);
         }

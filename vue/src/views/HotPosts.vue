@@ -1,16 +1,16 @@
 <template>
   <div>
     <div class="hot-posts">
-        <HotPosts></HotPosts>
+        <post-list/>
     </div>
   </div>
 </template>
 
 <script>
-import HotPosts from '../components/HotPosts.vue';
+import PostList from '../components/PostList.vue';
 export default {
   name: "user-profile",
-  components: {HotPosts},
+  components: {PostList},
   data() {
     return {
       user: {},

@@ -7,8 +7,8 @@ export default {
     return axios.get(`/posts/details/${id}`)
   },
 
-  getAllPosts() {
-    return axios.get(`/posts`);
+  getHotPosts() {
+    return axios.get(`/posts/hot`);
   },
   getPostsByForumId(forumId) {
     return axios.get(`/posts/forums/${forumId}`); 
