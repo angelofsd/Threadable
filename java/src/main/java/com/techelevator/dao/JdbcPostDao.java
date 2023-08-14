@@ -254,7 +254,7 @@ public class JdbcPostDao implements PostDao{
         post.setTitle(rs.getString("title"));
         post.setBody(rs.getString("body"));
         post.setImageURL(rs.getString("image_url"));
-        post.setDateCreated(rs.getDate("date_created"));
+        post.setDateCreated(rs.getTimestamp("date_created"));
         post.setForumId(rs.getInt("forum_id"));
         post.setUserId(rs.getInt("user_id"));
 

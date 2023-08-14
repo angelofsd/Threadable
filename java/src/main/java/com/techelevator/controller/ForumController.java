@@ -45,15 +45,6 @@ public class ForumController {
     public Forum getForumById(@PathVariable int forumId) {
         return forumDao.getForumById(forumId);
     }
-    @GetMapping("/{forumId}/posts")
-    public List<Post> getPostsByForumId(@PathVariable int forumId) {
-        return postDao.getPostsByForumId(forumId);
-    }
-
-    @GetMapping("/{forumId}/new")
-    public List<Post> getPostsByForumIdByNew(@PathVariable int forumId) {
-        return postDao.getPostsByForumId(forumId);
-    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

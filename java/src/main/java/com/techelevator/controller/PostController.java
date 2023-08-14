@@ -38,6 +38,16 @@ public class PostController {
         return postDao.getPostsByForumId(userId);
     }
 
+    @GetMapping("/forums/{forumId}")
+    public List<Post> getPostsByForumId(@PathVariable int forumId) {
+        return postDao.getPostsByForumId(forumId);
+    }
+
+    @GetMapping("/forums/{forumId}/new")
+    public List<Post> getPostsByForumIdByNew(@PathVariable int forumId) {
+        return postDao.getPostsByForumId(forumId);
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Post createPost(@RequestBody Post post) {
