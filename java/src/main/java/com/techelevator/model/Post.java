@@ -13,7 +13,7 @@ public class Post {
     private int userId;
     private boolean liked;
 
-    private int votes;
+    private int votes = 0;
 
     public Post() { };
 
