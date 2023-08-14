@@ -28,7 +28,7 @@ export default {
     };
   },
   created() {
-    if(this.$store.state.user) {
+    if(this.$store.state.token != '') {
       PostService.getLikedPostsByUserId(this.$store.state.user.id).then((response) => {
                   this.$store.commit("SET_LIKED_POSTS", response.data)
               })
