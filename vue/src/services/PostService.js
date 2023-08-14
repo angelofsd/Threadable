@@ -11,11 +11,11 @@ export default {
     return axios.get(`/posts`);
   },
   getPostsByForumId(forumId) {
-    return axios.get(`/forums/${forumId}/posts`); 
+    return axios.get(`/posts/forums/${forumId}`); 
   },
 
   getPostsByForumIdByNew(forumId) {
-    return axios.get(`/forums/${forumId}/new`); 
+    return axios.get(`/posts/forums/${forumId}/new`); 
   },
 
   getPostsByUserId(userId) {
