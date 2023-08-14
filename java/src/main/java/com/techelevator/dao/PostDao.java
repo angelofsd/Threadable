@@ -12,10 +12,10 @@ public interface PostDao {
     List<Post> getPostsByForumId(int forumId);
     List<Post> getPostsByForumIdByNew(int forumId);
     List<Post> getPostsByUserId(int userId);
-    List<Post> findLikedPostsByUserId(int userId);
+    List<Post> findLikedPostsByUserId(int userId, boolean liked);
     boolean setLikePost(int userId, int postId, boolean isLiked);
     boolean removeLikePost(int userId, int postId);
     boolean removePost(int postId);
-    int getVotes(int postId);
+    int getNumberOfLikes(int postId, boolean isLiked);
 
 }

@@ -141,14 +141,14 @@ public class JdbcPostDao implements PostDao{
     }
 
     @Override
-    public List<Post> findLikedPostsByUserId(int userId) {
+    public List<Post> findLikedPostsByUserId(int userId, boolean liked) {
         List<Post> likedPosts = new ArrayList<>();
         String sql = "SELECT p.id, p.title, p.body, p.image_url, p.date_created, p.forum_id, p.user_id FROM posts p\n" +
                 "LEFT JOIN liked_posts lp\n" +
                 "\tON p.id = lp.post_id\n" +
-                "WHERE lp.user_id = ?;";
+                "WHERE lp.user_id = ? AND lp.liked = ?;";
         try {
-            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId, liked);
             while (results.next()) {
                 likedPosts.add(mapRowToPost(results));
             }
@@ -227,11 +227,11 @@ public class JdbcPostDao implements PostDao{
     }
 
     @Override
-    public int getVotes(int postId) {
+    public int getNumberOfLikes(int postId, boolean isLiked) {
         int votes = 0;
-        String sql = "SELECT COUNT(*) as count FROM liked_posts WHERE post_id = ?;";
+        String sql = "SELECT COUNT(*) as count FROM liked_posts WHERE post_id = ? AND liked = ?;";
         try {
-            SqlRowSet result = jdbcTemplate.queryForRowSet(sql, postId);
+            SqlRowSet result = jdbcTemplate.queryForRowSet(sql, postId, isLiked);
             if (result.next()) {
                 votes = result.getInt("count");
             }
