@@ -8,7 +8,7 @@ public class Post {
     private String title;
     private String body;
     private String imageURL;
-    private Date dateCreated;
+    private Timestamp dateCreated;
     private int forumId;
     private int userId;
     private boolean liked;
@@ -52,7 +52,7 @@ public class Post {
         return dateCreated;
     }
 
-    public void setDateCreated(Date dateCreated) {
+    public void setDateCreated(Timestamp dateCreated) {
         this.dateCreated = dateCreated;
     }
 
