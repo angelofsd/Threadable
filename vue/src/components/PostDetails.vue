@@ -3,7 +3,7 @@
     <div class="post" >
       <div id="post-subheader">
         <h1>{{ post.title }}</h1>
-        <LikeAndDislike :postId="post.id" />
+        <LikeAndDislike v-bind:postId="postId" />
       </div>
         <p>{{post.body}}</p>
         
