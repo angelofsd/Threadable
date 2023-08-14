@@ -1,7 +1,7 @@
 <template>
   <div>
       <h1>Post Details</h1>
-      <post-details v-bind:postId="$route.params.id"/>
+      <post-details v-bind:postId="$route.params.id" />
   </div>
 </template>
 
