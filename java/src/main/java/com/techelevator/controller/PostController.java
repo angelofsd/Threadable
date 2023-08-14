@@ -45,7 +45,7 @@ public class PostController {
 
     @GetMapping("/forums/{forumId}/new")
     public List<Post> getPostsByForumIdByNew(@PathVariable int forumId) {
-        return postDao.getPostsByForumId(forumId);
+        return postDao.getPostsByForumIdByNew(forumId);
     }
 
     @PostMapping
