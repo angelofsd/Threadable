@@ -4,10 +4,10 @@
       <div id="post-subheader">
         <h1>{{ post.title }}</h1>
         <LikeAndDislike :postId="postId" />
-        <small>{{post.username}} on {{formatDate(post.dateCreated)}}</small>
+        
       </div>
         <p>{{post.body}}</p>
-        
+        <small>{{post.username}} on {{formatDate(post.dateCreated)}}>>></small>
         <button class="delete-button" v-on:click="deletePost(post.id)" >Delete</button>
     </div>
     <div><reply-list v-bind:postId="postId" /></div>
@@ -69,13 +69,14 @@ export default {
     
   },
   created() {
-    this.getUsername();
+    
 
     PostService
       .get(this.postId)
       .then(response => {
         this.$store.commit("SET_ACTIVE_POST", response.data);
         this.post = response.data;
+        this.getUsername(this.post);
       })
       .catch(error => {
         if (error.response.status == 404) {
