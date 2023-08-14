@@ -1,8 +1,11 @@
+<!-- This Page Contains the Old Header Settings. If the new ones continue
+to work this can be deleted at the end of the project -->
+
 <template>
   <div id="header">
     <div id="banner">
         <div>
-            <router-link id="logo" v-bind:to="{ name: 'home' }"><span>Jackie's Forums!!!</span></router-link>
+            <router-link id="logo" v-bind:to="{ name: 'home' }"><span>Reddit (Lite)</span></router-link>
         </div>
         <div id="nav">
             <router-link id="profile-pic-link" v-bind:to="{ name: 'user', params: {id: $store.state.user.id}}">
@@ -21,17 +24,17 @@
           <input v-model="searchInput" v-on:keyup.enter="searchPage()" type="text" placeholder="Search..."/>
         </div>
       <div id="main-tabs">
-          <div name="hot" >
-            <router-link v-bind:to="{name: 'hot'}"><p :class="{ 'active-tab': isActiveHot }">Hot</p></router-link>
+          <div name="hot">
+              <router-link v-bind:to="{name: 'hot'}"><p>Hot</p></router-link>
           </div>
-          <div name="trending" >
-              <router-link v-bind:to="{name: 'trendingForums'}"><p :class="{ 'active-tab': isActiveTrending }">Trending</p></router-link>
+          <div name="trending">
+              <router-link v-bind:to="{name: 'trendingForums'}"><p>Trending</p></router-link>
           </div>
           <div name="favorited" v-show="$store.state.token != ''">
-              <router-link v-bind:to="{name: 'favorites'}"><p :class="{ 'active-tab': isActiveFavorite }">Favorited</p></router-link>
+              <router-link v-bind:to="{name: 'favorites'}"><p>Favorited</p></router-link>
           </div>
-          <div name="all" >
-              <router-link v-bind:to="{name: 'allForums'}"><p :class="{ 'active-tab': isActiveAll }">All Forums</p></router-link>
+          <div name="all">
+              <router-link v-bind:to="{name: 'allForums'}"><p>All Forums</p></router-link>
           </div>
       </div>
     </div>
@@ -43,20 +46,7 @@ export default {
     data() {
         return{
             searchInput: "",
-            isActiveHot: true,
-            isActiveTrending: false,
-            isActiveAll: false,
-            isActiveFavorite: false,
         }
-    },
-    created() {
-        this.setActiveTab();
-    },
-    watch: {
-        $route() {
-            // never used watch but seeing if this works, if route changes call method
-            this.setActiveTab();
-        },
     },
     methods: {
         //Probably works, just need to figure out how to print list
@@ -67,13 +57,7 @@ export default {
             }
             this.$router.push(route)
             this.searchInput = "";
-        },
-          setActiveTab() {
-            this.isActiveHot = this.$route.name === 'hot';
-            this.isActiveTrending = this.$route.name === 'trendingForums';
-            this.isActiveFavorite = this.$route.name === 'favorites';
-            this.isActiveAll = this.$route.name === 'allForums';
-        },
+        }
     },
     
 }
@@ -160,33 +144,25 @@ export default {
 
     #main-tabs p {
     padding: 1px;
-    
+    border-bottom: solid 1px transparent;
     cursor: pointer;
   }
 
 
   #main-tabs p:hover {
-        color:#2626d8;
-        border-bottom: solid 2px #2626d8;
-        transition-duration: 50ms;
+        color:#555597;
+        border-bottom: solid 1px #555597;
+        transition-duration: 250ms;
     }
 
     #main-tabs p:not( :hover ) {
         transition-duration: 250ms;
     }
     /* Default will be 'HOT', but onClick change the class to this */
-
-
-    .active-tab {
-    /* styling for the active tab TESTING*/
-    color:#2626d8;
-    border-bottom: solid 2px #2626d8;
-    
-    transition-duration: 250ms;
-    
-        
-}
-
-   
+    .clicked {
+        color:#555597;
+        border-bottom: solid 1px #555597;
+        transition-duration: 250ms;
+    }
     
 </style>
