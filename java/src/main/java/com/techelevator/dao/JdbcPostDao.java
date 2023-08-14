@@ -25,7 +25,8 @@ public class JdbcPostDao implements PostDao{
                 "join liked_posts lp on p.id = lp.post_id \n" +
                 "WHERE liked = true\n" +
                 "group by p.id\n" +
-                "order by liked_count";
+                "order by liked_count DESC\n" +
+                "limit 10";
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql);
         while (result.next()) {
             posts.add(mapRowToPost(result));

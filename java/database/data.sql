@@ -80,6 +80,14 @@ INSERT INTO moderators (user_id, forum_id)
 VALUES (3, 1), (1, 2);
 INSERT INTO favorite_forums (user_id, forum_id)
 VALUES (2, 1), (3, 2);
-INSERT INTO liked_posts (user_id, post_id, liked) VALUES (2, 1, TRUE), (3, 2, FALSE);
+INSERT INTO liked_posts (user_id, post_id, liked)
+VALUES (1, 1, TRUE), (1, 2, TRUE), (1, 3, TRUE), (1, 4, TRUE), (1, 11, TRUE), (1, 12, TRUE), (1, 13, TRUE), (1, 14, TRUE), (1, 22, TRUE), (1, 23, TRUE),
+(2, 1, TRUE), (2, 2, TRUE), (2, 3, TRUE), (2, 7, TRUE), (2, 8, TRUE), (2, 9, TRUE), (2, 10, TRUE), (2, 11, TRUE), (2, 12, TRUE), (2, 13, TRUE),
+(3, 1, TRUE), (3, 2, TRUE), (3, 8, TRUE), (3, 9, TRUE), (3, 10, TRUE), (3, 22, TRUE), (3, 24, TRUE), (3, 26, TRUE), (3, 28, TRUE), (3, 32, TRUE),
+(4, 1, TRUE), (4, 5, TRUE), (4, 6, TRUE), (4, 7, TRUE), (4, 22, TRUE), (4, 23, TRUE), (4, 24, TRUE), (4, 25, TRUE), (4, 26, TRUE), (4, 27, TRUE),
+(5, 1, TRUE), (5, 23, TRUE), (5, 24, TRUE), (5, 25, TRUE), (5, 26, TRUE), (6, 21, TRUE), (6, 22, TRUE), (6, 23, TRUE), (6, 24, TRUE), (6, 25, TRUE),
+(7, 10, TRUE), (7, 12, TRUE), (7, 23, TRUE), (7, 24, TRUE), (8, 29, TRUE), (8, 30, TRUE), (8, 31, TRUE), (8, 11, TRUE), (8, 3, TRUE), (8, 2, TRUE),
+(9, 1, TRUE), (10, 2, TRUE), (10, 21, TRUE), (10, 12, TRUE), (10, 13, TRUE), (10, 14, TRUE), (11, 32, TRUE), (11, 22, TRUE), (11, 9, TRUE), (11, 10, TRUE),
+(12, 1, TRUE), (13, 21, TRUE), (13, 22, TRUE), (13, 24, TRUE), (13, 26, TRUE), (13, 27, TRUE), (13, 28, TRUE), (13, 29, TRUE), (13, 30, TRUE), (13, 9, TRUE);
 
 COMMIT TRANSACTION;
