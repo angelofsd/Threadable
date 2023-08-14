@@ -90,7 +90,7 @@ public class JdbcPostDao implements PostDao{
     @Override
     public List<Post> getPostsByForumIdByNew(int forumId){
         List<Post> posts = new ArrayList<>();
-        String sql = "SELECT * FROM posts WHERE forum_id = ? ORDER BY date_created;";
+        String sql = "SELECT * FROM posts WHERE forum_id = ? ORDER BY date_created DESC;";
         try {
             SqlRowSet result = jdbcTemplate.queryForRowSet(sql, forumId);
             while (result.next()) {
