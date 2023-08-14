@@ -3,7 +3,7 @@
     <div class="post" >
       <div id="post-subheader">
         <h1>{{ post.title }}</h1>
-        <LikeAndDislike :postId="post.id" />
+        <LikeAndDislike :postId="postId" />
         <small>{{post.username}} on {{formatDate(post.dateCreated)}}</small>
       </div>
         <p>{{post.body}}</p>

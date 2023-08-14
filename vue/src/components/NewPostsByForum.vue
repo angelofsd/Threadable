@@ -6,16 +6,18 @@
     <h3 class="options"><router-link v-bind:to="{ name: 'forumPageByNew', params: {id: this.forumId}}">New</router-link></h3>
     <h3 class="options"><router-link v-bind:to="{ name: 'forumPage', params: {id: this.forumId}}">Popular</router-link></h3>
     <div v-for="post in posts" :key="post.id" class="post">
-      <h4>{{ post.title }}</h4>
+      <div id="post-subheader">
+        <h4><router-link v-bind:to="{ name: 'post', params:{id: post.postId} }">{{ post.title }}</router-link></h4>
+        <LikeAndDislike v-bind:postId="post.postId" />
+      </div>
       <p>{{ post.body }}</p>
-      <button @click="replyToPost(post.id)">Reply</button>
-      <button @click="deletePost(post.id)">Delete Post</button>
     </div>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
+import LikeAndDislike from './LikeAndDislike.vue'
 
 export default {
   props: {
@@ -27,6 +29,9 @@ export default {
 
     required: true, 
   },
+  },
+  components: {
+    LikeAndDislike
   },
   data() {
     return {
