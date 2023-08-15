@@ -77,9 +77,9 @@ VALUES ('Great post! Except that I don"t like Barbie, she is such barbie. And do
        ('I never thought to add salt to the water. Game-changer!', '2023-08-06', 19, 12),
        ('Quantum computing is complex but so intriguing!', '2023-08-06', 20, 4);
 INSERT INTO moderators (user_id, forum_id)
-VALUES (3, 1), (1, 2);
+VALUES (3, 1), (1, 2), (6, 1);
 INSERT INTO favorite_forums (user_id, forum_id)
-VALUES (2, 1), (3, 2);
+VALUES (2, 1), (3, 2), (3,1), (4,1), (13,1);
 INSERT INTO liked_posts (user_id, post_id, liked)
 VALUES (1, 1, TRUE), (1, 2, TRUE), (1, 3, TRUE), (1, 4, TRUE), (1, 11, TRUE), (1, 12, TRUE), (1, 13, TRUE), (1, 14, TRUE), (1, 22, TRUE), (1, 23, TRUE),
 (2, 1, TRUE), (2, 2, TRUE), (2, 3, TRUE), (2, 7, TRUE), (2, 8, TRUE), (2, 9, TRUE), (2, 10, TRUE), (2, 11, TRUE), (2, 12, TRUE), (2, 13, TRUE),

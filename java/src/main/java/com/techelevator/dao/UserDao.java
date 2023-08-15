@@ -1,8 +1,5 @@
 package com.techelevator.dao;
 
-import com.techelevator.model.Forum;
-import com.techelevator.model.Post;
-import com.techelevator.model.Reply;
 import com.techelevator.model.User;
 
 import java.util.List;
@@ -14,6 +11,8 @@ public interface UserDao {
     User getUserById(int userId);
 
     User findByUsername(String username);
+    List<User> getModsByForumId(int forumId);
+    List<User> getUsersByFavorited(int forumId);
 
     int findIdByUsername(String username);
 

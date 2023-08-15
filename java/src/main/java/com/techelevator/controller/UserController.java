@@ -39,4 +39,14 @@ public class UserController {
     public List<Forum> findFavoriteForumsByUserId(@PathVariable int id) {
         return forumDao.findFavoriteForumsByUserId(id);
     }
+
+    @GetMapping("/mods/forums/{forumId}")
+    public List<User> getModsByForumId(@PathVariable int forumId) {
+        return userDao.getModsByForumId(forumId);
+    }
+
+    @GetMapping("/favorited/forums/{forumId}")
+    public List<User> getUsersByFavorited(@PathVariable int forumId) {
+        return userDao.getUsersByFavorited(forumId);
+    }
 }

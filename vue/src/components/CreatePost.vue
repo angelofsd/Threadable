@@ -32,8 +32,8 @@ export default {
         body: "",
         imageURL: null,
         dateCreated: "",
-        forumId: 4,
-        userId: 2,
+        forumId: this.$route.params.id,
+        userId: this.$store.state.user.id,
         liked: null
       }
     };
