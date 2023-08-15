@@ -52,7 +52,7 @@ export default {
       PostService.deletePost(this.postId)
       .then(() => {
                 const route = {
-                    name: "home",
+                    name: "hot",
                 };
 
                 this.$router.push(route);
