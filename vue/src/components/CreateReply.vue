@@ -58,5 +58,26 @@ export default {
 </script>
 
 <style scoped>
+.text-box {
+   padding: 7px;
+   font-family: 'Montserrat', sans-serif;
+     font-size: 14px;
+     font-weight:500;
+     border-width: 6px;
+     border-color: #3b7793;
+     background-color: #FFFFFF;
+     color: #000000;
+     border-style: solid;
+     border-radius: 14px;
+     box-shadow: 3px 3px 5px rgba(66,66,66,.75);
+     
+}
+
+button {
+  font-weight: 600;
+  margin-top: 5px;
+  border: black solid 1px;
+  background-color: lightgray;
+}
 
 </style>
