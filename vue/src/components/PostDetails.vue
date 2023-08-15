@@ -3,7 +3,7 @@
     <div class="post" >
       <div id="post-subheader">
         <h1>{{ post.title }}</h1>
-        <LikeAndDislike :postId="postId" />
+        <LikeAndDislike :postId="postId" :post="post" />
         
       </div>
         <p>{{post.body}}</p>
@@ -20,7 +20,6 @@ import PostService from "../services/PostService.js";
 import CreateReply from "../components/CreateReply.vue"
 import ReplyList from "../components/ReplyList.vue"
 import LikeAndDislike from './LikeAndDislike.vue';
-//import ReplyService from "../services/ReplyService.js";
 import UserService from '../services/UserService.js';
 
 
@@ -33,7 +32,6 @@ export default {
   data() {
     return{
       post: {},
-      // userLikes: []
     }
   },
   components: {
@@ -54,24 +52,29 @@ export default {
       PostService.deletePost(this.postId)
       .then(() => {
                 const route = {
-                    name: "home",
+                    name: "hot",
                 };
 
                 this.$router.push(route);
       })
-      //this.$store.commit("DELETE_POST", postId);
     },
     formatDate(dateString) {
       const date = new Date(dateString);
       const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
       return date.toLocaleDateString('en-US', options);
     },
-    
-  },
-  created() {
-    
-
-    PostService
+    setLikes() {
+       if(this.$store.state.token != '') {
+        PostService.getLikedPostsByUserId(this.$store.state.user.id).then((response) => {
+          this.$store.commit("SET_LIKED_POSTS", response.data)
+        })
+        PostService.getDislikedPostsByUserId(this.$store.state.user.id).then((response) => {
+          this.$store.commit("SET_DISLIKED_POSTS", response.data)
+        })
+      }
+    },
+    getPost() {
+      PostService
       .get(this.postId)
       .then(response => {
         this.$store.commit("SET_ACTIVE_POST", response.data);
@@ -83,19 +86,17 @@ export default {
           this.$router.push({name: 'NotFound'});
         }
       });
-      if(this.$store.state.token != '') {
-        PostService.getLikedPostsByUserId(this.$store.state.user.id).then((response) => {
-                    this.$store.commit("SET_LIKED_POSTS", response.data)
-                })
-        PostService.getDislikedPostsByUserId(this.$store.state.user.id).then((response) => {
-          this.$store.commit("SET_DISLIKED_POSTS", response.data)
-        })
-      }
+     
+    
     }
+    
+  },
+  created() {
+    this.getPost()
+    this.setLikes()
 
-  };
-  
-
+  },
+}
 
 </script>
 
