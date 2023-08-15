@@ -156,6 +156,25 @@ public class JdbcUserDao implements UserDao {
         return updated;
     }
 
+    @Override
+    public boolean makeModerator(int userId, int forumId) {
+        String sql = "insert into moderators (user_id, forum_id) values (?,?)";
+        boolean success = false;
+        try {
+            int newModerator = jdbcTemplate.queryForObject(sql, Integer.class, userId, forumId);
+            if (newModerator > 0) {
+                success = true;
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to the server");
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data Integrity Violation", e);
+        }
+        return success;
+    }
+
+
+
     private User mapRowToUser(SqlRowSet rs) {
         User user = new User();
         user.setId(rs.getInt("user_id"));
