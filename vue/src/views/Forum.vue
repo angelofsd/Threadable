@@ -1,7 +1,7 @@
 
 <template>
   <div class="forums">
-    <user-list/>
+    <!-- <user-list/> -->
     <posts-by-forum :forumId="$route.params.id" :forumName="forumName">
     </posts-by-forum>
     <create-post/>
@@ -15,14 +15,14 @@
 
 import PostsByForum from '../components/PostsByForum.vue'
 import PostService from '../services/PostService'
-import UserList from '../components/UserList.vue'
+// import UserList from '../components/UserList.vue'
 import CreatePost from '../components/CreatePost.vue'
 
 export default {
   name: "forum",
   components: {
     PostsByForum,
-    UserList,
+    // UserList,
     CreatePost
   },
   data() {

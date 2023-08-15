@@ -21,7 +21,11 @@ export default {
   },
 
   getUsersByFavorited(forumId) {
-    return axios.get(`${API_URL}/favorited/forums/${forumId}`)
+    return axios.get(`${API_URL}/favorited/forums/${forumId}`);
+  },
+
+  makeModerator(userId, forumId) {
+    return axios.put(`${API_URL}/${userId}`, forumId);
   }
 
 }

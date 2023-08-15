@@ -14,6 +14,8 @@ public interface UserDao {
     List<User> getModsByForumId(int forumId);
     List<User> getUsersByFavorited(int forumId);
 
+    boolean makeModerator(int userId, int forumId);
+
     int findIdByUsername(String username);
 
     boolean create(String username, String password, String role);
