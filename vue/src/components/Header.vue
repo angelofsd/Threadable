@@ -46,7 +46,6 @@ export default {
         }
     },
     methods: {
-        //Probably works, just need to figure out how to print list
         searchPage() {
             const route = {
                 name: 'search',
