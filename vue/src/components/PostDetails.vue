@@ -7,8 +7,8 @@
         
       </div>
         <p>{{post.body}}</p>
-        <small>{{post.username}} on {{formatDate(post.dateCreated)}}>>></small>
-        <button class="delete-button" v-on:click="deletePost(post.id)" >Delete</button>
+        <small>{{post.username}} on {{formatDate(post.dateCreated)}}</small>
+        <button class="delete-button" v-on:click="deletePost(post.id)" >Delete Post</button>
     </div>
     <div><reply-list v-bind:postId="postId" /></div>
     <div><create-reply /></div>
@@ -99,7 +99,10 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
+.post {
+ padding: 10px;
+}
 /** page structure **/
 #post-subheader{
   display:flex;
@@ -109,6 +112,35 @@ export default {
   padding: 20px 20px;
   margin: 0 auto;
   max-width: 600px;
+}
+
+button {
+    float: right;
+    width: 100px;
+      color: rgb(255, 255, 255);
+      font-size: 14px;
+      line-height: 14px;
+      padding: 1px 3px;
+      margin-right: 3px;
+      margin-bottom: 3px;
+      border-radius: 6px;
+      background-color: rgb(106, 126, 170);
+      box-shadow: rgb(68, 88, 94) 1px 2px 2px 2px;
+      border: 2px solid rgb(107, 111, 114);
+}
+
+button:hover {
+     
+      color: rgb(255, 255, 255);
+      font-size: 14px;
+      line-height: 14px;
+      padding: 1px 3px;
+      margin-right: 3px;
+      margin-bottom: 3px;
+      border-radius: 6px;
+      background-color: rgb(78, 79, 82);
+      box-shadow: rgb(68, 88, 94) 1px 2px 2px 2px;
+      border: 2px solid rgb(107, 111, 114);
 }
 
 /** ios1-ios6 bubbles **/
