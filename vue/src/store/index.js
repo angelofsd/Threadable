@@ -98,6 +98,18 @@ export default new Vuex.Store({
     },
     SET_DISLIKED_POSTS(state, data) {
       state.dislikedPosts = data
+    },
+    ADD_LIKED_POST(state, payload) {
+      state.likedPosts.unshift(payload);
+    },
+    REMOVE_LIKED_POST(state, postId) {
+      state.likedPosts.splice(post => post.postId === postId)
+    },
+    ADD_DISLIKED_POST(state, payload) {
+      state.dislikedPosts.unshift(payload);
+    },
+    REMOVE_DISLIKED_POST(state, postId) {
+      state.dislikedPosts.splice(post => post.postId === postId)
     }
   }
 })
