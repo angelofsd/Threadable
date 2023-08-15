@@ -4,7 +4,7 @@
       <div class="post" v-for="post in posts" v-bind:key="post.id">
         <div>
           <router-link
-            v-bind:to="{ name: 'post', params: { id: post.id } }"
+            v-bind:to="{ name: 'post', params: { id: post.postId } }"
           >{{ post.title }}</router-link>
         </div>
         <p>{{post.body}}</p>
