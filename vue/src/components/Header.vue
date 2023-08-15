@@ -84,7 +84,7 @@ export default {
    /* General Header Stuff */
 
     #header {
-        border-bottom: solid 1px #889DAE;
+        border-bottom: solid 2px #889DAE;
     }
 
     #banner {
