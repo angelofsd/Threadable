@@ -4,7 +4,7 @@
       <div id="post-subheader">
         <h1>{{ post.title }}</h1>
         <LikeAndDislike :postId="postId" />
-        
+        <img src="post.imageURL" alt="No Pic">
       </div>
         <p>{{post.body}}</p>
         <small>{{post.username}} on {{formatDate(post.dateCreated)}}>>></small>
