@@ -77,7 +77,13 @@ public class JdbcPostDao implements PostDao{
     @Override
     public List<Post> getPostsByForumId(int forumId) {
         List<Post> posts = new ArrayList<>();
-        String sql = "SELECT * FROM posts WHERE forum_id = ?;";
+        String sql = "select p.id, p.title, p.body, p.image_url, p.date_created, p.forum_id, p.user_id, COUNT(*) as liked_count\n" +
+                "from posts p\n" +
+                "left join liked_posts lp \n" +
+                "on p.id = lp.post_id\n" +
+                "WHERE p.forum_id=?\n" +
+                "group by p.id\n" +
+                "order by liked_count DESC\n";
         try {
             SqlRowSet result = jdbcTemplate.queryForRowSet(sql, forumId);
             while (result.next()) {
