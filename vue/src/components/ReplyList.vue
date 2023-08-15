@@ -5,21 +5,21 @@
       <p>{{ reply.text }}</p>
       <small>Posted by user {{ reply.username }} on {{ formatDate(reply.dateCreated) }}</small>
       <button v-on:click="deleteReply(reply.id)" class = "delete-button">Delete Reply</button>
-      <HeartReply :replyId="reply.id" />
+      <!-- <HeartReply :replyId="reply.id" /> -->
     </div>
-    <!-- TODO Optionally(ask team), add a form to create a new reply -->
+   
   </div>
 </template>
 
 <script>
 import ReplyService from '../services/ReplyService';
 import UserService from '../services/UserService';
-import HeartReply from './HeartReply.vue';
+
 
 
 export default {
   components: {
-    HeartReply,
+    
   },
   props: {
     postId: {
