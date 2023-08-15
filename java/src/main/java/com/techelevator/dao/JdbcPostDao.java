@@ -35,6 +35,23 @@ public class JdbcPostDao implements PostDao{
     }
 
     @Override
+    public List<Post> getAllPosts() {
+        String sql = "SELECT id, title, body, image_url, date_created, forum_id, user_id FROM posts;";
+        List<Post> posts = new ArrayList<>();
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+            while (results.next()) {
+                posts.add(mapRowToPost(results));
+            }
+        } catch (CannotGetJdbcConnectionException ex) {
+            throw new DaoException("Unable to connect to server or database", ex);
+        } catch (Exception ex) {
+            throw new DaoException("Something went wrong");
+        }
+        return posts;
+    }
+
+    @Override
     public List<Post> searchForPosts(String search) {
         List<Post> results = new ArrayList<>();
         String sql = "SELECT id, title, body, image_url, date_created, forum_id, user_id FROM posts WHERE title ILIKE ? OR body ILIKE ?;";

@@ -24,7 +24,15 @@ public class PostController {
         } else {
             return postDao.searchForPosts(search);
         }
+    }
 
+    @GetMapping("")
+    public List<Post> getAllPosts(@RequestParam String search) {
+        if (search.equals("")) {
+            return postDao.getAllPosts();
+        } else {
+            return postDao.searchForPosts(search);
+        }
     }
 
     @GetMapping("/details/{id}")
