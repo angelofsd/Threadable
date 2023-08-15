@@ -5,7 +5,7 @@ import com.techelevator.model.Post;
 import java.util.List;
 
 public interface PostDao {
-    List<Post> getAllPosts();
+    List<Post> getHotPosts();
     List<Post> searchForPosts(String search);
     Post getPostbyId(int postId);
     Post createPost(Post post);

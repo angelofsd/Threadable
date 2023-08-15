@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     getPosts() {
-      PostService.getAllPosts()
+      PostService.getHotPosts()
       .then( (response) => {
          if (response.status === 200) {
            this.posts = response.data;
