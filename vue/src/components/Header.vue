@@ -159,7 +159,7 @@ export default {
 
     #main-tabs p {
     padding: 1px;
-    
+    border-bottom: solid 2px transparent;
     cursor: pointer;
   }
 

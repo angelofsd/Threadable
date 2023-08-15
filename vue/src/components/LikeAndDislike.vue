@@ -1,5 +1,5 @@
 <template>
-  <div v-show="$store.state.token != ''">
+  <div id="likeButtons" v-show="$store.state.token != ''">
       <div class="likes">
           <p>{{numberOfLikes}}</p>
           <ArrowCircleUpIcon class="like-button" v-show="!isLiked" v-on:click="onClickLike()" />
@@ -22,7 +22,8 @@ import {ArrowCircleDownIcon as SolidDownArrow} from '@vue-hero-icons/solid'
 export default {
     components: {ArrowCircleUpIcon, SolidUpArrow, ArrowCircleDownIcon, SolidDownArrow},
     props: [
-        'postId'
+        'postId',
+        'post'
     ],
     data() {
         return {
@@ -35,9 +36,14 @@ export default {
     methods: {
         setLike() {
             PostService.likePost(this.postId, this.$store.state.user.id);
+            //TRYING TO UPDATE isLiked AND isDisliked. On refresh it does not update setLiked() and setDisliked() even though it is in state.dislikedPosts
+            //Also only in this component
+            this.$store.commit("ADD_LIKED_POST", this.post)
         },
         setDislike() {
             PostService.dislikePost(this.postId, this.$store.state.user.id);
+            this.$store.commit("ADD_DISLIKED_POST", this.post)
+            
         },
         removeLike() {
             PostService.removeLikeOnPost(this.postId, this.$store.state.user.id)
@@ -97,20 +103,22 @@ export default {
                     this.isDisliked = true;
                 }
             })
-        }
+        },
     },
     created() {
         this.getNumberOfLikes();
         this.getNumberOfDislikes();
         this.setLiked();
         this.setDisliked();
-
-        
-    }
+    },
 }
 </script>
 
 <style>
+#likeButtons {
+    margin-left: 5px;
+    text-align: center;
+}
 .likes {
     display: flex;
     align-items: center;
@@ -118,11 +126,12 @@ export default {
 }
 
 .likes p{
-    margin-right: 5px;
+    margin-right: auto;
 }
 
 .like-button{
     color: #555597;
+    margin-left: 3px;
 }
 
 .like-button:hover {
