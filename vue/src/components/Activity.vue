@@ -3,12 +3,12 @@
         <h3>Activity</h3>
         <div id="post-list">
             <h4>Created Posts</h4>
-            <div class="post" v-for="post in posts" v-bind:key="post.id">
+            <div class="post" v-for="post in posts" v-bind:key="post.postId">
                 <div id="post-subheader">
                   <h4>{{ post.title }}</h4>
                   <LikeAndDislike :postId="post.postId" />
                 </div>
-                <img v-show="post.imageURL" v-if="post.postId" v-bind:src="'' + post.postId" />
+                <img v-show="post.imageURL" :src="post.imageURL" />
                 <p>{{ post.body }}</p>
             </div>
         </div>
