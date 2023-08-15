@@ -3,12 +3,14 @@
     <div class="post" >
       <div id="post-subheader">
         <h1>{{ post.title }}</h1>
-        <LikeAndDislike :postId="postId" />
+        
         <img src="post.imageURL" alt="No Pic">
+        <LikeAndDislike :postId="postId" :post="post" />
+        
       </div>
         <p>{{post.body}}</p>
-        <small>{{post.username}} on {{formatDate(post.dateCreated)}}>>></small>
-        <button class="delete-button" v-on:click="deletePost(post.id)" >Delete</button>
+        <small>{{post.username}} on {{formatDate(post.dateCreated)}}</small>
+        <button class="delete-button" v-on:click="deletePost(post.id)" >Delete Post</button>
     </div>
     <div><reply-list v-bind:postId="postId" /></div>
     <div><create-reply /></div>
@@ -20,7 +22,6 @@ import PostService from "../services/PostService.js";
 import CreateReply from "../components/CreateReply.vue"
 import ReplyList from "../components/ReplyList.vue"
 import LikeAndDislike from './LikeAndDislike.vue';
-//import ReplyService from "../services/ReplyService.js";
 import UserService from '../services/UserService.js';
 
 
@@ -33,7 +34,6 @@ export default {
   data() {
     return{
       post: {},
-      // userLikes: []
     }
   },
   components: {
@@ -59,19 +59,24 @@ export default {
 
                 this.$router.push(route);
       })
-      //this.$store.commit("DELETE_POST", postId);
     },
     formatDate(dateString) {
       const date = new Date(dateString);
       const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
       return date.toLocaleDateString('en-US', options);
     },
-    
-  },
-  created() {
-    
-
-    PostService
+    setLikes() {
+       if(this.$store.state.token != '') {
+        PostService.getLikedPostsByUserId(this.$store.state.user.id).then((response) => {
+          this.$store.commit("SET_LIKED_POSTS", response.data)
+        })
+        PostService.getDislikedPostsByUserId(this.$store.state.user.id).then((response) => {
+          this.$store.commit("SET_DISLIKED_POSTS", response.data)
+        })
+      }
+    },
+    getPost() {
+      PostService
       .get(this.postId)
       .then(response => {
         this.$store.commit("SET_ACTIVE_POST", response.data);
@@ -83,23 +88,24 @@ export default {
           this.$router.push({name: 'NotFound'});
         }
       });
-      if(this.$store.state.token != '') {
-        PostService.getLikedPostsByUserId(this.$store.state.user.id).then((response) => {
-                    this.$store.commit("SET_LIKED_POSTS", response.data)
-                })
-        PostService.getDislikedPostsByUserId(this.$store.state.user.id).then((response) => {
-          this.$store.commit("SET_DISLIKED_POSTS", response.data)
-        })
-      }
+     
+    
     }
+    
+  },
+  created() {
+    this.getPost()
+    this.setLikes()
 
-  };
-  
-
+  },
+}
 
 </script>
 
-<style>
+<style scoped>
+.post {
+ padding: 10px;
+}
 /** page structure **/
 #post-subheader{
   display:flex;
@@ -109,6 +115,35 @@ export default {
   padding: 20px 20px;
   margin: 0 auto;
   max-width: 600px;
+}
+
+button {
+    float: right;
+    width: 100px;
+      color: rgb(255, 255, 255);
+      font-size: 14px;
+      line-height: 14px;
+      padding: 1px 3px;
+      margin-right: 3px;
+      margin-bottom: 3px;
+      border-radius: 6px;
+      background-color: rgb(106, 126, 170);
+      box-shadow: rgb(68, 88, 94) 1px 2px 2px 2px;
+      border: 2px solid rgb(107, 111, 114);
+}
+
+button:hover {
+     
+      color: rgb(255, 255, 255);
+      font-size: 14px;
+      line-height: 14px;
+      padding: 1px 3px;
+      margin-right: 3px;
+      margin-bottom: 3px;
+      border-radius: 6px;
+      background-color: rgb(78, 79, 82);
+      box-shadow: rgb(68, 88, 94) 1px 2px 2px 2px;
+      border: 2px solid rgb(107, 111, 114);
 }
 
 /** ios1-ios6 bubbles **/
