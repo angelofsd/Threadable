@@ -5,9 +5,6 @@ import java.util.List;
 import java.util.Objects;
 
 import com.techelevator.exception.DaoException;
-import com.techelevator.model.Forum;
-import com.techelevator.model.Post;
-import com.techelevator.model.Reply;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
@@ -18,7 +15,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.techelevator.model.User;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 @Component
 public class JdbcUserDao implements UserDao {
@@ -53,6 +49,38 @@ public class JdbcUserDao implements UserDao {
 			return null;
 		}
 	}
+
+    @Override
+    public List<User> getModsByForumId(int forumId) {
+        List<User> users = new ArrayList<>();
+        String sql = "select * \n" +
+                "from users u\n" +
+                "JOIN moderators m\n" +
+                "ON m.user_id = u.user_id\n" +
+                "WHERE forum_id = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, forumId);
+        while (results.next()) {
+            User user = mapRowToUser(results);
+            users.add(user);
+        }
+        return users;
+    }
+
+    @Override
+    public List<User> getUsersByFavorited(int forumId) {
+        List<User> users = new ArrayList<>();
+        String sql = "SELECT *\n" +
+                "from users u\n" +
+                "JOIN favorite_forums ff\n" +
+                "ON ff.user_id = u.user_id\n" +
+                "WHERE ff.forum_id = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, forumId);
+        while (results.next()) {
+            User user = mapRowToUser(results);
+            users.add(user);
+        }
+        return users;
+    }
 
     @Override
     public List<User> findAll() {

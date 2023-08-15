@@ -16,4 +16,12 @@ export default {
     return axios.put(`${API_URL}/${user.id}`, user);
   },
 
+  getModsByForumId(forumId) {
+    return axios.get(`${API_URL}/mods/forums/${forumId}`);
+  },
+
+  getUsersByFavorited(forumId) {
+    return axios.get(`${API_URL}/favorited/forums/${forumId}`)
+  }
+
 }
