@@ -2,13 +2,6 @@
   <div>
     <div id="profile">
       <div id="profile-image-section">
-        <div v-show="showEditPic">
-          <form>
-            <textarea v-model="newProfileUrl" placeholder="Edit Pic..."/>
-            <button v-on:click="updateUser()">Submit</button>
-            <button v-on:click.prevent="showEditPic = !showEditPic">Cancel</button>
-          </form>
-        </div>
         <div id="profile-image">
           <img v-bind:src="user.profilePic" />
         </div>
@@ -18,11 +11,18 @@
       <div id="bio-section">
         <p>{{user.bio}}</p>
         <button v-show="isCurrentUserProfile && !showEditBio" v-on:click="showEditBio = !showEditBio">Edit</button>
-        <div v-show="showEditBio">
-          <form>
-            <textarea v-model="newBio" placeholder="Edit Bio..."/>
-            <button v-on:click="updateUser()">Submit</button>
-            <button v-on:click="showEditBio = !showEditBio">Cancel</button>
+        <div class="edit" v-show="showEditBio">
+          <form class="editForm">
+            <textarea class="edittext" v-model="newBio" placeholder="Edit Bio..."/>
+            <button v-on:click.prevent="updateUser()">Submit</button>
+            <button v-on:click.prevent="showEditBio = !showEditBio">Cancel</button>
+          </form>
+        </div>
+        <div class="edit" v-show="showEditPic">
+          <form class="editForm">
+            <textarea v-model="newProfileUrl" class="edittext" placeholder="Edit Pic..."/>
+            <button v-on:click.prevent="updateUser()">Submit</button>
+            <button v-on:click.prevent="showEditPic = !showEditPic">Cancel</button>
           </form>
         </div>
       </div>
@@ -63,10 +63,13 @@ export default {
         bio: (this.newBio ? this.newBio : this.user.bio),
         authorities: this.authorities
         };
-        console.log(updatedUser)
       userService.updateUser(updatedUser).then(() => {
           this.user = updatedUser
           this.$store.commit("SET_USER", updatedUser);
+          this.profilePic = "";
+          this.bio = "";
+          this.showEditBio = false;
+          this.showEditPic = false;
       })
       .catch((error) => {
                 if(error.response) {
@@ -129,5 +132,32 @@ export default {
 
   #profile-image img {
     width: 150px;
+  }
+
+  .edittext {
+    padding: 7px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight:500;
+    border-width: 6px;
+    border-color: #3b7793;
+    background-color: #FFFFFF;
+    color: #000000;
+    border-style: solid;
+    border-radius: 14px;
+    box-shadow: 3px 3px 5px rgba(66,66,66,.75);
+  }
+
+  button {
+    margin: 10px;
+  }
+
+  .editForm {
+    display: flex;
+    align-items: center;
+  }
+
+  .edit {
+    margin: 10px;
   }
 </style>
