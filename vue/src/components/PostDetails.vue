@@ -2,13 +2,17 @@
   <div class="post-details">
     <div class="post" >
       <div id="post-subheader">
-        <h1>{{ post.title }}</h1>
-        
-        <img src="post.imageURL" alt="No Pic">
-        <LikeAndDislike :postId="postId" :post="post" />
-        
+        <div v-show="post.imageURL != null" id="img-div">
+          <img :src="post.imageURL" alt="post_img">
+        </div>
+        <div id="body-and-likes">
+          <div id="body">
+            <h3>{{ post.title }}</h3>
+            <p>{{post.body}}</p>
+          </div>
+          <LikeAndDislike :postId="postId" :post="post" />
+        </div>
       </div>
-        <p>{{post.body}}</p>
         <small>{{post.username}} on {{formatDate(post.dateCreated)}}</small>
         <button class="delete-button" v-on:click="deletePost(post.id)" >Delete Post</button>
     </div>
@@ -109,12 +113,31 @@ export default {
 /** page structure **/
 #post-subheader{
   display:flex;
+}
+
+#body-and-likes {
+  display: flex;
   justify-content: space-between;
+  flex: 1;
+}
+
+#body {
+  margin-left: 15px;
 }
 .post-details {
   padding: 20px 20px;
   margin: 0 auto;
-  max-width: 600px;
+  max-width: 75%;
+}
+
+#img-div {
+  padding: 15px;
+  border-right: solid 1px rgb(214, 214, 214);
+}
+
+img {
+  height: 200px;
+  border-radius: 5px;
 }
 
 button {
@@ -144,6 +167,10 @@ button:hover {
       background-color: rgb(78, 79, 82);
       box-shadow: rgb(68, 88, 94) 1px 2px 2px 2px;
       border: 2px solid rgb(107, 111, 114);
+}
+
+small {
+  margin-left: 15px;
 }
 
 /** ios1-ios6 bubbles **/

@@ -8,7 +8,7 @@
     <div v-for="post in posts" :key="post.id" class="post">
       <div id="post-subheader">
         <h4><router-link v-bind:to="{ name: 'post', params:{id: post.postId} }">{{ post.title }}</router-link></h4>
-        <LikeAndDislike v-bind:postId="post.postId" />
+        <LikeAndDislike v-bind:postId="post.postId" :post="post"/>
       </div>
       <p>{{ post.body }}</p>
     </div>

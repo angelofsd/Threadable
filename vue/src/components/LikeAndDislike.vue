@@ -27,17 +27,37 @@ export default {
     ],
     data() {
         return {
-            isLiked: false,
-            isDisliked: false,
+            // isLiked: false,
+            // isDisliked: false,
             numberOfLikes: 0,
             numberOfDislikes: 0,
         }
     },
+    computed: {
+        isLiked() {
+            let liked = false;
+            this.$store.state.likedPosts.forEach((post) => {
+                console.log(post.postId + " " + this.postId)
+                if (post.postId == this.postId) {
+                    liked = true;
+                }
+            })
+            return liked;
+        },
+        isDisliked() {
+            let disliked = false;
+            this.$store.state.dislikedPosts.forEach((post) => {
+                if (post.postId == this.postId) {
+                    disliked = true;
+                }
+            })
+            return disliked;
+        },
+    },
     methods: {
         setLike() {
             PostService.likePost(this.postId, this.$store.state.user.id);
-            //TRYING TO UPDATE isLiked AND isDisliked. On refresh it does not update setLiked() and setDisliked() even though it is in state.dislikedPosts
-            //Also only in this component
+    
             this.$store.commit("ADD_LIKED_POST", this.post)
         },
         setDislike() {
@@ -64,14 +84,17 @@ export default {
                 this.isDisliked = false;
                 this.removeLike();
                 this.numberOfLikes --
+                this.$store.commit("REMOVE_LIKED_POST", this.postId)
             } else {
                 this.isLiked = !this.isLiked;
                 if (this.isDisliked) {
                     this.numberOfDislikes --
                     this.isDisliked = false;
+                    this.$store.commit("REMOVE_DISLIKED_POST", this.postId)
                 }
                 this.setLike();
                 this.numberOfLikes ++
+                this.$store.commit("ADD_LIKED_POST", this.post)
             }
         },
         onClickDislike() {
@@ -80,30 +103,33 @@ export default {
                 this.isLiked = false;
                 this.removeLike();
                 this.numberOfDislikes --
+                this.$store.commit("REMOVE_DISLIKED_POST", this.postId)
             } else {
                 this.isDisliked = !this.isDisliked;
                 if (this.isLiked) {
                     this.numberOfLikes --
                     this.isLiked = false;
+                    this.$store.commit("REMOVE_LIKED_POST", this.postId)
                 }
                 this.setDislike();
                 this.numberOfDislikes ++;
+                this.$store.commit("ADD_DISLIKED_POST", this.post)
             }
         },
-        setLiked() {
-            this.$store.state.likedPosts.forEach((post) => {
-                if (post.postId === this.postId) {
-                    this.isLiked = true;
-                }
-            })
-        },
-        setDisliked() {
-            this.$store.state.dislikedPosts.forEach((post) => {
-                if (post.postId === this.postId) {
-                    this.isDisliked = true;
-                }
-            })
-        },
+        // setLiked() {
+        //     this.$store.state.likedPosts.forEach((post) => {
+        //         if (post.postId == this.postId) {
+        //             this.isLiked = true;
+        //         }
+        //     })
+        // },
+        // setDisliked() {
+        //     this.$store.state.dislikedPosts.forEach((post) => {
+        //         if (post.postId == this.postId) {
+        //             this.isDisliked = true;
+        //         }
+        //     })
+        // },
     },
     created() {
         this.getNumberOfLikes();
