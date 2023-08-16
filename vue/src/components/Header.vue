@@ -2,7 +2,7 @@
   <div id="header">
     <div id="banner">
         <div>
-            <router-link id="logo" v-bind:to="{ name: 'hot' }"><span>Jackie's Forums!!!</span></router-link>
+            <router-link id="logo" v-bind:to="{ name: 'hot' }"><span>THREADABLE</span></router-link>
         </div>
         <div id="nav">
             <router-link id="profile-pic-link" v-bind:to="{ name: 'user', params: {id: $store.state.user.id}}">
@@ -98,6 +98,7 @@ export default {
         width: 50px;
         border: solid 1px #555597;
         border-radius: 50%;
+        background-color: white;
     }
 
     #profile-pic:hover {
@@ -118,7 +119,10 @@ export default {
 
     /* Logo */
 
+    
+
     #header span {
+        
         font-family: 'Unica One', 'Montserrat', sans-serif;
         font-size: 28px;
         cursor: pointer;
@@ -159,14 +163,13 @@ export default {
 
     #main-tabs p {
     padding: 1px;
-    border-bottom: solid 2px transparent;
     cursor: pointer;
   }
 
 
   #main-tabs p:hover {
-        color:#2626d8;
-        border-bottom: solid 2px #2626d8;
+        color:#07a3eb;
+        border-bottom: solid 2px #ffffff;
         transition-duration: 50ms;
     }
 
@@ -178,8 +181,8 @@ export default {
 
     .active-tab {
     /* styling for the active tab TESTING*/
-    color:#2626d8;
-    border-bottom: solid 2px #2626d8;
+    color:#07a3eb;
+    border-bottom: solid 2px #ffffff;
     
     transition-duration: 250ms;
     
