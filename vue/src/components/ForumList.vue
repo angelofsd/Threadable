@@ -17,7 +17,6 @@
                     </h4>
             </div>
         </div>
-
 </template>
 
 <script>
@@ -88,13 +87,17 @@ export default {
 .forum-subheader {
     display: flex;
 }
+.forumList{
+    margin-top: 20px;
+}
 .testDiv {
     border: solid 2px #889DAE;
+    margin-top: 20px;
     padding-left: 10px;
     padding-right: 10px;
-    margin-bottom:10px;
+    margin-bottom:20px;
     border-radius: 8px;
-    width:75%
+
     
 }
 .forum-description {
