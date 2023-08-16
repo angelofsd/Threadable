@@ -72,8 +72,8 @@ export default new Vuex.Store({
     ADD_NEW_FORUM(state, payload) {
       state.forums.unshift(payload);
     },
-    SAVE_FORUM() {
-
+    SET_FORUMS() {
+  
     },
     DELETE_POST(state, postId) {
       state.posts.splice(
