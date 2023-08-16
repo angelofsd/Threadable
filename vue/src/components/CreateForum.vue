@@ -47,6 +47,7 @@ export default {
                 if (response.status === 200 || response.status === 201) {
                     console.log("Successfully created a forum!");
                 }
+                window.location.reload();
             })
             .catch((error) => {
                 if(error.response) {
@@ -65,5 +66,16 @@ export default {
 </script>
 
 <style>
+button {
+    background-color: #5390b3;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
 
+  button:hover {
+    background-color: #225979;
+  }
 </style>
