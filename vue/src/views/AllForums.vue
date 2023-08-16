@@ -1,29 +1,40 @@
 <template>
   <div class="allForums">
-    <create-forum/>
     <forum-list/>
-    <create-post/>
+    <button @click="createNewForum ^= true">Create New Forum</button>
+  <div v-show="createNewForum">
+    <create-forum/>
+  </div>
   </div>
 </template>
 
 <script>
 import CreateForum from '../components/CreateForum.vue';
 import ForumList from '../components/ForumList.vue'
-import CreatePost from '../components/CreatePost.vue'
+
 import ForumService from '../services/ForumService';
 
 export default {
   name: "allForums",
   components: {
     ForumList,
-    CreateForum,
-    CreatePost
+    CreateForum
+  },
+  methods: {
+    clicked() {
+      if (this.createNewForm == true) {
+        this.createNewForm == false;
+      } else if (this.createNewForm == false) {
+        this.createNewForm == true;
+      }
+    }
   },
   data() {
     return {
       forum: {},
       forumName:"",
-      invalidCredentials: false
+      invalidCredentials: false,
+      createNewForum: false
     };
   },
   created() {
@@ -45,6 +56,6 @@ export default {
                   }
           })
     }
-  }
+  },
 };
 </script>
