@@ -1,6 +1,7 @@
 <template>
   <div id="post-list">
       <h3>{{showingResultsFor}}</h3>
+      <p v-show="posts.length == 0">No results found.</p>
       <div class="post" v-for="post in posts" v-bind:key="post.postId">
         <div>
           <router-link

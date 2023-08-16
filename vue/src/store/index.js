@@ -100,16 +100,28 @@ export default new Vuex.Store({
       state.dislikedPosts = data
     },
     ADD_LIKED_POST(state, payload) {
-      state.likedPosts.unshift(payload);
+      const foundPost = state.likedPosts.find(post => post.postId == payload.postId)
+      if (!foundPost) {
+        state.likedPosts.unshift(payload);
+      }
     },
     REMOVE_LIKED_POST(state, postId) {
-      state.likedPosts.splice(post => post.postId === postId)
+      const index = state.likedPosts.findIndex(post => post.postId == postId)
+      if (index >= 0) {
+        state.likedPosts.splice(index, 1)
+      }
     },
     ADD_DISLIKED_POST(state, payload) {
-      state.dislikedPosts.unshift(payload);
+      const foundPost = state.dislikedPosts.find(post => post.postId == payload.postId)
+      if (!foundPost) {
+        state.dislikedPosts.unshift(payload);
+      }
     },
     REMOVE_DISLIKED_POST(state, postId) {
-      state.dislikedPosts.splice(post => post.postId === postId)
+      const index = state.dislikedPosts.findIndex(post => post.postId == postId)
+      if (index >= 0) {
+        state.dislikedPosts.splice(index, 1)
+      }
     }
   }
 })

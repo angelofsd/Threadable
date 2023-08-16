@@ -11,7 +11,7 @@
     </div>
     <div class="field">
       <label for="image">Image URL</label>
-      <input class="image-input" type="text" placeholder="Image URL" v-model="post.image" />
+      <input class="image-input" type="text" placeholder="Image URL" v-model="post.imageURL" />
     </div>
     <div class="actions">
       <button type="submit" v-on:click="savePost">Save Post</button>
@@ -32,7 +32,6 @@ export default {
         title: "",
         body: "",
         imageURL: null,
-        dateCreated: "",
         forumId: this.$route.params.id,
         userId: this.$store.state.user.id,
         liked: null,
