@@ -45,6 +45,7 @@ export default {
           if (response.status === 201) {
             console.log("Successfully posted!");
             //maybe reset the reply body here or navigate somewhere else?
+            window.location.reload();
           }
         })
         .catch((error) => {
