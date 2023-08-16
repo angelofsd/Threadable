@@ -89,6 +89,12 @@ export default {
     
   }
 
+  textarea#body {
+    font-family: 'Montserrat', sans-serif;
+    height: 100px;
+    font-size: 18px;
+  }
+
   .image-input {
     width: 100%;
   }
