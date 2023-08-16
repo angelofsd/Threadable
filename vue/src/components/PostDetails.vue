@@ -5,13 +5,13 @@
         <div v-show="post.imageURL != null" id="img-div">
           <img :src="post.imageURL" alt="post_img">
         </div>
-        <div id="body-and-likes">
-          <div id="body">
-            <h3>{{ post.title }}</h3>
-            <p>{{post.body}}</p>
+          <div id="body-and-likes">
+            <div id="body">
+              <h3>{{ post.title }}</h3>
+              <p>{{post.body}}</p>
+            </div>
+            <LikeAndDislike :postId="postId" :post="post" />
           </div>
-          <LikeAndDislike :postId="postId" :post="post" />
-        </div>
       </div>
         <small>{{post.username}} on {{formatDate(post.dateCreated)}}</small>
         <button class="delete-button" v-on:click="deletePost(post.id)" >Delete Post</button>
