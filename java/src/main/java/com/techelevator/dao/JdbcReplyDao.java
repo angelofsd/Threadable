@@ -8,6 +8,7 @@ import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
+import java.sql.Timestamp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,8 +44,12 @@ public class JdbcReplyDao implements ReplyDao{
 
     @Override
     public Reply createReply(Reply reply) {
+
+        Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
+        reply.setDateCreated(currentTimestamp);
+
         String sql = "INSERT INTO replies (text, date_created, post_id, user_id) VALUES (?, ?, ?, ?) RETURNING id";
-        int newId = jdbcTemplate.queryForObject(sql, Integer.class, reply.getText(), reply.getDateCreated(), reply.getPostId(), reply.getUserId());
+        int newId = jdbcTemplate.queryForObject(sql, Integer.class, reply.getText(), currentTimestamp, reply.getPostId(), reply.getUserId());
         reply.setId(newId);
         return reply;
     }
