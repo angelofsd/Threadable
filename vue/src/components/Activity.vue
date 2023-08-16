@@ -1,21 +1,24 @@
 <template>
-    <div id="list">
-        <h3>Activity</h3>
-        <div id="post-list">
-            <h4>Created Posts</h4>
-            <div class="post" v-for="post in posts" v-bind:key="post.postId">
-                <div id="post-subheader">
-                  <h4>{{ post.title }}</h4>
-                  <LikeAndDislike :postId="post.postId" />
-                </div>
-                <img v-show="post.imageURL" :src="post.imageURL" />
-                <p>{{ post.body }}</p>
-            </div>
+  <div id="post-list">
+    <h3>Activity</h3>
+    <div class="post" v-for="post in posts" v-bind:key="post.postId">
+      <div id="post-subheader">
+        <div v-show="post.imageURL != null" id="img-div">
+          <img :src="post.imageURL" alt="post_img">
         </div>
+          <div id="body-and-likes">
+            <div id="body">
+              <router-link v-bind:to="{ name: 'post', params: { id: post.postId } }" >{{ post.title }}</router-link>
+              <p>{{post.body}}</p>
+            </div>
+            <LikeAndDislike :postId="post.postId" :post="post" />
+          </div>
+      </div>
     </div>
+  </div>
 </template>
 
-<script>
+<script scoped>
 import postService from '../services/PostService';
 import LikeAndDislike from './LikeAndDislike.vue';
 
@@ -39,34 +42,42 @@ export default {
 </script>
 
 
-<style>
+<style scoped>
 #list {
   margin: 20px;
 }
 
 .post {
-  border: solid 1px #555597;
-  box-shadow: 1px 2px #555597;
-  border-radius: 10px;
-  margin: 20px 0px;
-  padding: 5px;
-
+ padding: 10px;
+}
+/** page structure **/
+#post-subheader{
+  display:flex;
 }
 
-.post:hover {
-  border: solid 1px #978555;
-  box-shadow: 1px 2px #978555;
+#body-and-likes {
+  display: flex;
+  justify-content: space-between;
+  flex: 1;
 }
 
-.post p {
-  font-size: 14px;
+#body {
+  margin-left: 15px;
+}
+.post-details {
+  padding: 20px 20px;
+  margin: 0 auto;
+  max-width: 75%;
 }
 
-.post a {
-  border-bottom: solid 1px #555597;
+#img-div {
+  padding: 15px;
+  border-right: solid 1px rgb(214, 214, 214);
 }
 
-.post a:hover {
-  border-bottom: solid 1px #978555;
+#img-div img {
+  height: 200px;
+  border-radius: 5px;
 }
+
 </style>

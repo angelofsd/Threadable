@@ -44,7 +44,6 @@ export default {
                 console.error("An error occurred", error)
             })
         }
-
   },
   created() {
     
