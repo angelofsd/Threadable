@@ -2,7 +2,7 @@
   <div id="header">
     <div id="banner">
         <div>
-            <router-link id="logo" v-bind:to="{ name: 'hot' }"><span>Jackie's Forums!!!</span></router-link>
+            <router-link id="logo" v-bind:to="{ name: 'hot' }"><span>THREADABLE</span></router-link>
         </div>
         <div id="nav">
             <router-link id="profile-pic-link" v-bind:to="{ name: 'user', params: {id: $store.state.user.id}}">
@@ -98,6 +98,7 @@ export default {
         width: 50px;
         border: solid 1px #555597;
         border-radius: 50%;
+        background-color: white;
     }
 
     #profile-pic:hover {
