@@ -119,7 +119,10 @@ export default {
 
     /* Logo */
 
+    
+
     #header span {
+        
         font-family: 'Unica One', 'Montserrat', sans-serif;
         font-size: 28px;
         cursor: pointer;
@@ -160,14 +163,13 @@ export default {
 
     #main-tabs p {
     padding: 1px;
-    border-bottom: solid 2px transparent;
     cursor: pointer;
   }
 
 
   #main-tabs p:hover {
-        color:#2626d8;
-        border-bottom: solid 2px #2626d8;
+        color:#07a3eb;
+        border-bottom: solid 2px #ffffff;
         transition-duration: 50ms;
     }
 
@@ -179,8 +181,8 @@ export default {
 
     .active-tab {
     /* styling for the active tab TESTING*/
-    color:#2626d8;
-    border-bottom: solid 2px #2626d8;
+    color:#07a3eb;
+    border-bottom: solid 2px #ffffff;
     
     transition-duration: 250ms;
     
