@@ -93,6 +93,7 @@ export default {
 }
 
 .forum {
+    
   border: solid 1px #555597;
   box-shadow: 1px 2px #555597;
   border-radius: 10px;

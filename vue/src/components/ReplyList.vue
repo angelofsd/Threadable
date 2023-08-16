@@ -94,33 +94,33 @@ export default {
 
 .reply {
   width: 90%;
+  color: black;
   font-weight: 600;
-  border: 3px solid #2BA8FA;
+  border: 3px solid #0a629c;
   box-shadow: 1px 2px;
-  border-radius: 5px;
+  border-radius: 8px;
   padding: 10px;
   margin: 10px 0;
-  background-color: rgb(166, 199, 238);
+  background-image: linear-gradient(to top, #accbee 0%, #e7f0fd 100%);
 }
 
-.reply:hover {
-  background-color: rgb(134, 174, 224);
-}
+
 
 small {
-  font-weight: 700;
-  color: #FFFFFF;
+  font-weight: 800;
+  color: #000000;
 
 
 }
 
 small:hover {
-  background-color: rgb(134, 174, 224);
+  font-weight: 700;
 }
 
  .delete-button {
       float: right;
       color: rgb(255, 255, 255);
+      width: 125px;
       font-size: 14px;
       line-height: 14px;
       padding: 1px 3px;
