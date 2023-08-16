@@ -76,7 +76,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 
 #favorited-list {
   margin: 20px;
