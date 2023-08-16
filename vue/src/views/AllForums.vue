@@ -59,3 +59,13 @@ export default {
   },
 };
 </script>
+<style scoped>
+button {
+    background-color: #5390b3;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+</style>

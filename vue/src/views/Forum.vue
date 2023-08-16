@@ -25,6 +25,12 @@ export default {
     // UserList,
     CreatePost
   },
+  props: {
+    forumId: {
+      
+      required: false,
+    },
+  },
   data() {
     return {
       forum: {},
