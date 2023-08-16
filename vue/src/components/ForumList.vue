@@ -1,20 +1,19 @@
 <template>
 
-        <div class="forumList">
-            <div class="testDiv" v-for="forum in forums" v-bind:key="forum.id">
+        <div id="all-list">
+            <h3>All Forums</h3>
+            <div class="forum" v-for="forum in forums" v-bind:key="forum.id">
                 <div id="forum-subheader">
-                    <h3 class="forum-name">  
-                        <router-link :to="{name: 'forumPage', params: {id: forum.id}}">
-                        {{forum.name}}
-                        </router-link>
-                    </h3>
-                        <FavoriteButton :forumId="forum.id"></FavoriteButton>
+                    <router-link :to="{name: 'forumPage', params: {id: forum.id}}">
+                    {{forum.name}}
+                    </router-link>
+                    <FavoriteButton :forumId="forum.id"></FavoriteButton>
                 </div>
-                    <h4 class="forum-description"> {{forum.description}}</h4>
-                    <h4 class="created-by">Created By:
-                        <router-link :to="{name:'user', params:{id : forum.createdBy}}">{{forum.username}}
-                        </router-link>
-                    </h4>
+                <p> {{forum.description}}</p>
+                <h4 class="created-by">
+                    <router-link :to="{name:'user', params:{id : forum.createdBy}}">Created By: {{forum.username}}
+                    </router-link>
+                </h4>
             </div>
         </div>
 </template>
@@ -84,32 +83,44 @@ export default {
 </script>
 
 <style scoped>
-.forum-subheader {
-    display: flex;
+#all-list {
+  margin: 20px;
 }
-.forumList{
-    margin-top: 20px;
-}
-.testDiv {
-    border: solid 2px #889DAE;
-    margin-top: 20px;
-    padding-left: 10px;
-    padding-right: 10px;
-    margin-bottom:20px;
-    border-radius: 8px;
 
-    
+#forum-subheader {
+  display: flex;
+  justify-content: space-between;
 }
-.forum-description {
-    display: inline-block;
-    width:50%;
-    flex-direction: row-reverse;
+
+.forum {
+  border: solid 1px #555597;
+  box-shadow: 1px 2px #555597;
+  border-radius: 10px;
+  margin: 20px 0px;
+  padding: 5px;
+
+}
+
+.forum:hover {
+  border: solid 1px #978555;
+  box-shadow: 1px 2px #978555;
+}
+
+.forum p {
+  font-size: 14px;
+}
+
+.forum a {
+  border-bottom: solid 1px #555597;
+}
+
+.forum a:hover {
+  border-bottom: solid 1px #978555;
 }
 
 .created-by {
-    display: inline-block;
-    width:50%;
-    text-align:right;
+    display: flex;
+    justify-content:end;
     font-weight: normal;
 }
 
