@@ -79,7 +79,7 @@ export default {
 .post {
   background-color: rgb(200, 216, 246);
   color: black;
-  border: solid 2px #e9e9f3;
+  border: solid 1px #e9e9f3;
   box-shadow: 1px 2px #e5e5f6;
   border-radius: 10px;
   margin: 20px 0px;
