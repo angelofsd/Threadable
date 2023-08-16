@@ -1,8 +1,8 @@
 <template>
   <div>
     <h3>Create a Reply:</h3>
-    <textarea v-model="replyBody" placeholder="Enter your reply here..." rows="6" cols="65" class="text-box"></textarea>
-    <button v-on:click="createReply">Submit Reply</button>
+    <textarea v-model="replyBody" placeholder="Enter your reply here..." rows="6" cols="65" class="text-box" id="replytext"></textarea>
+    <button v-on:click="createReply" id="replybutton">Submit Reply</button>
   </div>
 </template>
 
@@ -58,7 +58,7 @@ export default {
 </script>
 
 <style scoped>
-.text-box {
+#replytext {
    padding: 7px;
    font-family: 'Montserrat', sans-serif;
      font-size: 14px;
@@ -73,11 +73,14 @@ export default {
      
 }
 
-button {
+#replybutton {
+  display: block;
   font-weight: 600;
-  margin-top: 5px;
+  margin-top: 3px;
+  margin-left: 3px;
   border: black solid 1px;
-  background-color: lightgray;
+  color: white;
+  background-color: rgb(9, 92, 148);
 }
 
 </style>
