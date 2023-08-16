@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>Posts in Forum: {{this.forumId}}</h3>
+    <h3>Posts in Forum: {{forum.name}}</h3>
     <h3 id="sort-by">Sort Posts By:</h3>
     <!-- Still need to find out to refresh if on same URL -->
     <h3 class="options"><router-link v-bind:to="{ name: 'forumPageByNew', params: {id: this.forumId}}">New</router-link></h3>
@@ -18,6 +18,7 @@
 <script>
 import axios from 'axios';
 import LikeAndDislike from './LikeAndDislike.vue';
+import ForumService from '../services/ForumService.js'
 
 export default {
   props: {
@@ -25,10 +26,7 @@ export default {
 
       required: true,
     },
-     forumName: { 
-
-    required: true, 
-  },
+  
   },
   components: {
     LikeAndDislike
@@ -36,10 +34,14 @@ export default {
   data() {
     return {
       posts: [],
+      forum: {}
     };
   },
   created() {
     this.getPostsByForum();
+    ForumService.get(this.forumId).then((response) => {
+      this.forum = response.data;
+    });
     
   },
   methods: {
