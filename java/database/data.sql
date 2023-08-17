@@ -12,23 +12,48 @@ INSERT INTO forums (name, description, created_by, date_created)
 VALUES ('Technology', 'Discussion about tech', 1, NOW()), ('Sports', 'All about sports', 2, NOW()), ('Pokemon', 'All things Pokemon', 3, NOW()), ('Programming', 'All Things Coding', 4, NOW()), ('Food', 'All about delicious Food', 5, NOW()),
 ('AITDB', 'Am I the Dirt Bag? Serious Questions answered by the public.', 1, NOW()), ('Aliens', 'For people who believe in everything and nothing', 2, NOW()), ('Fans of Fish Sticks', 'For People who cant talk about Fish Sticks enough', 3, NOW()), ('Art', 'Appreciation for All things Art', 6, NOW()), ('Fine Wine', 'For People that say No to cheap Merlot', 7, NOW()),
  ('Career', 'Tips and Tricks to Career Success', 8, NOW()), ('Classic Cars', 'For Fans of Classic Rides', 9, NOW());
-INSERT INTO posts (title, body, forum_id, user_id)
-VALUES ('Tech Revolution', 'The rise of AI and Machine Learning', 1, 3),('New Sports Game', 'Discussing the upcoming football season', 2, 5),('Pokemon Evolutions', 'The latest updates in Pokemon Go', 3, 7),
-       ('JavaScript Frameworks', 'Comparing Vue, React, and Angular', 4, 2),('Delicious Recipes', 'Sharing my favorite pasta recipe', 5, 10),('Bad Behavior Analysis', 'Am I the bad guy here?', 6, 13),
-       ('UFO Sightings', 'Recent UFO sightings in my area', 7, 11),('Fish Stick Lovers', 'Why are fish sticks so amazing?', 8, 9),('Modern Art', 'Exploring contemporary art exhibitions', 9, 15),
-       ('Wine Tasting Event', 'Join us for an exclusive wine tasting event', 10, 4),('Job Interview Tips', 'How to ace your next job interview', 11, 6),('Classic Car Auction', 'Buying and selling classic cars', 12, 1),
-       ('Tech Gadgets', 'Reviewing the latest tech gadgets', 1, 14),('Fitness in Sports', 'How to maintain peak physical fitness', 2, 8),('Pokemon Battle', 'Discussing strategies for Pokemon battles', 3, 12),
-       ('Coding Best Practices', 'Clean code principles and practices', 4, 5),('World Cuisines', 'Exploring different food cultures', 5, 9),('Self Reflection', 'Understanding our own behaviors', 6, 15),
-       ('Extraterrestrial Life', 'Theories about life on other planets', 7, 2),('Fish Stick Recipes', 'Delicious recipes using fish sticks', 8, 6),('Art Exhibitions', 'Upcoming art exhibitions in the city', 9, 13),
-       ('Wine and Cheese', 'Pairing wine with the perfect cheese', 10, 10),('Career Growth', 'How to climb the corporate ladder', 11, 7),('Restoring Classic Cars', 'Tips for restoring classic cars', 12, 3),
-       ('New Gadgets', 'Latest gadgets in the market like omg...', 1, 2), ('Football Match', 'Last nights game was the best ever.', 2, 2), ('I caught a Pikachu', 'After 10 years I caught a Pikachu', 3, 2) ,
-       ('Golden Cards', 'Has anyone ever heard of catching golden pokemon cards et all i really wish i had some golden cards', 3, 2), ('Bulbasaur is cheating', 'The title says it all, this card should be illegals', 3, 2),
-       ('Java rules', 'Java is way better than Javascript. What an ugly language JavaScript is.', 4, 3), ('JavaScript is amazing', 'I thought JavaScript was horrible but then i used it and like omg omg it was amazing no compiler checks and i can run anything', 4, 4),
-       ('Vue 2 Deprecated', 'Can you believe that Vue 2 is going to be deprecated at the end of the year. What will I do now? I guess i"ll have to learn Vue 3', 4, 4), ('Greek Food', 'I know Greek food and let me tell you, Gustavis is the best Greek food in town, it is not even close omg omg omg.', 5, 5),
-       ('Wheels and Cheese', 'My grandmother passed down a secret recipe of wheels and cheese and it is better than any high end restaurant. First you have to take it out of the box and then boil water. Here is the key, make sure you add a dash of salt to the water. It will be amazing', 5, 5),
-       ('Emerging Technologies', 'Exploring the next big things in tech', 1, 8),('Olympic Highlights', 'Discussing the latest Olympic games', 2, 14),('Pokemon Collecting', 'Tips and tricks for collecting rare Pokemon', 3, 4),
-       ('Open Source Development', 'Contributing to open source projects', 4, 12),('Vegan Delights', 'Exploring the world of vegan cuisine', 5, 11),('Relationship Dilemmas', 'Navigating complex personal relationships', 6, 10),
-       ('Alien Encounters', 'Personal experiences with extraterrestrial beings', 7, 15);
+INSERT INTO posts (title, body, forum_id, user_id, image_url)
+VALUES ('Tech Revolution', 'The rise of AI and Machine Learning', 1, 3, 'https://www.vizrt.com/wp-content/uploads/ai-ml-new20article-vizrt-hdr-img-1920x1080-1.png'),
+	   ('New Sports Game', 'Discussing the upcoming football season', 2, 5, 'https://cujossports.com/wp-content/uploads/2019/09/Football-Season.jpg'),
+	   ('Pokemon Evolutions', 'The latest updates in Pokemon Go', 3, 7, 'https://images.crunchbase.com/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/v1397762747/24805058203a2cb5894c43f863c47338.png'),
+	   ('JavaScript Frameworks', 'Comparing Vue, React, and Angular', 4, 2, 'https://images.crunchbase.com/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/v1397762747/24805058203a2cb5894c43f863c47338.png'),
+	   ('Delicious Recipes', 'Sharing my favorite pasta recipe', 5, 10, 'https://images.crunchbase.com/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/v1397762747/24805058203a2cb5894c43f863c47338.png'),
+	   ('Bad Behavior Analysis', 'Am I the bad guy here?', 6, 13, 'https://images.crunchbase.com/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/v1397762747/24805058203a2cb5894c43f863c47338.png'),
+       ('UFO Sightings', 'Recent UFO sightings in my area', 7, 11, 'https://images.crunchbase.com/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/v1397762747/24805058203a2cb5894c43f863c47338.png'),
+	   ('Fish Stick Lovers', 'Why are fish sticks so amazing?', 8, 9, 'https://images.crunchbase.com/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/v1397762747/24805058203a2cb5894c43f863c47338.png'),
+	   ('Modern Art', 'Exploring contemporary art exhibitions', 9, 15, 'https://media.tatler.com/photos/6347d2294e38be6997059b93/3:2/w_1920,h_1280,c_limit/Mino_121022_Mino_121022_2K67RRN.jpg'),
+       ('Wine Tasting Event', 'Join us for an exclusive wine tasting event', 10, 4, 'https://cf.ltkcdn.net/wine/images/orig/254422-2309x1299-wine-tasting-festival.jpg'),
+	   ('Job Interview Tips', 'How to ace your next job interview', 11, 6, 'https://www.simplilearn.com/ice9/free_resources_article_thumb/Job_Interview_Statistics_and_Trends_for_2021.jpg'),
+	   ('Classic Car Auction', 'Buying and selling classic cars', 12, 1, 'https://goauctionmpc.blob.core.windows.net/main/may%20auction%20room.jpg'),
+       ('Tech Gadgets', 'Reviewing the latest tech gadgets', 1, 14, 'https://images.crunchbase.com/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/v1397762747/24805058203a2cb5894c43f863c47338.png'),
+	   ('Fitness in Sports', 'How to maintain peak physical fitness', 2, 8, 'https://images.crunchbase.com/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/v1397762747/24805058203a2cb5894c43f863c47338.png'),
+	   ('Pokemon Battle', 'Discussing strategies for Pokemon battles', 3, 12, 'https://images.crunchbase.com/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/v1397762747/24805058203a2cb5894c43f863c47338.png'),
+       ('Coding Best Practices', 'Clean code principles and practices', 4, 5, 'https://images.crunchbase.com/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/v1397762747/24805058203a2cb5894c43f863c47338.png'),
+	   ('World Cuisines', 'Exploring different food cultures', 5, 9, 'https://images.crunchbase.com/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/v1397762747/24805058203a2cb5894c43f863c47338.png'),
+	   ('Self Reflection', 'Understanding our own behaviors', 6, 15, 'https://images.crunchbase.com/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/v1397762747/24805058203a2cb5894c43f863c47338.png'),
+       ('Extraterrestrial Life', 'Theories about life on other planets', 7, 2, 'https://images.crunchbase.com/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/v1397762747/24805058203a2cb5894c43f863c47338.png'),
+	   ('Fish Stick Recipes', 'Delicious recipes using fish sticks', 8, 6, 'https://images.crunchbase.com/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/v1397762747/24805058203a2cb5894c43f863c47338.png'),
+	   ('Art Exhibitions', 'Upcoming art exhibitions in the city', 9, 13, 'https://images.crunchbase.com/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/v1397762747/24805058203a2cb5894c43f863c47338.png'),
+       ('Wine and Cheese', 'Pairing wine with the perfect cheese', 10, 10, 'https://www.datocms-assets.com/20941/1658151081-good-wine-and-cheese-pairings-hero.png?w=1000&fit=max&fm=jpg'),
+	   ('Career Growth', 'How to climb the corporate ladder', 11, 7, 'https://imageio.forbes.com/specials-images/imageserve/6448568b2b87c888cfeb47a1/The-road-to-success-involves-creating-your-career-path-/960x0.jpg?format=jpg&width=960'),
+	   ('Restoring Classic Cars', 'Tips for restoring classic cars', 12, 3, 'https://cdn.dealeraccelerate.com/ab/1/1623/73219/1920x1440/1940-packard-110-club-coupe'),
+       ('New Gadgets', 'Latest gadgets in the market like omg...', 1, 2, 'https://images.crunchbase.com/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/v1397762747/24805058203a2cb5894c43f863c47338.png'), 
+	   ('Football Match', 'Last nights game was the best ever.', 2, 2, 'https://e3.365dm.com/22/10/768x432/skynews-cardiff-city-wigan-athletic_5925630.jpg?20221009112702'), 
+	   ('I caught a Pikachu', 'After 10 years I caught a Pikachu', 3, 2, 'https://images.crunchbase.com/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/v1397762747/24805058203a2cb5894c43f863c47338.png') ,
+       ('Golden Cards', 'Has anyone ever heard of catching golden pokemon cards et all i really wish i had some golden cards', 3, 2, 'https://images.crunchbase.com/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/v1397762747/24805058203a2cb5894c43f863c47338.png'), 
+	   ('Bulbasaur is cheating', 'The title says it all, this card should be illegals', 3, 2, 'https://images.crunchbase.com/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/v1397762747/24805058203a2cb5894c43f863c47338.png'),
+       ('Java rules', 'Java is way better than Javascript. What an ugly language JavaScript is.', 4, 3, 'https://images.crunchbase.com/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/v1397762747/24805058203a2cb5894c43f863c47338.png'), 
+	   ('JavaScript is amazing', 'I thought JavaScript was horrible but then i used it and like omg omg it was amazing no compiler checks and i can run anything', 4, 4, 'https://images.crunchbase.com/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/v1397762747/24805058203a2cb5894c43f863c47338.png'),
+       ('Vue 2 Deprecated', 'Can you believe that Vue 2 is going to be deprecated at the end of the year. What will I do now? I guess i"ll have to learn Vue 3', 4, 4, 'https://images.crunchbase.com/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/v1397762747/24805058203a2cb5894c43f863c47338.png'), 
+	   ('Greek Food', 'I know Greek food and let me tell you, Gustavis is the best Greek food in town, it is not even close omg omg omg.', 5, 5, 'https://images.crunchbase.com/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/v1397762747/24805058203a2cb5894c43f863c47338.png'),
+       ('Wheels and Cheese', 'My grandmother passed down a secret recipe of wheels and cheese and it is better than any high end restaurant. First you have to take it out of the box and then boil water. Here is the key, make sure you add a dash of salt to the water. It will be amazing', 5, 5, 'https://images.crunchbase.com/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/v1397762747/24805058203a2cb5894c43f863c47338.png'),
+       ('Emerging Technologies', 'Exploring the next big things in tech', 1, 8, 'https://images.crunchbase.com/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/v1397762747/24805058203a2cb5894c43f863c47338.png'),
+	   ('Olympic Highlights', 'Discussing the latest Olympic games', 2, 14, 'https://images.crunchbase.com/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/v1397762747/24805058203a2cb5894c43f863c47338.png'),
+	   ('Pokemon Collecting', 'Tips and tricks for collecting rare Pokemon', 3, 4, 'https://images.crunchbase.com/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/v1397762747/24805058203a2cb5894c43f863c47338.png'),
+       ('Open Source Development', 'Contributing to open source projects', 4, 12, 'https://images.crunchbase.com/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/v1397762747/24805058203a2cb5894c43f863c47338.png'),
+	   ('Vegan Delights', 'Exploring the world of vegan cuisine', 5, 11, 'https://images.crunchbase.com/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/v1397762747/24805058203a2cb5894c43f863c47338.png'),
+	   ('Relationship Dilemmas', 'Navigating complex personal relationships', 6, 10, 'https://images.crunchbase.com/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/v1397762747/24805058203a2cb5894c43f863c47338.png'),
+       ('Alien Encounters', 'Personal experiences with extraterrestrial beings', 7, 15, 'https://images.crunchbase.com/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/v1397762747/24805058203a2cb5894c43f863c47338.png');
 INSERT INTO replies (text, post_id, user_id)
 VALUES ('I love the new gadgets!', 1, 3), ('That was an amazing game!', 2, 1);
 INSERT INTO replies (text, date_created, post_id, user_id)
@@ -77,9 +102,9 @@ VALUES ('Great post! Except that I don"t like Barbie, she is such barbie. And do
        ('I never thought to add salt to the water. Game-changer!', '2023-08-06', 19, 12),
        ('Quantum computing is complex but so intriguing!', '2023-08-06', 20, 4);
 INSERT INTO moderators (user_id, forum_id)
-VALUES (3, 1), (1, 2), (6, 1);
+VALUES (3, 1), (1, 2);
 INSERT INTO favorite_forums (user_id, forum_id)
-VALUES (2, 1), (3, 2), (3,1), (4,1), (13,1);
+VALUES (2, 1), (3, 2);
 INSERT INTO liked_posts (user_id, post_id, liked)
 VALUES (1, 1, TRUE), (1, 2, TRUE), (1, 3, TRUE), (1, 4, TRUE), (1, 11, TRUE), (1, 12, TRUE), (1, 13, TRUE), (1, 14, TRUE), (1, 22, TRUE), (1, 23, TRUE),
 (2, 1, TRUE), (2, 2, TRUE), (2, 3, TRUE), (2, 7, TRUE), (2, 8, TRUE), (2, 9, TRUE), (2, 10, TRUE), (2, 11, TRUE), (2, 12, TRUE), (2, 13, TRUE),

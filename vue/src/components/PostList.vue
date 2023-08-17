@@ -8,6 +8,7 @@
           >{{ post.title }}</router-link>
         </div>
         <p>{{post.body}}</p>
+        <small>posted by {{post.username}} on {{formatDate(post.dateCreated)}}</small>
       </div>
   </div>
 </template>
@@ -26,6 +27,7 @@ export default {
   },
   created() {
     this.getPosts();
+    
   },
   methods: {
     getPosts() {
@@ -33,6 +35,10 @@ export default {
       .then( (response) => {
          if (response.status === 200) {
            this.posts = response.data;
+           this.posts.forEach((post) => {
+              this.getUsername(post); 
+              
+            });
          }
        })
        .catch( (error) => {
@@ -48,23 +54,19 @@ export default {
     },
     getUsername(post) {
       UserService.getUserById(post.userId)
-      .then((response) => {
-        if (response.status === 200) {
-          post.username = response.data.username;
-          this.$forceUpdate();
-        }
-      })
-      .catch( (error) => {
-         if (error.response) {
-           alert("Something went wrong: " + error.response.statusText);
-         } else if(error.request){
-                    //We could not reach the server
-                    alert("We could not reach the server");
-         } else {
-                    alert("Something went horribly wrong");
-                }
-       })
-    }
+        .then((response) => {
+          post.username = response.data.username; // Set username to reply object
+          this.$forceUpdate(); // Force re-render
+        })
+        .catch((error) => {
+          console.error('An error occurred:', error);
+        });
+    },
+    formatDate(dateString) {
+      const date = new Date(dateString);
+      const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+      return date.toLocaleDateString('en-US', options);
+    },
     
   }
 };

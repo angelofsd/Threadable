@@ -26,7 +26,7 @@ CREATE TABLE posts (
     id SERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     body TEXT NOT NULL,
-    image_url VARCHAR(255),
+    image_url VARCHAR(255) DEFAULT 'https://images.crunchbase.com/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/v1397762747/24805058203a2cb5894c43f863c47338.png',
     date_created TIMESTAMP DEFAULT NOW(),
     forum_id INT,
     user_id INT,
