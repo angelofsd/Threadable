@@ -27,6 +27,9 @@ export default {
         PostService.getDislikedPostsByUserId(this.$store.state.user.id).then((response) => {
           this.$store.commit("SET_DISLIKED_POSTS", response.data)
         })
+        PostService.getPostsByUserId(this.$route.params.id).then((response) => {
+            this.posts = response.data
+        })
       }
   }
 };

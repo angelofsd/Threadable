@@ -92,13 +92,17 @@ export default {
     }
 
     /* Profile Picture */
-
+    #circle-pic {
+        justify-content: end;
+    }
 
     #profile-pic {
-        width: 50px;
-        border: solid 1px #555597;
+        margin: 15px;
+        border: solid 2px #555597;
         border-radius: 50%;
-        background-color: white;
+        height: 50px;
+        width: 50px;
+        overflow: hidden;
     }
 
     #profile-pic:hover {

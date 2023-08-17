@@ -92,6 +92,7 @@ export default {
       this.user.id = response.data.id;
       this.user.username = response.data.username;
       this.user.profilePic = response.data.profilePic;
+      console.log(response.data.profilePic)
       if (response.data.bio) {
         this.user.bio = response.data.bio;
       }
@@ -131,7 +132,7 @@ export default {
   }
 
   #profile-image img {
-    width: 150px;
+    width: 200px;
   }
 
   .edittext {

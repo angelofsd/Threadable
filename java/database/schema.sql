@@ -7,7 +7,7 @@ CREATE TABLE users (
 	username varchar(50) NOT NULL UNIQUE,
 	password_hash varchar(200) NOT NULL,
 	role varchar(50) NOT NULL,
-	profile_pic_url VARCHAR(255) DEFAULT 'https://www.nicepng.com/png/full/1011-10113425_profile-clipart-generic-user-circle.png',
+	profile_pic_url VARCHAR(500) DEFAULT 'https://www.nicepng.com/png/full/1011-10113425_profile-clipart-generic-user-circle.png',
 	bio varchar(500),
 	date_created TIMESTAMP DEFAULT NOW(),
 	CONSTRAINT PK_user PRIMARY KEY (user_id)
@@ -26,7 +26,7 @@ CREATE TABLE posts (
     id SERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     body TEXT NOT NULL,
-    image_url VARCHAR(255) DEFAULT 'https://images.crunchbase.com/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/v1397762747/24805058203a2cb5894c43f863c47338.png',
+    image_url VARCHAR(500) DEFAULT 'https://images.crunchbase.com/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/v1397762747/24805058203a2cb5894c43f863c47338.png',
     date_created TIMESTAMP DEFAULT NOW(),
     forum_id INT,
     user_id INT,
