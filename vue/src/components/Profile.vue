@@ -149,7 +149,17 @@ export default {
   }
 
   button {
+    background-color: #5390b3;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
     margin: 10px;
+  }
+
+  button:hover {
+    background-color: #225979;
   }
 
   .editForm {

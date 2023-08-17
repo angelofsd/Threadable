@@ -75,7 +75,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 #favorited-list {
   margin: 20px;
@@ -103,8 +103,13 @@ export default {
 }
 
 .forum:hover {
-  border: solid 1px #978555;
-  box-shadow: 1px 2px #978555;
+  border: solid 1px #07a3eb;
+  box-shadow: 1px 2px #07a3eb;
+  transition-duration: 250ms;
+}
+
+.forum:not(:hover) {
+  transition-duration: 250ms;
 }
 
 .forum p {

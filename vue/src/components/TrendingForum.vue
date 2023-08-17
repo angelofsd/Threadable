@@ -110,6 +110,11 @@ export default {
 .forum:hover {
   border: solid 1px #07a3eb;
   box-shadow: 1px 2px #07a3eb;
+  transition-duration: 250ms;
+}
+
+.forum:not(:hover) {
+    transition-duration: 250ms;
 }
 
 .forum p {
