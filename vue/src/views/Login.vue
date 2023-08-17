@@ -68,6 +68,7 @@ export default {
   border-radius: 20px;
   padding: 2px;
   box-shadow: 2px 2px 3px #555597;
+  color: #225979;
 }
 
 h1{
