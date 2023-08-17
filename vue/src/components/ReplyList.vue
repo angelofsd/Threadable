@@ -3,7 +3,7 @@
     <h3>Replies:</h3>
     <div v-for="reply in replies" :key="reply.id" class="reply">
       <p>{{ reply.text }}</p>
-      <small>Posted by user {{ reply.username }} on {{ formatDate(reply.dateCreated) }}</small>
+      <small>Posted by {{ reply.username }} on {{ formatDate(reply.dateCreated) }}</small>
       <button v-show="reply.userId == $store.state.user.id" v-on:click="deleteReply(reply.id)" class="delete-button">Delete Reply</button>
     </div>
    
