@@ -1,5 +1,5 @@
 <template>
-  <form v-on:submit.prevent>
+  <form v-show="$store.state.token != ''" v-on:submit.prevent>
     <h3>Create Post</h3>
     <div class="field">
       <label for="postTitle">Title</label>
@@ -32,6 +32,7 @@ export default {
         title: "",
         body: "",
         imageURL: null,
+        dateCreated: Date.now(),
         forumId: this.$route.params.id,
         userId: this.$store.state.user.id,
         liked: null,

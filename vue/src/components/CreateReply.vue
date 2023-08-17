@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-show="$store.state.token != ''">
     <h3>Create a Reply:</h3>
     <textarea v-model="replyBody" placeholder="Enter your reply here..." rows="6" cols="65" class="text-box" id="replytext"></textarea>
     <button v-on:click="createReply" id="replybutton">Submit Reply</button>
