@@ -4,8 +4,7 @@
     <div v-for="reply in replies" :key="reply.id" class="reply">
       <p>{{ reply.text }}</p>
       <small>Posted by user {{ reply.username }} on {{ formatDate(reply.dateCreated) }}</small>
-      <button v-on:click="deleteReply(reply.id)" class = "delete-button">Delete Reply</button>
-      <!-- <HeartReply :replyId="reply.id" /> -->
+      <button v-show="reply.userId == $store.state.user.id" v-on:click="deleteReply(reply.id)" class="delete-button">Delete Reply</button>
     </div>
    
   </div>
@@ -60,6 +59,7 @@ export default {
             this.replies = response.data;
             this.replies.forEach((reply) => {
               this.getUsername(reply); // Fetch username for each reply
+              console.log(reply)
             });
           }
         })

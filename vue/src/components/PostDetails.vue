@@ -14,7 +14,7 @@
           </div>
       </div>
         <small>{{post.username}} on {{formatDate(post.dateCreated)}}</small>
-        <button class="delete-button" v-on:click="deletePost(post.id)" >Delete Post</button>
+        <button v-show="post.userId == this.$store.state.user.id" class="delete-button" v-on:click="deletePost(post.id)" >Delete Post</button>
     </div>
     <div><reply-list v-bind:postId="postId" /></div>
     <div><create-reply /></div>
