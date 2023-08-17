@@ -1,10 +1,12 @@
 <template>
   <div class="allForums">
     <forum-list/>
-    <button @click="createNewForum ^= true">Create New Forum</button>
-  <div v-show="createNewForum">
-    <create-forum/>
-  </div>
+    <div v-show="$store.state.token != ''">
+      <button @click="createNewForum ^= true">Create New Forum</button>
+      <div v-show="createNewForum">
+        <create-forum/>
+      </div>
+    </div>
   </div>
 </template>
 
