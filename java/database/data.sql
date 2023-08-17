@@ -15,7 +15,7 @@ VALUES ('Technology', 'Discussion about tech', 1, NOW()), ('Sports', 'All about 
 INSERT INTO posts (title, body, forum_id, user_id, image_url)
 VALUES ('Tech Revolution', 'The rise of AI and Machine Learning', 1, 3, 'https://www.vizrt.com/wp-content/uploads/ai-ml-new20article-vizrt-hdr-img-1920x1080-1.png'),
 	   ('New Sports Game', 'Discussing the upcoming football season', 2, 5, 'https://cujossports.com/wp-content/uploads/2019/09/Football-Season.jpg'),
-	   ('Pokemon Evolutions', 'The latest updates in Pokemon Go', 3, 7, 'https://images.crunchbase.com/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/v1397762747/24805058203a2cb5894c43f863c47338.png'),
+	   ('Pokemon Evolutions', 'The latest updates in Pokemon Go', 3, 7, 'https://lh3.googleusercontent.com/n4ueCR9xMecmU6_UtnA1zwvkLGgH5PKw7qiD37oyUdgEdELPxboA1mWblLjt6O7c0vKn_04eBkh9jYHqAuuZ5EZLKYO3ll-GDbojk-5fvnyxtF0=w1440-e365'),
 	   ('JavaScript Frameworks', 'Comparing Vue, React, and Angular', 4, 2, 'https://images.crunchbase.com/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/v1397762747/24805058203a2cb5894c43f863c47338.png'),
 	   ('Delicious Recipes', 'Sharing my favorite pasta recipe', 5, 10, 'https://images.crunchbase.com/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/v1397762747/24805058203a2cb5894c43f863c47338.png'),
 	   ('Bad Behavior Analysis', 'Am I the bad guy here?', 6, 13, 'https://images.crunchbase.com/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/v1397762747/24805058203a2cb5894c43f863c47338.png'),
