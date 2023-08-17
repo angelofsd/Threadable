@@ -165,8 +165,15 @@ button:hover {
       margin-bottom: 3px;
       border-radius: 6px;
       background-color: rgb(78, 79, 82);
-      box-shadow: rgb(68, 88, 94) 1px 2px 2px 2px;
-      border: 2px solid rgb(107, 111, 114);
+      border: solid 1px #07a3eb;
+      box-shadow: 1px 2px #07a3eb;
+      transition-duration: 250ms;
+}
+
+.post:hover {
+  border: solid 1px #07a3eb;
+  box-shadow: 1px 2px #07a3eb;
+  transition-duration: 250ms;
 }
 
 small {
