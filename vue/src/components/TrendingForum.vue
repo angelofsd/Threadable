@@ -108,8 +108,8 @@ export default {
 }
 
 .forum:hover {
-  border: solid 1px #978555;
-  box-shadow: 1px 2px #978555;
+  border: solid 1px #07a3eb;
+  box-shadow: 1px 2px #07a3eb;
 }
 
 .forum p {
