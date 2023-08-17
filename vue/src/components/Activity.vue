@@ -18,24 +18,22 @@
   </div>
 </template>
 
-<script scoped>
+<script>
 import postService from '../services/PostService';
 import LikeAndDislike from './LikeAndDislike.vue';
 
 export default {
   components: { LikeAndDislike },
     name: 'activity',
-    props: {
-        post: Object,
-    },
     data() {
         return {
-            posts: {}
+            posts: []
         }
     },
     created() {
         postService.getPostsByUserId(this.$route.params.id).then((response) => {
             this.posts = response.data
+            console.log(response.data)
         })
     }
 }

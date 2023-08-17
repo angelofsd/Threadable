@@ -141,7 +141,7 @@ public class JdbcPostDao implements PostDao{
         String sql = "SELECT * FROM posts WHERE user_id = ?;";
         try {
             SqlRowSet result = jdbcTemplate.queryForRowSet(sql, userId);
-            if (result.next()) {
+            while (result.next()) {
                 posts.add(mapRowToPost(result));
             }
         } catch (CannotGetJdbcConnectionException ex) {

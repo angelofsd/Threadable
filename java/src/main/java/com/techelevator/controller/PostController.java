@@ -43,7 +43,7 @@ public class PostController {
 
     @GetMapping("user/{userId}")
     public List<Post> getPostsByUserId(@PathVariable int userId) {
-        return postDao.getPostsByForumId(userId);
+        return postDao.getPostsByUserId(userId);
     }
 
     @GetMapping("/forums/{forumId}")
