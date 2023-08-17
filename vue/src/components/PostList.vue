@@ -1,13 +1,21 @@
 <template>
   <div id="post-list">
-      <h3>Posts</h3>
+      <h3>Hot Posts</h3>
       <div class="post" v-for="post in posts" v-bind:key="post.id">
-        <div>
-          <router-link
-            v-bind:to="{ name: 'post', params: { id: post.postId } }"
-          >{{ post.title }}</router-link>
+        <div id="post-subheader">
+          <div v-show="post.imageURL != null" id="img-div">
+            <img :src="post.imageURL" />
+          </div>
+          <div id="body-and-likes">
+            <div id="body">
+              <router-link v-bind:to="{ name: 'post', params: { id: post.postId } }">
+                {{ post.title }}
+              </router-link>
+              <p>{{post.body}}</p>
+            </div>
+            <LikeAndDislike :postId="post.postId" :post="post" />
+          </div>
         </div>
-        <p>{{post.body}}</p>
         <small>posted by {{post.username}} on {{formatDate(post.dateCreated)}}</small>
       </div>
   </div>
@@ -16,10 +24,12 @@
 <script>
 import PostService from "../services/PostService.js";
 import UserService from '../services/UserService.js';
+import LikeAndDislike from './LikeAndDislike.vue';
 
 
 export default {
   name: "post-list",
+  components: {LikeAndDislike},
   data() {
     return {
       posts: [],
@@ -27,6 +37,15 @@ export default {
   },
   created() {
     this.getPosts();
+
+    if(this.$store.state.token != '') {
+      PostService.getLikedPostsByUserId(this.$store.state.user.id).then((response) => {
+                  this.$store.commit("SET_LIKED_POSTS", response.data)
+              })
+      PostService.getDislikedPostsByUserId(this.$store.state.user.id).then((response) => {
+        this.$store.commit("SET_DISLIKED_POSTS", response.data)
+      })
+    }
     
   },
   methods: {
@@ -72,10 +91,24 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 
 #post-list {
   margin: 20px;
+}
+
+#post-subheader{
+  display: flex;
+}
+
+#body-and-likes {
+  display: flex;
+  justify-content: space-between;
+  flex: 1;
+}
+
+#body {
+  margin-left: 15px;
 }
 
 .post {
@@ -85,13 +118,18 @@ export default {
   box-shadow: 1px 2px #e5e5f6;
   border-radius: 10px;
   margin: 20px 0px;
-  padding: 5px;
+  padding: 10px;
 
 }
 
 .post:hover {
   border: solid 1px #07a3eb;
   box-shadow: 1px 2px #07a3eb;
+  transition-duration: 250ms;
+}
+
+.post:not(:hover) {
+  transition-duration: 250ms;
 }
 
 .post p {
@@ -104,6 +142,16 @@ export default {
 
 .post a:hover {
   border-bottom: solid 1px #978555;
+}
+
+#img-div {
+  padding: 15px;
+  border-right: solid 1px rgb(179, 179, 179);
+}
+
+img {
+  height: 125px;
+  border-radius: 5px;
 }
 
 </style>
